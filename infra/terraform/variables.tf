@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "bucket_name" {
   description = "Globally unique S3 bucket name for the author site content store."
   type        = string
-  default     = "author-site-content-dev"
+  default     = "author-site-content-rahulmks-2026"
 }
 
 variable "app_name" {
