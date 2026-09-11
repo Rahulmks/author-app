@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">Editorial placeholder</title>
+  <desc id="desc">Neutral placeholder image for article, book, and media cards.</desc>
+  <rect width="1200" height="900" fill="#f2eee9"/>
+  <rect x="120" y="120" width="960" height="660" rx="12" fill="#e7e0d7" stroke="#d8cdc1" stroke-width="3"/>
+  <circle cx="600" cy="380" r="140" fill="#ddd0c0"/>
+  <path d="M420 620c40-110 130-170 180-170s140 60 180 170" fill="#c8b39d"/>
+  <rect x="430" y="285" width="340" height="80" rx="40" fill="#c8b39d" opacity="0.65"/>
+</svg>
