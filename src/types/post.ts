@@ -26,6 +26,7 @@ export interface Post {
   seo?: PostSEO;
   featured?: boolean;
   published?: boolean;
+  source?: 'mock' | 's3';
 }
 
 export interface PostSummary {

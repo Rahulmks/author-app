@@ -18,4 +18,5 @@ export interface Book {
   updatedAt: string;
   publishedYear?: number;
   purchaseUrl?: string;
+  source?: 'mock' | 's3';
 }

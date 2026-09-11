@@ -15,6 +15,7 @@ export interface PodcastEpisode {
   createdAt: string;
   updatedAt: string;
   platforms?: Record<string, string | undefined>;
+  source?: 'mock' | 's3';
 }
 
 export type Podcast = PodcastEpisode;

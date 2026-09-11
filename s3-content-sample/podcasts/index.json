@@ -1,0 +1,15 @@
+[
+  {
+    "id": "podcast-001",
+    "title": "On Attention and Craft",
+    "slug": "on-attention-and-craft",
+    "description": "A reflective discussion on attention, patience, and creative work.",
+    "platform": "spotify",
+    "episodeUrl": "https://open.spotify.com/episode/example",
+    "coverImage": "/images/placeholder.svg",
+    "episodeNumber": 1,
+    "duration": "25:10",
+    "createdAt": "2026-09-02T10:00:00Z",
+    "updatedAt": "2026-09-02T10:00:00Z"
+  }
+]

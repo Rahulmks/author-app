@@ -1,0 +1,26 @@
+[
+  {
+    "id": "book-001",
+    "title": "The Quiet Places",
+    "slug": "the-quiet-places",
+    "description": "A collection of essays on memory, place, and the language of belonging.",
+    "coverImage": "/images/books/book-cover-1.jpg",
+    "publicationYear": 2026,
+    "publisher": "Independent Press",
+    "purchaseUrl": "https://example.com/book/the-quiet-places",
+    "createdAt": "2026-09-01T10:00:00Z",
+    "updatedAt": "2026-09-01T10:00:00Z"
+  },
+  {
+    "id": "book-002",
+    "title": "Letters to the Future",
+    "slug": "letters-to-the-future",
+    "description": "A reflective work on time, memory, and the careful art of living intentionally.",
+    "coverImage": "/images/books/book-cover-2.jpg",
+    "publicationYear": 2025,
+    "publisher": "Studio Lantern",
+    "purchaseUrl": "https://example.com/book/letters-to-the-future",
+    "createdAt": "2026-08-20T10:00:00Z",
+    "updatedAt": "2026-08-20T10:00:00Z"
+  }
+]

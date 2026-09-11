@@ -1,0 +1,14 @@
+[
+  {
+    "id": "video-001",
+    "title": "Writing in Public",
+    "slug": "writing-in-public",
+    "description": "A short conversation on the discipline of writing and publishing creatively.",
+    "platform": "youtube",
+    "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "thumbnailUrl": "/images/placeholder.svg",
+    "createdAt": "2026-09-01T10:00:00Z",
+    "updatedAt": "2026-09-01T10:00:00Z",
+    "duration": "8:42"
+  }
+]

@@ -16,4 +16,5 @@ export interface Video {
   updatedAt: string;
   duration?: string;
   provider?: VideoPlatform;
+  source?: 'mock' | 's3';
 }

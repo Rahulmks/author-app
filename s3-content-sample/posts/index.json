@@ -1,0 +1,24 @@
+[
+  {
+    "id": "post-001",
+    "title": "The Power of Stories",
+    "slug": "the-power-of-stories",
+    "excerpt": "Stories shape how we understand ourselves and the world around us.",
+    "coverImage": "/images/placeholder.svg",
+    "category": "Essays",
+    "tags": ["stories", "writing"],
+    "publishedAt": "2026-09-01T10:00:00Z",
+    "readingTimeMinutes": 8
+  },
+  {
+    "id": "post-002",
+    "title": "On Reading and Living",
+    "slug": "on-reading-and-living",
+    "excerpt": "Reading expands our inner life and deepens our understanding of human experience.",
+    "coverImage": "/images/placeholder.svg",
+    "category": "Reflections",
+    "tags": ["reading", "life"],
+    "publishedAt": "2026-08-28T10:00:00Z",
+    "readingTimeMinutes": 6
+  }
+]

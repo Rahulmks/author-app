@@ -5,7 +5,7 @@ export const mockPodcasts: Podcast[] = [
     id: '1',
     title: 'கதைகளும் கனவுகளும் - Episode 5',
     slug: 'stories-and-dreams-ep5',
-    description: 'எழுத்தாளர்களுடன் உரையாடல்கள் - இந்த அத்தியாயத்தில் கதைகளின் தோற்றம் பற்றி விவாதிக்கிறோம்.',
+    description: 'Mock data for testing: எழுத்தாளர்களுடன் உரையாடல்கள் - இந்த அத்தியாயத்தில் கதைகளின் தோற்றம் பற்றி விவாதிக்கிறோம்.',
     coverImage: '/images/placeholder.svg',
     image: '/images/placeholder.svg',
     platform: 'spotify',
@@ -15,6 +15,7 @@ export const mockPodcasts: Podcast[] = [
     updatedAt: '2026-09-05T10:00:00Z',
     duration: '42:15',
     episodeNumber: 5,
+    source: 'mock',
     platforms: {
       spotify: 'https://spotify.com',
       apple: 'https://podcasts.apple.com',
@@ -35,6 +36,7 @@ export const mockPodcasts: Podcast[] = [
     updatedAt: '2026-08-28T10:00:00Z',
     duration: '38:30',
     episodeNumber: 12,
+    source: 'mock',
     platforms: {
       spotify: 'https://spotify.com',
       apple: 'https://podcasts.apple.com',
@@ -55,6 +57,7 @@ export const mockPodcasts: Podcast[] = [
     updatedAt: '2026-08-15T10:00:00Z',
     duration: '45:20',
     episodeNumber: 8,
+    source: 'mock',
     platforms: {
       spotify: 'https://spotify.com',
       apple: 'https://podcasts.apple.com',
@@ -74,6 +77,7 @@ export const mockPodcasts: Podcast[] = [
     updatedAt: '2026-08-01T10:00:00Z',
     duration: '35:45',
     episodeNumber: 3,
+    source: 'mock',
     platforms: {
       spotify: 'https://spotify.com',
       apple: 'https://podcasts.apple.com',

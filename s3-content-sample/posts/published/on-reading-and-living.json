@@ -1,0 +1,24 @@
+{
+  "id": "post-002",
+  "title": "On Reading and Living",
+  "slug": "on-reading-and-living",
+  "excerpt": "Reading expands our inner life and deepens our understanding of human experience.",
+  "content": "<h2>On Reading and Living</h2><p>To read is to inhabit another way of seeing the world. Books do not simply inform us; they widen our imagination and sharpen our empathy.</p><p>Every meaningful book asks us to pause, reflect, and reconsider what we thought we already knew. In that sense, reading is not an escape from life but a deeper participation in it.</p>",
+  "contentFormat": "html",
+  "coverImage": "/images/placeholder.svg",
+  "author": "Author Name",
+  "status": "published",
+  "category": "Reflections",
+  "tags": ["reading", "life"],
+  "createdAt": "2026-08-20T10:00:00Z",
+  "updatedAt": "2026-08-28T10:00:00Z",
+  "publishedAt": "2026-08-28T10:00:00Z",
+  "readingTimeMinutes": 6,
+  "featured": false,
+  "published": true,
+  "seo": {
+    "title": "On Reading and Living",
+    "description": "A reflection on reading as a form of living more fully and more thoughtfully.",
+    "canonicalUrl": "/posts/on-reading-and-living"
+  }
+}
