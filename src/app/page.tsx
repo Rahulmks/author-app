@@ -8,16 +8,21 @@ import EventCard from '@/components/events/EventCard';
 import VideoCard from '@/components/media/VideoCard';
 import PodcastCard from '@/components/media/PodcastCard';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { getFeaturedPost, getLatestPosts } from '@/data/posts';
-import { mockBooks } from '@/data/books';
 import { getUpcomingEvents } from '@/data/events';
-import { mockVideos } from '@/data/videos';
-import { mockPodcasts } from '@/data/podcasts';
+import { getBooks } from '@/lib/books/get-books';
 import { siteConfig } from '@/lib/navigation';
+import { getPodcasts } from '@/lib/podcasts/get-podcasts';
+import { getPost } from '@/lib/posts/get-post';
+import { getPosts } from '@/lib/posts/get-posts';
+import { getVideos } from '@/lib/videos/get-videos';
 
-export default function HomePage() {
-  const featuredPost = getFeaturedPost();
-  const latestPosts = getLatestPosts(3);
+export default async function HomePage() {
+  const posts = await getPosts();
+  const featuredPost = posts[0] ? await getPost(posts[0].slug) : null;
+  const latestPosts = posts.slice(0, 3);
+  const books = await getBooks();
+  const videos = await getVideos();
+  const podcasts = await getPodcasts();
   const upcomingEvents = getUpcomingEvents().slice(0, 2);
 
   return (
@@ -112,7 +117,7 @@ export default function HomePage() {
             நூல்கள்
           </SectionHeading>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {mockBooks.map((book) => (
+            {books.map((book) => (
               <BookCard key={book.id} book={book} />
             ))}
           </div>
@@ -143,7 +148,7 @@ export default function HomePage() {
             காணொளிகள்
           </SectionHeading>
           <div className="grid gap-8 md:grid-cols-3">
-            {mockVideos.slice(0, 3).map((video) => (
+            {videos.slice(0, 3).map((video) => (
               <VideoCard key={video.id} video={video} />
             ))}
           </div>
@@ -156,7 +161,7 @@ export default function HomePage() {
             ஒலிப்பதிவு
           </SectionHeading>
           <div className="space-y-5">
-            {mockPodcasts.slice(0, 2).map((podcast) => (
+            {podcasts.slice(0, 2).map((podcast) => (
               <PodcastCard key={podcast.id} podcast={podcast} />
             ))}
           </div>
