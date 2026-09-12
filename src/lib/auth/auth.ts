@@ -15,6 +15,16 @@ export interface AdminSession {
   expiresAt: string;
 }
 
+export interface AuthAttemptResult {
+  isValid: boolean;
+  reason:
+    | 'email_mismatch'
+    | 'password_mismatch'
+    | 'password_missing_in_production'
+    | 'fallback_password_mismatch'
+    | 'success';
+}
+
 interface SessionPayload {
   email: string;
   issuedAt: number;
@@ -74,18 +84,43 @@ export async function authenticate(email: string, password: string) {
   const normalizedEmailMatches = email.trim().toLowerCase() === expectedEmail.toLowerCase();
 
   if (!normalizedEmailMatches) {
-    return false;
+    return {
+      isValid: false,
+      reason: 'email_mismatch',
+    } satisfies AuthAttemptResult;
   }
 
   if (expectedPassword) {
-    return password === expectedPassword;
+    const isValid = password === expectedPassword;
+    return {
+      isValid,
+      reason: isValid ? 'success' : 'password_mismatch',
+    } satisfies AuthAttemptResult;
   }
 
   if (isProduction) {
-    return false;
+    return {
+      isValid: false,
+      reason: 'password_missing_in_production',
+    } satisfies AuthAttemptResult;
   }
 
-  return password === DEFAULT_ADMIN_PASSWORD;
+  const fallbackValid = password === DEFAULT_ADMIN_PASSWORD;
+  return {
+    isValid: fallbackValid,
+    reason: fallbackValid ? 'success' : 'fallback_password_mismatch',
+  } satisfies AuthAttemptResult;
+}
+
+export function getAuthDebugConfig() {
+  return {
+    nodeEnv: process.env.NODE_ENV ?? 'unknown',
+    hasAdminEmail: Boolean(process.env.ADMIN_EMAIL?.trim()),
+    hasAdminPassword: Boolean(process.env.ADMIN_PASSWORD?.trim()),
+    hasSessionSecret: Boolean(process.env.ADMIN_SESSION_SECRET?.trim()),
+    usingFallbackEmail: !Boolean(process.env.ADMIN_EMAIL?.trim()),
+    usingFallbackPassword: !Boolean(process.env.ADMIN_PASSWORD?.trim()) && process.env.NODE_ENV !== 'production',
+  };
 }
 
 export function createSessionToken(email: string) {

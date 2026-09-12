@@ -3,8 +3,19 @@ import {
   ADMIN_SESSION_COOKIE,
   authenticate,
   createSessionToken,
+  getAuthDebugConfig,
   getSession,
 } from '@/lib/auth/auth';
+
+function maskEmail(email: string) {
+  const [name, domain] = email.split('@');
+  if (!name || !domain) {
+    return 'invalid-email-format';
+  }
+
+  const visiblePrefix = name.slice(0, 2);
+  return `${visiblePrefix}***@${domain}`;
+}
 
 export async function POST(request: Request) {
   const body = (await request.json().catch(() => null)) as { email?: string; password?: string } | null;
@@ -15,11 +26,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Email and password are required.' }, { status: 400 });
   }
 
-  const isValid = await authenticate(email, password);
+  const authResult = await authenticate(email, password);
+  const debugConfig = getAuthDebugConfig();
 
-  if (!isValid) {
+  if (!authResult.isValid) {
+    console.warn('ADMIN_AUTH_FAILED', {
+      reason: authResult.reason,
+      email: maskEmail(email),
+      passwordLength: password.length,
+      host: request.headers.get('host') ?? 'unknown-host',
+      userAgent: request.headers.get('user-agent') ?? 'unknown-user-agent',
+      ...debugConfig,
+    });
+
     return NextResponse.json({ error: 'Invalid admin credentials.' }, { status: 401 });
   }
+
+  console.info('ADMIN_AUTH_SUCCESS', {
+    email: maskEmail(email),
+    host: request.headers.get('host') ?? 'unknown-host',
+    ...debugConfig,
+  });
 
   const response = NextResponse.json({ success: true });
   const token = createSessionToken(email);
