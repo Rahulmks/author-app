@@ -1,10 +1,7 @@
-export default function NewPostPage() {
-  return (
-    <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="paper-panel rounded-[2rem] p-8">
-        <h1 className="mb-4 text-4xl font-semibold">புதிய பதிவு உருவாக்கம்</h1>
-        <p className="text-text-secondary">புதிய பதிவுக்கான படிவம் இங்கு இணைக்கப்படும்.</p>
-      </div>
-    </main>
-  );
+import { redirect } from 'next/navigation';
+import { requireAdminSession } from '@/lib/auth/auth';
+
+export default async function NewPostPage() {
+  await requireAdminSession();
+  redirect('/admin/posts');
 }

@@ -1,7 +1,6 @@
-// Authorization and permissions
-// Functions for checking user permissions
+import { getSession } from '@/lib/auth/auth';
 
-export function canManageContent(userId: string) {
-  // Permission check placeholder
-  return false;
+export async function canManageContent() {
+  const session = await getSession();
+  return Boolean(session);
 }

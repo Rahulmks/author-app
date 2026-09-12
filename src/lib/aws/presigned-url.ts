@@ -5,7 +5,15 @@ import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 import { getS3Client, isS3Configured } from '@/lib/aws/s3-client';
 
-const allowedPrefixes = ['media/posts/', 'media/books/', 'media/profile/', 'media/general/'];
+const allowedPrefixes = [
+  'media/posts/',
+  'media/books/',
+  'media/podcasts/',
+  'media/videos/',
+  'media/author/',
+  'media/profile/',
+  'media/general/',
+];
 
 export async function createUploadUrl(options?: {
   prefix?: string;

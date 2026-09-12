@@ -1,10 +1,13 @@
-export default function AdminPostsPage() {
+import AdminPostsManager from '@/components/admin/AdminPostsManager';
+import AdminShell from '@/components/admin/AdminShell';
+import { requireAdminSession } from '@/lib/auth/auth';
+
+export default async function AdminPostsPage() {
+  await requireAdminSession();
+
   return (
-    <main className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="paper-panel rounded-[2rem] p-8">
-        <h1 className="mb-4 text-4xl font-semibold">பதிவுகள் நிர்வாகம்</h1>
-        <p className="text-text-secondary">கட்டுரைகள் மற்றும் பதிவுகளுக்கான மேலாண்மை இடைமுகம்.</p>
-      </div>
-    </main>
+    <AdminShell>
+      <AdminPostsManager />
+    </AdminShell>
   );
 }
