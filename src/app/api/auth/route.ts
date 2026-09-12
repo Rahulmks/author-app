@@ -30,6 +30,12 @@ export async function POST(request: Request) {
   const debugConfig = getAuthDebugConfig();
 
   if (!authResult.isValid) {
+    const debugPayload = {
+      reason: authResult.reason,
+      ...debugConfig,
+      vercelEnv: process.env.VERCEL_ENV ?? 'unknown',
+    };
+
     console.warn('ADMIN_AUTH_FAILED', {
       reason: authResult.reason,
       email: maskEmail(email),
@@ -38,6 +44,16 @@ export async function POST(request: Request) {
       userAgent: request.headers.get('user-agent') ?? 'unknown-user-agent',
       ...debugConfig,
     });
+
+    if (process.env.ADMIN_AUTH_DEBUG === 'true') {
+      return NextResponse.json(
+        {
+          error: 'Invalid admin credentials.',
+          debug: debugPayload,
+        },
+        { status: 401 },
+      );
+    }
 
     return NextResponse.json({ error: 'Invalid admin credentials.' }, { status: 401 });
   }
