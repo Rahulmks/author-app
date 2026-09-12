@@ -6,9 +6,11 @@ interface VideoCardProps {
 }
 
 export default function VideoCard({ video }: VideoCardProps) {
+  const videoLink = video.url ?? video.videoUrl;
+
   return (
     <article className="group hover-lift manuscript-card overflow-hidden rounded-[1.75rem] p-4 md:p-5">
-      <a href={video.url} target="_blank" rel="noopener noreferrer" className="block">
+      <a href={videoLink} target="_blank" rel="noopener noreferrer" className="block">
         {video.thumbnailImage && (
           <div className="relative mb-5 aspect-video overflow-hidden rounded-[1.4rem] bg-border-color">
             <Image

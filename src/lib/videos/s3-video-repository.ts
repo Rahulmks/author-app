@@ -13,10 +13,12 @@ export class S3VideoRepository implements VideoRepository {
     const videos = await getJsonObject<Video[]>(VIDEOS_INDEX_KEY);
     return (videos ?? []).map((video) => {
       const resolvedThumbnail = resolveImagePath(video.thumbnailImage ?? video.thumbnailUrl ?? video.thumbnail);
+      const resolvedVideoUrl = video.videoUrl ?? video.url;
 
       return {
         ...video,
-        url: video.url ?? video.videoUrl,
+        videoUrl: resolvedVideoUrl,
+        url: resolvedVideoUrl,
         thumbnailImage: resolvedThumbnail,
         thumbnail: resolvedThumbnail,
         thumbnailUrl: resolvedThumbnail,

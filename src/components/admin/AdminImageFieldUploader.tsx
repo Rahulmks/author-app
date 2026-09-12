@@ -5,9 +5,9 @@ import { useMemo, useState } from 'react';
 type UploadFolder = 'posts' | 'books' | 'podcasts' | 'videos' | 'author' | 'general';
 
 interface UploadResponse {
-  uploadUrl: string;
   objectKey: string;
   publicUrl?: string;
+  error?: string;
 }
 
 interface AdminImageFieldUploaderProps {
@@ -35,34 +35,21 @@ export default function AdminImageFieldUploader({ folder, onUploaded }: AdminIma
     setUploading(true);
 
     try {
-      const urlResponse = await fetch('/api/upload', {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', folder);
+
+      const uploadResponse = await fetch('/api/upload', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          filename: file.name,
-          contentType: file.type || 'application/octet-stream',
-          folder,
-        }),
+        body: formData,
       });
 
-      if (!urlResponse.ok) {
-        const details = (await urlResponse.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(details?.error ?? 'Unable to prepare upload.');
+      if (!uploadResponse.ok) {
+        const details = (await uploadResponse.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(details?.error ?? 'Upload failed.');
       }
 
-      const uploadData = (await urlResponse.json()) as UploadResponse;
-
-      const putResponse = await fetch(uploadData.uploadUrl, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': file.type || 'application/octet-stream',
-        },
-        body: file,
-      });
-
-      if (!putResponse.ok) {
-        throw new Error('Image upload failed.');
-      }
+      const uploadData = (await uploadResponse.json()) as UploadResponse;
 
       const resolvedPath = uploadData.publicUrl ?? uploadData.objectKey;
       onUploaded(resolvedPath);
