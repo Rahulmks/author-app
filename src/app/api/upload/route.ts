@@ -28,6 +28,22 @@ function extractExtension(filename?: string) {
   return filename.slice(lastDot).toLowerCase();
 }
 
+function buildPublicUrl(objectKey: string) {
+  const bucket = process.env.S3_BUCKET_NAME;
+  const region = process.env.AWS_REGION;
+
+  if (!bucket || !region) {
+    return undefined;
+  }
+
+  const encodedKey = objectKey
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/');
+
+  return `https://${bucket}.s3.${region}.amazonaws.com/${encodedKey}`;
+}
+
 export async function POST(request: Request) {
   await requireAdminSession();
 
@@ -70,9 +86,7 @@ export async function POST(request: Request) {
         }),
       );
 
-      const publicUrl = objectKey.startsWith('media/')
-        ? `/images/${objectKey.slice('media/'.length)}`
-        : undefined;
+      const publicUrl = buildPublicUrl(objectKey);
 
       return NextResponse.json({ objectKey, publicUrl });
     } catch (error) {
@@ -96,9 +110,7 @@ export async function POST(request: Request) {
       contentType: body?.contentType || 'application/octet-stream',
     });
 
-    const publicUrl = objectKey.startsWith('media/')
-      ? `/images/${objectKey.slice('media/'.length)}`
-      : undefined;
+    const publicUrl = buildPublicUrl(objectKey);
 
     return NextResponse.json({ uploadUrl, objectKey, publicUrl });
   } catch (error) {
