@@ -28,40 +28,46 @@ export async function POST(request: Request) {
 
   const authResult = await authenticate(email, password);
   const debugConfig = getAuthDebugConfig();
+  const deploymentDebug = {
+    vercelEnv: process.env.VERCEL_ENV ?? 'unknown',
+    vercelDeploymentId: process.env.VERCEL_DEPLOYMENT_ID ?? 'unknown',
+    region: process.env.VERCEL_REGION ?? 'unknown',
+  };
 
   if (!authResult.isValid) {
     const debugPayload = {
       reason: authResult.reason,
       ...debugConfig,
-      vercelEnv: process.env.VERCEL_ENV ?? 'unknown',
+      ...deploymentDebug,
     };
 
-    console.warn('ADMIN_AUTH_FAILED', {
+    console.error('ADMIN_AUTH_FAILED', {
       reason: authResult.reason,
       email: maskEmail(email),
       passwordLength: password.length,
       host: request.headers.get('host') ?? 'unknown-host',
       userAgent: request.headers.get('user-agent') ?? 'unknown-user-agent',
       ...debugConfig,
+      ...deploymentDebug,
     });
 
-    if (process.env.ADMIN_AUTH_DEBUG === 'true') {
-      return NextResponse.json(
-        {
-          error: 'Invalid admin credentials.',
-          debug: debugPayload,
-        },
-        { status: 401 },
-      );
-    }
-
-    return NextResponse.json({ error: 'Invalid admin credentials.' }, { status: 401 });
+    const response = NextResponse.json(
+      {
+        error: 'Invalid admin credentials.',
+        debug: debugPayload,
+      },
+      { status: 401 },
+    );
+    response.headers.set('x-admin-auth-reason', authResult.reason);
+    response.headers.set('x-admin-auth-deployment', deploymentDebug.vercelDeploymentId);
+    return response;
   }
 
   console.info('ADMIN_AUTH_SUCCESS', {
     email: maskEmail(email),
     host: request.headers.get('host') ?? 'unknown-host',
     ...debugConfig,
+    ...deploymentDebug,
   });
 
   const response = NextResponse.json({ success: true });
