@@ -6,7 +6,7 @@ export const mockBooks: Book[] = [
     title: 'காற்றின் குரல்',
     slug: 'voice-of-the-wind',
     description: 'Mock data for testing: ஒரு சிறு கிராமத்தில் நடக்கும் அசாதாரண நிகழ்வுகளின் கதை. இயற்கையும் மனிதர்களும் எவ்வாறு ஒன்றிணைகின்றன என்பதை விவரிக்கும் நாவல்.',
-    coverImage: '/images/profile.jpg',
+    coverImage: '/images/books/voice-of-wind.jpg',
     publicationYear: 2024,
     publishedYear: 2024,
     publisher: 'Literary Press',

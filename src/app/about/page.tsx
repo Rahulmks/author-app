@@ -11,7 +11,7 @@ export default async function AboutPage() {
         <div className="manuscript-card rounded-[2rem] p-4">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-neutral-200">
           <Image
-            src={about?.image || '/images/author/profile.jpg'}
+            src={about?.image || '/images/author/jaya-mohan.jpg'}
             alt={about?.name || 'எழுத்தாளரின் உருவப்படம்'}
             fill
             className="object-cover"
