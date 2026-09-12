@@ -1,0 +1,13 @@
+{
+  "id": "book-003",
+  "title": "Kaadu",
+  "slug": "kaadu",
+  "description": "A novel of wilderness and interior transformation, celebrated for its ecological imagination and psychological insight.",
+  "coverImage": "/images/books/book-cover-3.jpg",
+  "publicationYear": 2003,
+  "publisher": "Uyirmmai",
+  "purchaseUrl": "https://jeyamohan.in",
+  "createdAt": "2026-09-05T10:00:00Z",
+  "updatedAt": "2026-09-12T10:00:00Z",
+  "language": "Tamil"
+}

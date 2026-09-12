@@ -1,0 +1,24 @@
+{
+  "id": "post-001",
+  "title": "Aram and Ethical Imagination",
+  "slug": "aram-and-ethical-imagination",
+  "excerpt": "Why Aram remains one of the most accessible and morally urgent entry points into Jaya Mohan's fiction.",
+  "content": "<h2>Aram and Ethical Imagination</h2><p>Aram is often recommended as a first encounter with Jaya Mohan because of its clarity and emotional force. The stories are simple on the surface, but each one opens into difficult moral questions.</p><p>Rather than offering neat solutions, the collection asks readers to inhabit ambiguity: how to act when duty, compassion, and social rules collide. This ethical tension gives the stories their long afterlife in public conversations.</p><p>Across classrooms, book clubs, and online readers' circles, Aram continues to be discussed as literature that is both artistically strong and socially alert.</p>",
+  "contentFormat": "html",
+  "coverImage": "/images/posts/post-aram.jpg",
+  "author": "Jaya Mohan",
+  "status": "published",
+  "category": "Literary Criticism",
+  "tags": ["aram", "ethics", "short-stories"],
+  "createdAt": "2026-09-09T10:00:00Z",
+  "updatedAt": "2026-09-12T10:00:00Z",
+  "publishedAt": "2026-09-10T10:00:00Z",
+  "readingTimeMinutes": 8,
+  "featured": true,
+  "published": true,
+  "seo": {
+    "title": "Aram and Ethical Imagination",
+    "description": "A concise reading of Aram and its moral imagination in contemporary Tamil literature.",
+    "canonicalUrl": "/posts/aram-and-ethical-imagination"
+  }
+}

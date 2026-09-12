@@ -1,26 +1,38 @@
 [
   {
     "id": "book-001",
-    "title": "The Quiet Places",
-    "slug": "the-quiet-places",
-    "description": "A collection of essays on memory, place, and the language of belonging.",
+    "title": "Vishnupuram",
+    "slug": "vishnupuram",
+    "description": "A landmark modern Tamil novel known for its philosophical depth, layered narrative architecture, and civilizational scope.",
     "coverImage": "/images/books/book-cover-1.jpg",
-    "publicationYear": 2026,
-    "publisher": "Independent Press",
-    "purchaseUrl": "https://example.com/book/the-quiet-places",
+    "publicationYear": 1997,
+    "publisher": "Tamilini",
+    "purchaseUrl": "https://jeyamohan.in",
     "createdAt": "2026-09-01T10:00:00Z",
-    "updatedAt": "2026-09-01T10:00:00Z"
+    "updatedAt": "2026-09-12T10:00:00Z"
   },
   {
     "id": "book-002",
-    "title": "Letters to the Future",
-    "slug": "letters-to-the-future",
-    "description": "A reflective work on time, memory, and the careful art of living intentionally.",
+    "title": "Aram",
+    "slug": "aram",
+    "description": "A widely read short story collection that explores ethics, compassion, and moral responsibility in everyday life.",
     "coverImage": "/images/books/book-cover-2.jpg",
-    "publicationYear": 2025,
-    "publisher": "Studio Lantern",
-    "purchaseUrl": "https://example.com/book/letters-to-the-future",
+    "publicationYear": 2011,
+    "publisher": "Kizhakku Pathippagam",
+    "purchaseUrl": "https://jeyamohan.in",
     "createdAt": "2026-08-20T10:00:00Z",
-    "updatedAt": "2026-08-20T10:00:00Z"
+    "updatedAt": "2026-09-12T10:00:00Z"
+  },
+  {
+    "id": "book-003",
+    "title": "Kaadu",
+    "slug": "kaadu",
+    "description": "A novel of wilderness and interior transformation, celebrated for its ecological imagination and psychological insight.",
+    "coverImage": "/images/books/book-cover-3.jpg",
+    "publicationYear": 2003,
+    "publisher": "Uyirmmai",
+    "purchaseUrl": "https://jeyamohan.in",
+    "createdAt": "2026-09-05T10:00:00Z",
+    "updatedAt": "2026-09-12T10:00:00Z"
   }
 ]

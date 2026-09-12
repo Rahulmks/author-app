@@ -17,17 +17,17 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border-color bg-[rgba(248,240,229,0.78)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border-color bg-[rgba(247,241,230,0.92)] backdrop-blur-md">
       <Container>
-        <nav className="flex items-center justify-between gap-6 py-4 md:py-5">
+        <nav className="flex items-center justify-between gap-4 py-4 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
           <Link 
             href="/" 
             className="group block text-text-primary"
           >
-            <span className="block font-display text-xl md:text-2xl leading-tight">
+            <span className="block font-display text-xl leading-tight md:text-2xl">
               {siteConfig.authorName}
             </span>
-            <span className="mt-1 block text-[0.68rem] font-medium uppercase tracking-[0.28em] text-text-secondary transition-colors group-hover:text-accent">
+            <span className="mt-1 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-accent transition-opacity group-hover:opacity-80">
               {siteConfig.authorTitle}
             </span>
           </Link>

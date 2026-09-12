@@ -3,6 +3,9 @@ import EventCard from '@/components/events/EventCard';
 import { mockEvents } from '@/data/events';
 
 export default function EventsPage() {
+  const upcomingEvents = mockEvents.filter((event) => event.status === 'upcoming');
+  const pastEvents = mockEvents.filter((event) => event.status === 'past');
+
   return (
     <Container className="py-12 md:py-20">
       <div className="mb-12 max-w-3xl">
@@ -15,13 +18,37 @@ export default function EventsPage() {
         <p className="text-lg leading-8 text-text-secondary">
           வாசகர்கள், எழுத்தாளர்கள், மொழி மற்றும் நினைவை மையமாகக் கொண்ட மேடைகள் இங்கு தொகுக்கப்பட்டுள்ளன.
         </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          <span className="rounded-full border border-border-color bg-[rgba(255,249,242,0.8)] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
+            வரவிருக்கும் நிகழ்வுகள்
+          </span>
+          <span className="rounded-full border border-border-color bg-[rgba(255,249,242,0.8)] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
+            கடந்த நிகழ்வுகள்
+          </span>
+        </div>
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
-        {mockEvents.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
-      </div>
+      {upcomingEvents.length > 0 && (
+        <section className="mb-12">
+          <h2 className="mb-5 text-2xl font-semibold md:text-3xl">வரவிருக்கும் நிகழ்வுகள்</h2>
+          <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+            {upcomingEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {pastEvents.length > 0 && (
+        <section>
+          <h2 className="mb-5 text-2xl font-semibold md:text-3xl">கடந்த நிகழ்வுகள்</h2>
+          <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+            {pastEvents.map((event) => (
+              <EventCard key={event.id} event={event} />
+            ))}
+          </div>
+        </section>
+      )}
     </Container>
   );
 }

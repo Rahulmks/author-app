@@ -1,15 +1,30 @@
 [
   {
     "id": "podcast-001",
-    "title": "On Attention and Craft",
-    "slug": "on-attention-and-craft",
-    "description": "A reflective discussion on attention, patience, and creative work.",
+    "title": "Why Aram Still Matters",
+    "slug": "why-aram-still-matters",
+    "description": "A discussion on recurring ethical motifs in Jaya Mohan's short fiction and why readers still return to Aram.",
     "platform": "spotify",
-    "episodeUrl": "https://open.spotify.com/episode/example",
-    "coverImage": "/images/placeholder.svg",
+    "episodeUrl": "https://open.spotify.com/episode/example-aram",
+    "coverImage": "/images/podcasts/aram-episode.jpg",
     "episodeNumber": 1,
-    "duration": "25:10",
-    "createdAt": "2026-09-02T10:00:00Z",
-    "updatedAt": "2026-09-02T10:00:00Z"
+    "duration": "28:14",
+    "publishedAt": "2026-09-06T10:00:00Z",
+    "createdAt": "2026-09-06T10:00:00Z",
+    "updatedAt": "2026-09-12T10:00:00Z"
+  },
+  {
+    "id": "podcast-002",
+    "title": "Approaching Vishnupuram",
+    "slug": "approaching-vishnupuram",
+    "description": "A practical listener's guide to navigating the scale, symbolism, and ideas in Vishnupuram.",
+    "platform": "spotify",
+    "episodeUrl": "https://open.spotify.com/episode/example-vishnupuram",
+    "coverImage": "/images/podcasts/vishnupuram-episode.jpg",
+    "episodeNumber": 2,
+    "duration": "31:02",
+    "publishedAt": "2026-09-09T10:00:00Z",
+    "createdAt": "2026-09-09T10:00:00Z",
+    "updatedAt": "2026-09-12T10:00:00Z"
   }
 ]

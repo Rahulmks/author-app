@@ -1,24 +1,35 @@
 [
   {
     "id": "post-001",
-    "title": "The Power of Stories",
-    "slug": "the-power-of-stories",
-    "excerpt": "Stories shape how we understand ourselves and the world around us.",
-    "coverImage": "/images/placeholder.svg",
-    "category": "Essays",
-    "tags": ["stories", "writing"],
-    "publishedAt": "2026-09-01T10:00:00Z",
+    "title": "Aram and Ethical Imagination",
+    "slug": "aram-and-ethical-imagination",
+    "excerpt": "Why Aram remains one of the most accessible and morally urgent entry points into Jaya Mohan's fiction.",
+    "coverImage": "/images/posts/post-aram.jpg",
+    "category": "Literary Criticism",
+    "tags": ["aram", "ethics", "short-stories"],
+    "publishedAt": "2026-09-10T10:00:00Z",
     "readingTimeMinutes": 8
   },
   {
     "id": "post-002",
-    "title": "On Reading and Living",
-    "slug": "on-reading-and-living",
-    "excerpt": "Reading expands our inner life and deepens our understanding of human experience.",
-    "coverImage": "/images/placeholder.svg",
-    "category": "Reflections",
-    "tags": ["reading", "life"],
-    "publishedAt": "2026-08-28T10:00:00Z",
-    "readingTimeMinutes": 6
+    "title": "Inside Vishnupuram",
+    "slug": "inside-vishnupuram",
+    "excerpt": "A concise guide to the symbols, philosophical threads, and narrative structure of Vishnupuram.",
+    "coverImage": "/images/posts/post-vishnupuram.jpg",
+    "category": "Novel Study",
+    "tags": ["vishnupuram", "novel", "tamil-literature"],
+    "publishedAt": "2026-09-08T10:00:00Z",
+    "readingTimeMinutes": 7
+  },
+  {
+    "id": "post-003",
+    "title": "Reading Venmurasu in the Digital Age",
+    "slug": "reading-venmurasu-in-the-digital-age",
+    "excerpt": "How the long-form epic project reshaped serial literary reading for contemporary Tamil audiences.",
+    "coverImage": "/images/posts/post-venmurasu.jpg",
+    "category": "Epic Literature",
+    "tags": ["venmurasu", "mahabharata", "digital-serial"],
+    "publishedAt": "2026-09-05T10:00:00Z",
+    "readingTimeMinutes": 9
   }
 ]

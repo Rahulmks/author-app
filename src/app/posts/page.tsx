@@ -5,6 +5,13 @@ import Container from '@/components/layout/Container';
 import PostCard from '@/components/posts/PostCard';
 import { getPosts } from '@/lib/posts/get-posts';
 
+const postCategories = [
+  'பொது',
+  'சிறுகதை',
+  'கட்டுரை',
+  'குறுங்கற்பனை கதைகள்',
+];
+
 export default async function PostsPage() {
   const posts = await getPosts();
 
@@ -25,6 +32,16 @@ export default async function PostsPage() {
           விளிம்புகளில் எழுதப்பட்ட குறிப்புகள், நிலமும் நினைவும் குறித்த கவனிப்புகள்,
           வாசித்துப் பின் நீண்ட நேரம் மனதில் தங்கும் சிறு கதைகள்.
         </p>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {postCategories.map((category) => (
+            <span
+              key={category}
+              className="rounded-full border border-border-color bg-[rgba(255,249,242,0.8)] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary"
+            >
+              {category}
+            </span>
+          ))}
+        </div>
       </div>
 
       <div className="border-t border-border-color pt-10">

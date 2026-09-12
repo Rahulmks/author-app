@@ -84,8 +84,8 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                       href={item.href}
                       className={`block rounded-2xl border px-4 py-4 text-base font-medium transition-colors ${
                         isActive
-                          ? 'border-[rgba(138,90,60,0.28)] bg-accent-soft text-accent'
-                          : 'border-transparent text-text-secondary hover:border-border-color hover:bg-[rgba(255,250,242,0.8)] hover:text-text-primary'
+                            ? 'border-[rgba(138,90,60,0.28)] bg-accent-soft text-accent'
+                            : 'border-transparent text-text-secondary hover:border-border-color hover:bg-[rgba(255,250,242,0.8)] hover:text-text-primary'
                       }`}
                     >
                       {item.name}

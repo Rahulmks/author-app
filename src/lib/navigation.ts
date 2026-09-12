@@ -5,13 +5,10 @@ export interface NavigationItem {
 
 export const navigationItems: NavigationItem[] = [
   { name: 'முகப்பு', href: '/' },
-  { name: 'எழுத்தாளர்', href: '/about' },
   { name: 'எழுத்துகள்', href: '/posts' },
+  { name: 'காணொளிகள்', href: '/videos' },
   { name: 'நூல்கள்', href: '/books' },
   { name: 'நிகழ்வுகள்', href: '/events' },
-  { name: 'காணொளிகள்', href: '/videos' },
-  { name: 'ஒலிப்பதிவு', href: '/podcast' },
-  { name: 'தொடர்பு', href: '/contact' },
 ];
 
 export const siteConfig = {
