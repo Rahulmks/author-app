@@ -2,6 +2,8 @@
 
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
+import AdminImageFieldUploader from '@/components/admin/AdminImageFieldUploader';
+
 interface PostRecord {
   id: string;
   title: string;
@@ -222,6 +224,7 @@ export default function AdminPostsManager() {
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Cover Image Path</label>
             <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/posts/example.jpg" />
+            <AdminImageFieldUploader folder="posts" onUploaded={(path) => setForm((prev) => ({ ...prev, coverImage: path }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Author</label>

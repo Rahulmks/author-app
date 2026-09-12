@@ -2,6 +2,8 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 
+import AdminImageFieldUploader from '@/components/admin/AdminImageFieldUploader';
+
 interface BookRecord {
   id: string;
   title: string;
@@ -169,6 +171,7 @@ export default function AdminBooksManager() {
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Cover Image Path</label>
             <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/books/book.jpg" />
+            <AdminImageFieldUploader folder="books" onUploaded={(path) => setForm((prev) => ({ ...prev, coverImage: path }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Publication Year</label>

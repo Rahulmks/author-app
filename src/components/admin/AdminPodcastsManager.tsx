@@ -2,6 +2,8 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 
+import AdminImageFieldUploader from '@/components/admin/AdminImageFieldUploader';
+
 interface PodcastRecord {
   id: string;
   title: string;
@@ -204,6 +206,7 @@ export default function AdminPodcastsManager() {
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Cover Image Path</label>
             <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/podcasts/cover.jpg" />
+            <AdminImageFieldUploader folder="podcasts" onUploaded={(path) => setForm((prev) => ({ ...prev, coverImage: path }))} />
           </div>
         </div>
 

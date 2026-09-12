@@ -2,6 +2,8 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 
+import AdminImageFieldUploader from '@/components/admin/AdminImageFieldUploader';
+
 interface VideoRecord {
   id: string;
   title: string;
@@ -198,6 +200,7 @@ export default function AdminVideosManager() {
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Thumbnail Path</label>
             <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.thumbnailUrl} onChange={(event) => setForm((prev) => ({ ...prev, thumbnailUrl: event.target.value }))} placeholder="media/videos/thumbnail.jpg" />
+            <AdminImageFieldUploader folder="videos" onUploaded={(path) => setForm((prev) => ({ ...prev, thumbnailUrl: path }))} />
           </div>
         </div>
 
