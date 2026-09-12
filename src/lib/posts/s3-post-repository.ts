@@ -2,6 +2,7 @@ import 'server-only';
 
 import type { Post, PostSummary } from '@/types/post';
 import { getJsonObject } from '@/lib/aws/s3-read';
+import { resolveImagePath } from '@/lib/media/resolve-image-path';
 
 import type { PostRepository } from '@/lib/posts/post-repository';
 
@@ -10,7 +11,10 @@ const POSTS_INDEX_KEY = 'posts/index.json';
 export class S3PostRepository implements PostRepository {
   async getPublishedPosts(): Promise<PostSummary[]> {
     const index = await getJsonObject<PostSummary[]>(POSTS_INDEX_KEY);
-    return index ?? [];
+    return (index ?? []).map((post) => ({
+      ...post,
+      coverImage: resolveImagePath(post.coverImage),
+    }));
   }
 
   async getPublishedPostBySlug(slug: string): Promise<Post | null> {
@@ -18,7 +22,11 @@ export class S3PostRepository implements PostRepository {
     if (!post) {
       return null;
     }
-    return post;
+
+    return {
+      ...post,
+      coverImage: resolveImagePath(post.coverImage),
+    };
   }
 
   async getDrafts(): Promise<PostSummary[]> {

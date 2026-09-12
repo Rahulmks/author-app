@@ -5,6 +5,8 @@ export interface AboutPageContent {
   image?: string;
 }
 
+import { resolveImagePath } from '@/lib/media/resolve-image-path';
+
 export async function getAboutPage(): Promise<AboutPageContent | null> {
   const fallback: AboutPageContent = {
     name: 'எழுத்தாளர்',
@@ -16,7 +18,15 @@ export async function getAboutPage(): Promise<AboutPageContent | null> {
 
   if (process.env.S3_BUCKET_NAME && process.env.AWS_REGION) {
     const { getJsonObject } = await import('@/lib/aws/s3-read');
-    return (await getJsonObject<AboutPageContent>('pages/about.json')) ?? fallback;
+    const page = await getJsonObject<AboutPageContent>('pages/about.json');
+    if (!page) {
+      return fallback;
+    }
+
+    return {
+      ...page,
+      image: resolveImagePath(page.image),
+    };
   }
 
   return fallback;
