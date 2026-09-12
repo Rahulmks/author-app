@@ -71,22 +71,27 @@ function decodePayload(token: string): SessionPayload | null {
 }
 
 export async function authenticate(email: string, password: string) {
-  const expectedEmail = process.env.ADMIN_EMAIL ?? DEFAULT_ADMIN_EMAIL;
-  const expectedPassword = process.env.ADMIN_PASSWORD;
-  const expectedPasswordHash = process.env.ADMIN_PASSWORD_HASH;
+  const isProduction = process.env.NODE_ENV === 'production';
+  const expectedEmail = (process.env.ADMIN_EMAIL ?? DEFAULT_ADMIN_EMAIL).trim();
+  const expectedPassword = process.env.ADMIN_PASSWORD?.trim();
+  const expectedPasswordHash = process.env.ADMIN_PASSWORD_HASH?.trim().toLowerCase();
 
-  const normalizedEmailMatches = email.trim().toLowerCase() === expectedEmail.trim().toLowerCase();
+  const normalizedEmailMatches = email.trim().toLowerCase() === expectedEmail.toLowerCase();
 
   if (!normalizedEmailMatches) {
     return false;
   }
 
-  if (expectedPasswordHash?.trim()) {
-    return sha256Hex(password) === expectedPasswordHash.trim().toLowerCase();
+  if (expectedPasswordHash) {
+    return sha256Hex(password) === expectedPasswordHash;
   }
 
-  if (expectedPassword?.trim()) {
+  if (expectedPassword) {
     return password === expectedPassword;
+  }
+
+  if (isProduction) {
+    return false;
   }
 
   return password === DEFAULT_ADMIN_PASSWORD;
