@@ -1,4 +1,4 @@
-import { createHmac, timingSafeEqual } from 'crypto';
+import { createHash, createHmac, timingSafeEqual } from 'crypto';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -27,6 +27,10 @@ function getSessionSecret() {
 
 function sign(value: string) {
   return createHmac('sha256', getSessionSecret()).update(value).digest('base64url');
+}
+
+function sha256Hex(value: string) {
+  return createHash('sha256').update(value).digest('hex');
 }
 
 function encodePayload(payload: SessionPayload) {
@@ -68,9 +72,24 @@ function decodePayload(token: string): SessionPayload | null {
 
 export async function authenticate(email: string, password: string) {
   const expectedEmail = process.env.ADMIN_EMAIL ?? DEFAULT_ADMIN_EMAIL;
-  const expectedPassword = process.env.ADMIN_PASSWORD ?? DEFAULT_ADMIN_PASSWORD;
+  const expectedPassword = process.env.ADMIN_PASSWORD;
+  const expectedPasswordHash = process.env.ADMIN_PASSWORD_HASH;
 
-  return email.trim().toLowerCase() === expectedEmail.trim().toLowerCase() && password === expectedPassword;
+  const normalizedEmailMatches = email.trim().toLowerCase() === expectedEmail.trim().toLowerCase();
+
+  if (!normalizedEmailMatches) {
+    return false;
+  }
+
+  if (expectedPasswordHash?.trim()) {
+    return sha256Hex(password) === expectedPasswordHash.trim().toLowerCase();
+  }
+
+  if (expectedPassword?.trim()) {
+    return password === expectedPassword;
+  }
+
+  return password === DEFAULT_ADMIN_PASSWORD;
 }
 
 export function createSessionToken(email: string) {
