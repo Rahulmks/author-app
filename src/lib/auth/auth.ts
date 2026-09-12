@@ -1,4 +1,4 @@
-import { createHash, createHmac, timingSafeEqual } from 'crypto';
+import { createHmac, timingSafeEqual } from 'crypto';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
@@ -27,10 +27,6 @@ function getSessionSecret() {
 
 function sign(value: string) {
   return createHmac('sha256', getSessionSecret()).update(value).digest('base64url');
-}
-
-function sha256Hex(value: string) {
-  return createHash('sha256').update(value).digest('hex');
 }
 
 function encodePayload(payload: SessionPayload) {
@@ -74,16 +70,11 @@ export async function authenticate(email: string, password: string) {
   const isProduction = process.env.NODE_ENV === 'production';
   const expectedEmail = (process.env.ADMIN_EMAIL ?? DEFAULT_ADMIN_EMAIL).trim();
   const expectedPassword = process.env.ADMIN_PASSWORD?.trim();
-  const expectedPasswordHash = process.env.ADMIN_PASSWORD_HASH?.trim().toLowerCase();
 
   const normalizedEmailMatches = email.trim().toLowerCase() === expectedEmail.toLowerCase();
 
   if (!normalizedEmailMatches) {
     return false;
-  }
-
-  if (expectedPasswordHash) {
-    return sha256Hex(password) === expectedPasswordHash;
   }
 
   if (expectedPassword) {
