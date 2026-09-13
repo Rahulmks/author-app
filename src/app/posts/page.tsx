@@ -50,19 +50,19 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
     : allPosts;
 
   return (
-    <Container className="py-12 md:py-20">
-      <div className="max-w-3xl mb-12">
-        <p className="eyebrow mb-4">
+    <Container className="py-8 md:py-12">
+      <div className="max-w-3xl mb-8">
+        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
           எழுத்துகள்
         </p>
-        <h1 className="mb-5 text-4xl font-semibold md:text-5xl">
+        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
           கட்டுரைகள், கதைகள், மனநினைவுகள்
         </h1>
-        <p className="text-lg leading-8 text-text-secondary">
+        <p className="text-base leading-relaxed text-text-secondary">
           விளிம்புகளில் எழுதப்பட்ட குறிப்புகள், நிலமும் நினைவும் குறித்த கவனிப்புகள்,
           வாசித்துப் பின் நீண்ட நேரம் மனதில் தங்கும் சிறு கதைகள்.
         </p>
-        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
+        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
           {postCategories.map((category) => {
             const isActive = (!activeCategory && category === 'அனைத்தும்') || activeCategory === category;
             const href = category === 'அனைத்தும்' ? '/posts' : `/posts?category=${encodeURIComponent(category)}`;
@@ -70,7 +70,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`border-b pb-1 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`border-b pb-0.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
                   isActive
                     ? 'border-accent text-accent'
                     : 'border-transparent text-text-secondary hover:border-accent hover:text-accent'
@@ -83,9 +83,9 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         </div>
       </div>
 
-      <div className="border-t border-border-color pt-10">
+      <div className="border-t border-border-color pt-4">
         {posts.length > 0 ? (
-          <div className="max-w-3xl">
+          <div className="max-w-3xl divide-y divide-border-color">
             {posts.map((post) => (
               <PostCard key={post.id} post={post as any} />
             ))}

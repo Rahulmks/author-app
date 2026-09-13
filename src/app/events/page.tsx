@@ -8,31 +8,23 @@ export default function EventsPage() {
   const pastEvents = mockEvents.filter((event) => event.status === 'past');
 
   return (
-    <Container className="py-12 md:py-20">
-      <div className="mb-12 max-w-3xl">
-        <p className="eyebrow mb-4">
+    <Container className="py-8 md:py-12">
+      <div className="mb-8 max-w-3xl">
+        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
           நிகழ்வுகள்
         </p>
-        <h1 className="mb-5 text-4xl font-semibold md:text-5xl">
+        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
           வாசிப்புகள், பட்டறைகள், நேரடி உரையாடல்கள்
         </h1>
-        <p className="text-lg leading-8 text-text-secondary">
+        <p className="text-base leading-relaxed text-text-secondary">
           வாசகர்கள், எழுத்தாளர்கள், மொழி மற்றும் நினைவை மையமாகக் கொண்ட மேடைகள் இங்கு தொகுக்கப்பட்டுள்ளன.
         </p>
-        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
-          <span className="border-b border-border-color pb-1 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
-            வரவிருக்கும் நிகழ்வுகள்
-          </span>
-          <span className="border-b border-border-color pb-1 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
-            கடந்த நிகழ்வுகள்
-          </span>
-        </div>
       </div>
 
       {upcomingEvents.length > 0 && (
-        <section className="mb-12">
-          <h2 className="mb-5 text-2xl font-semibold md:text-3xl">வரவிருக்கும் நிகழ்வுகள்</h2>
-          <div className="max-w-3xl">
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-semibold md:text-2xl text-accent border-b border-border-color/60 pb-2">வரவிருக்கும் நிகழ்வுகள்</h2>
+          <div className="relative border-l border-border-color/60 ml-2 max-w-3xl divide-y divide-border-color/40">
             {upcomingEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
@@ -42,8 +34,8 @@ export default function EventsPage() {
 
       {pastEvents.length > 0 && (
         <section>
-          <h2 className="mb-5 text-2xl font-semibold md:text-3xl">கடந்த நிகழ்வுகள்</h2>
-          <div className="max-w-3xl">
+          <h2 className="mb-4 text-xl font-semibold md:text-2xl text-text-secondary border-b border-border-color/60 pb-2">கடந்த நிகழ்வுகள்</h2>
+          <div className="relative border-l border-border-color/60 ml-2 max-w-3xl divide-y divide-border-color/40">
             {pastEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}

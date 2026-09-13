@@ -79,12 +79,12 @@ export default async function HomePage() {
 
       <ManuscriptDivider />
 
-      <section className="py-12 md:py-20">
+      <section className="py-10 md:py-16">
         <Container>
-          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டைப்பக்கத் தேர்வைப் போலத் தொகுக்கப்பட்டுள்ளன.">
+          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டவணை போலத் தொகுக்கப்பட்டுள்ளன.">
             சமீபத்திய எழுத்துகள்
           </SectionHeading>
-          <div className="grid gap-10 md:grid-cols-3">
+          <div className="max-w-3xl mx-auto divide-y divide-border-color border-t border-border-color pt-2">
             {latestPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}

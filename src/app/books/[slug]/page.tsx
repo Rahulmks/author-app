@@ -17,43 +17,52 @@ export default async function BookDetailPage({
   }
 
   return (
-    <Container className="py-12 md:py-20">
-      <div className="grid gap-8 md:grid-cols-[300px_1fr] items-start">
-        <div className="manuscript-card rounded-[2rem] p-4">
-          <div className="relative aspect-[2/3] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
+    <Container className="py-8 md:py-12">
+      <div className="max-w-4xl mx-auto mb-6">
+        <Link
+          href="/books"
+          className="inline-flex items-center text-xs font-medium uppercase tracking-[0.12em] text-text-secondary hover:text-accent transition-colors"
+        >
+          ← நூல்கள் அனைத்தும்
+        </Link>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-[260px_1fr] items-start max-w-4xl mx-auto">
+        <div className="w-full max-w-[260px] mx-auto">
+          <div className="relative aspect-[2/3] overflow-hidden rounded-lg border border-border-color/60 bg-paper shadow-md">
             {book.coverImage && (
-            <Image
-              src={book.coverImage}
-              alt={book.title}
-              fill
-              className="object-cover"
-            />
-          )}
+              <Image
+                src={book.coverImage}
+                alt={book.title}
+                fill
+                className="object-cover"
+              />
+            )}
           </div>
         </div>
 
-        <div className="paper-panel rounded-[2rem] p-7 md:p-10">
-          <p className="eyebrow mb-4">
+        <div className="paper-panel rounded-2xl p-6 md:p-8">
+          <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
             நூல்
           </p>
-          <h1 className="mb-5 text-4xl font-semibold md:text-5xl">
+          <h1 className="mb-4 text-3xl font-semibold md:text-4xl">
             {book.title}
           </h1>
-          <p className="mb-6 text-lg leading-8 text-text-secondary">
+          <p className="mb-6 text-base leading-relaxed text-text-secondary">
             {book.description}
           </p>
 
-          <div className="mb-8 space-y-2 text-text-secondary">
-            {book.publishedYear && <p>வெளியீட்டு ஆண்டு: {book.publishedYear}</p>}
-            {book.publisher && <p>பதிப்பகம்: {book.publisher}</p>}
-            {book.language && <p>மொழி: {book.language}</p>}
+          <div className="mb-6 space-y-1.5 text-xs md:text-sm text-text-secondary border-t border-border-color/40 pt-4">
+            {book.publishedYear && <p><span className="font-medium text-text-primary">வெளியீட்டு ஆண்டு:</span> {book.publishedYear}</p>}
+            {book.publisher && <p><span className="font-medium text-text-primary">பதிப்பகம்:</span> {book.publisher}</p>}
+            {book.language && <p><span className="font-medium text-text-primary">மொழி:</span> {book.language}</p>}
           </div>
 
-          <div className="flex flex-wrap gap-4">
-            <a href="https://amazon.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-full border border-border-color px-5 py-3 text-sm font-medium transition-colors hover:border-accent hover:text-accent">
+          <div className="flex flex-wrap items-center gap-4 pt-2">
+            <a href="https://amazon.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center rounded-md border border-border-color px-4 py-2 text-xs font-medium transition-colors hover:border-accent hover:text-accent">
               வாங்க
             </a>
-            <a href="https://goodreads.com" target="_blank" rel="noopener noreferrer" className="ink-link inline-flex items-center text-sm font-medium text-accent">
+            <a href="https://goodreads.com" target="_blank" rel="noopener noreferrer" className="ink-link inline-flex items-center text-xs font-medium text-accent">
               Goodreads
             </a>
           </div>

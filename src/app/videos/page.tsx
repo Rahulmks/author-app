@@ -30,19 +30,19 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
     : allVideos;
 
   return (
-    <Container className="py-12 md:py-20">
-      <div className="max-w-3xl mb-12">
-        <p className="eyebrow mb-4">
+    <Container className="py-8 md:py-12">
+      <div className="max-w-3xl mb-8">
+        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
           காணொளிகள்
         </p>
-        <h1 className="mb-5 text-4xl font-semibold md:text-5xl">
+        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
           உரையாடல்கள் மற்றும் வாசிப்புகள்
         </h1>
-        <p className="text-lg leading-8 text-text-secondary">
+        <p className="text-base leading-relaxed text-text-secondary">
           பட்டறைகள், நிகழ்வுகள், நேர்காணல்கள் மற்றும் இலக்கியம் குறித்த தனிப்பட்ட உரையாடல்களிலிருந்து
           தேர்ந்தெடுக்கப்பட்ட காட்சி பதிவுகள்.
         </p>
-        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
+        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
           {videoCategories.map((category) => {
             const isActive = (!activeCategory && category === 'அனைத்தும்') || activeCategory === category;
             const href = category === 'அனைத்தும்' ? '/videos' : `/videos?category=${encodeURIComponent(category)}`;
@@ -50,7 +50,7 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`border-b pb-1 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`border-b pb-0.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
                   isActive
                     ? 'border-accent text-accent'
                     : 'border-transparent text-text-secondary hover:border-accent hover:text-accent'
@@ -64,7 +64,7 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
       </div>
 
       {videos.length > 0 ? (
-        <div className="max-w-3xl">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {videos.map((video) => (
             <VideoCard key={video.id} video={video} />
           ))}

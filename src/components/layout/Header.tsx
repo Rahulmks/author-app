@@ -50,11 +50,12 @@ export default function Header() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`ink-link text-sm font-medium tracking-[0.08em] transition-colors ${
+                      className={`text-sm font-medium tracking-[0.08em] transition-colors ${
                         isActive 
-                          ? 'text-text-primary' 
-                          : 'text-text-secondary hover:text-accent'
+                          ? 'text-accent border-b-2 border-accent pb-1 font-semibold' 
+                          : 'text-text-secondary hover:text-accent pb-1'
                       }`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {item.name}
                     </Link>
