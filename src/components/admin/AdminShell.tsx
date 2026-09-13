@@ -37,7 +37,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
           <p className="eyebrow mb-3">CMS</p>
           <h1 className="mb-4 text-2xl font-semibold">Admin Panel</h1>
 
-          <nav className="space-y-1">
+          <nav className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-1 lg:space-y-1">
             {navigationItems.map((item) => {
               const isActive = pathname === item.href;
 
@@ -46,9 +46,9 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   key={item.href}
                   href={item.href}
                   className={[
-                    'block rounded-xl border px-3 py-2 text-sm transition',
+                    'block rounded-xl border px-3 py-2 text-sm transition text-center lg:text-left',
                     isActive
-                      ? 'border-accent bg-accent-soft text-text-primary'
+                      ? 'border-accent bg-accent-soft text-text-primary font-medium'
                       : 'border-transparent text-text-secondary hover:border-border-color hover:text-text-primary',
                   ].join(' ')}
                 >

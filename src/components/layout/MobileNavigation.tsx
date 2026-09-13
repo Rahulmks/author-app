@@ -41,22 +41,21 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
   // Prevent body scroll when menu is open
   useEffect(() => {
     if (isOpen) {
+      const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
+      return () => {
+        document.body.style.overflow = originalOverflow;
+      };
     }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
   }, [isOpen]);
 
   if (!isOpen) return null;
 
   return (
-    <>
+    <div className="fixed inset-0 z-[60] lg:hidden">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 z-40 bg-[rgba(15,10,22,0.7)] backdrop-blur-sm md:hidden animate-fade-in"
+        className="fixed inset-0 bg-black/75 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -67,14 +66,14 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
         role="dialog"
         aria-modal="true"
         aria-label="முதன்மை வழிசெலுத்தல் பட்டியல்"
-        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border-color bg-[linear-gradient(180deg,rgba(46,32,56,0.98),rgba(36,25,45,0.98))] shadow-2xl backdrop-blur-xl md:hidden"
+        className="fixed inset-y-0 right-0 z-10 flex h-full w-[85vw] max-w-sm flex-col border-l border-border-color bg-[#241A2E] bg-gradient-to-b from-[#2E2038] to-[#1A1225] shadow-2xl"
       >
         <div className="flex flex-col h-full">
           {/* Header */}
-          <div className="border-b border-border-color p-6">
+          <div className="border-b border-border-color p-5 sm:p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <span className="block font-display text-xl leading-tight text-text-primary">
+                <span className="block font-display text-lg sm:text-xl leading-tight text-text-primary">
                   {siteConfig.authorName}
                 </span>
                 <span className="mt-1 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-accent">
@@ -84,7 +83,7 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
               <button
                 type="button"
                 onClick={onClose}
-                className="-mr-2 rounded-full border border-border-color bg-paper p-2 text-text-primary transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
+                className="-mr-1 rounded-full border border-border-color bg-paper p-2 text-text-primary transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
                 aria-label="பட்டியலை மூடு"
               >
                 <svg
@@ -100,13 +99,13 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                 </svg>
               </button>
             </div>
-            <p className="mt-4 text-xs leading-6 text-text-secondary">
+            <p className="mt-3 text-xs leading-6 text-text-secondary">
               {siteConfig.tagline}
             </p>
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex-1 overflow-y-auto p-6" aria-label="பட்டியல் இணைப்புகள்">
+          <nav className="flex-1 overflow-y-auto p-5 sm:p-6" aria-label="பட்டியல் இணைப்புகள்">
             <ul className="space-y-2">
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
@@ -166,7 +165,7 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
               <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-text-secondary/70">
                 சமூக வலைப்பின்னல்
               </p>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2">
                 {siteConfig.social.youtube && (
                   <a
                     href={siteConfig.social.youtube}
@@ -202,6 +201,6 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
           </nav>
         </div>
       </div>
-    </>
+    </div>
   );
 }

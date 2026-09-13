@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Noto_Sans_Tamil, Noto_Serif_Tamil } from 'next/font/google';
 import '../styles/globals.css';
 import Header from '@/components/layout/Header';
@@ -17,6 +17,13 @@ const displayFont = Noto_Serif_Tamil({
   variable: '--font-display',
   display: 'swap',
 });
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#1A1225',
+};
 
 export const metadata: Metadata = {
   title: 'எழுத்தாளர் இல்லம் | கட்டுரைகள், நூல்கள், குரல் மற்றும் காட்சி',
