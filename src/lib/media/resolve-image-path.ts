@@ -6,37 +6,50 @@ export function resolveImagePath(imagePath?: string): string | undefined {
   const bucket = process.env.S3_BUCKET_NAME;
   const region = process.env.AWS_REGION;
 
-  const toS3Url = (objectKey: string) => {
-    if (!bucket || !region) {
-      return undefined;
+  const toUrl = (objectKey: string) => {
+    const cleanKey = objectKey.replace(/^\/+/, '');
+    if (bucket && region) {
+      return `/api/media/${cleanKey}`;
     }
-
-    const encodedKey = objectKey
-      .split('/')
-      .map((segment) => encodeURIComponent(segment))
-      .join('/');
-
-    return `https://${bucket}.s3.${region}.amazonaws.com/${encodedKey}`;
+    if (cleanKey.startsWith('media/')) {
+      return `/images/${cleanKey.slice('media/'.length)}`;
+    }
+    return `/${cleanKey}`;
   };
 
+  if (imagePath.startsWith('/api/media/')) {
+    return imagePath;
+  }
+
   if (
-    imagePath.startsWith('/') ||
     imagePath.startsWith('http://') ||
     imagePath.startsWith('https://') ||
     imagePath.startsWith('data:') ||
     imagePath.startsWith('blob:')
   ) {
-    if (imagePath.startsWith('/images/') && bucket && region) {
-      const objectKey = `media/${imagePath.slice('/images/'.length)}`;
-      return toS3Url(objectKey) ?? imagePath;
+    if (imagePath.includes('.amazonaws.com/')) {
+      const urlParts = imagePath.split('.amazonaws.com/');
+      if (urlParts[1]) {
+        const objectKey = decodeURIComponent(urlParts[1]);
+        return toUrl(objectKey);
+      }
     }
-
     return imagePath;
   }
 
-  if (imagePath.startsWith('media/')) {
-    return toS3Url(imagePath) ?? `/images/${imagePath.slice('media/'.length)}`;
+  if (imagePath.startsWith('/images/')) {
+    const objectKey = `media/${imagePath.slice('/images/'.length)}`;
+    return toUrl(objectKey);
   }
 
-  return `/${imagePath}`;
+  if (imagePath.startsWith('images/')) {
+    const objectKey = `media/${imagePath.slice('images/'.length)}`;
+    return toUrl(objectKey);
+  }
+
+  if (imagePath.startsWith('media/') || imagePath.startsWith('/media/')) {
+    return toUrl(imagePath);
+  }
+
+  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
 }

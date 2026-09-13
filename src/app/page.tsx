@@ -15,6 +15,7 @@ import { getPodcasts } from '@/lib/podcasts/get-podcasts';
 import { getPost } from '@/lib/posts/get-post';
 import { getPosts } from '@/lib/posts/get-posts';
 import { getVideos } from '@/lib/videos/get-videos';
+import { resolveImagePath } from '@/lib/media/resolve-image-path';
 
 export default async function HomePage() {
   const posts = await getPosts();
@@ -62,7 +63,7 @@ export default async function HomePage() {
               <div className="manuscript-card overflow-hidden rounded-[2rem] p-4 md:p-5">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-neutral-200">
                   <Image
-                    src="/images/author/jaya-mohan.jpg"
+                    src={resolveImagePath('/images/author/jaya-mohan.jpg') ?? '/images/author/jaya-mohan.jpg'}
                     alt="எழுத்தாளரின் உருவப்படம்"
                     fill
                     className="object-cover"

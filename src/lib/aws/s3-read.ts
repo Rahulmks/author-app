@@ -43,6 +43,49 @@ export async function getJsonObject<T>(key: string): Promise<T | null> {
   }
 }
 
+export async function getS3Object(key: string): Promise<{
+  body: Uint8Array;
+  contentType?: string;
+  contentLength?: number;
+} | null> {
+  if (!isS3Configured()) {
+    return null;
+  }
+
+  const client = getS3Client();
+  const bucket = process.env.S3_BUCKET_NAME;
+
+  if (!client || !bucket) {
+    return null;
+  }
+
+  try {
+    const response = await client.send(new GetObjectCommand({ Bucket: bucket, Key: key }));
+    if (!response.Body) {
+      return null;
+    }
+
+    const body = await response.Body.transformToByteArray();
+    return {
+      body,
+      contentType: response.ContentType,
+      contentLength: response.ContentLength,
+    };
+  } catch (error) {
+    const err = error as { name?: string; code?: string };
+    const isMissingObject =
+      err?.name === 'NoSuchKey' ||
+      err?.code === 'NoSuchKey' ||
+      err?.name === 'NotFound' ||
+      err?.code === 'NotFound';
+
+    if (!isMissingObject) {
+      console.error(`Unable to get S3 object: ${key}`, err);
+    }
+    return null;
+  }
+}
+
 export async function readFromS3<T>(key: string): Promise<T | null> {
   return getJsonObject<T>(key);
 }
