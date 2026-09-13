@@ -9,13 +9,13 @@ interface FeaturedPostProps {
 
 export default function FeaturedPost({ post }: FeaturedPostProps) {
   return (
-    <article className="group border-y border-border-color py-8 md:py-12">
+    <article className="group border-y border-border-color py-6 md:py-8">
       <Link 
         href={`/posts/${post.slug}`}
-        className="block md:grid md:grid-cols-2 gap-8 md:gap-12 items-center"
+        className="block md:grid md:grid-cols-2 gap-6 md:gap-8 items-center"
       >
         {post.coverImage && (
-          <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-border-color md:mb-0">
+          <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-border-color md:mb-0">
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -32,11 +32,11 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
             </p>
           )}
           
-          <h2 className="mb-4 text-3xl font-medium leading-tight transition-colors group-hover:text-accent md:text-4xl">
+          <h2 className="mb-3 text-2xl font-medium leading-tight transition-colors group-hover:text-accent md:text-3xl">
             {post.title}
           </h2>
           
-          <p className="mb-6 line-clamp-4 text-lg leading-8 text-text-secondary">
+          <p className="mb-5 line-clamp-3 text-base leading-7 text-text-secondary">
             {post.excerpt}
           </p>
 

@@ -18,17 +18,17 @@ export default async function PostDetailPage({
   }
 
   return (
-    <Container maxWidth="article" className="py-12 md:py-20">
+    <Container maxWidth="article" className="py-10 md:py-16">
       <article>
         <p className="eyebrow mb-4">
           {post.category || 'கட்டுரை'}
         </p>
-        <h1 className="mb-5 text-4xl font-semibold leading-[1.12] md:text-6xl">
+        <h1 className="mb-4 text-3xl font-semibold leading-[1.2] md:text-5xl">
           {post.title}
         </h1>
 
         <div className="mb-8">
-          <p className="mb-4 text-lg leading-8 text-text-secondary">
+          <p className="mb-3 text-base leading-7 text-text-secondary">
             {post.excerpt}
           </p>
           <PostMetadata
@@ -39,8 +39,8 @@ export default async function PostDetailPage({
         </div>
 
         {post.coverImage && (
-          <div className="manuscript-card mb-10 overflow-hidden rounded-[2rem] p-4">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
+          <div className="manuscript-card mb-8 overflow-hidden p-3">
+            <div className="relative aspect-[16/8] overflow-hidden border border-border-color bg-paper">
             <Image
               src={post.coverImage}
               alt={post.title}
