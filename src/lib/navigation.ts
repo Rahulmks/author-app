@@ -6,6 +6,7 @@ export interface NavigationItem {
 export const navigationItems: NavigationItem[] = [
   { name: 'முகப்பு', href: '/' },
   { name: 'எழுத்துகள்', href: '/posts' },
+  { name: 'ஒலிப்பதிவு', href: '/podcast' },
   { name: 'காணொளிகள்', href: '/videos' },
   { name: 'நூல்கள்', href: '/books' },
   { name: 'நிகழ்வுகள்', href: '/events' },
