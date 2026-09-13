@@ -20,7 +20,7 @@ export default async function BookDetailPage({
     <Container className="py-12 md:py-20">
       <div className="grid gap-8 md:grid-cols-[300px_1fr] items-start">
         <div className="manuscript-card rounded-[2rem] p-4">
-          <div className="relative aspect-[2/3] overflow-hidden rounded-[1.5rem] border border-border-color bg-neutral-200">
+          <div className="relative aspect-[2/3] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
             {book.coverImage && (
             <Image
               src={book.coverImage}

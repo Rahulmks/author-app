@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import Container from './Container';
 import MobileNavigation from './MobileNavigation';
 import { navigationItems, siteConfig } from '@/lib/navigation';
@@ -10,6 +10,14 @@ import { navigationItems, siteConfig } from '@/lib/navigation';
 export default function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const handleOpenMobileMenu = useCallback(() => {
+    setMobileMenuOpen(true);
+  }, []);
+
+  const handleCloseMobileMenu = useCallback(() => {
+    setMobileMenuOpen(false);
+  }, []);
   
   // Don't show header on admin routes
   if (pathname?.startsWith('/admin')) {
@@ -17,9 +25,9 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border-color bg-[rgba(247,241,230,0.92)] backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border-color bg-[rgba(26,18,37,0.88)] backdrop-blur-md">
       <Container>
-        <nav className="flex items-center justify-between gap-4 py-4 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-8">
+        <nav className="flex items-center justify-between gap-4 py-4 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-8" aria-label="முதன்மை வழிசெலுத்தல்">
           <Link 
             href="/" 
             className="group block text-text-primary"
@@ -57,8 +65,10 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden rounded-full border border-border-color bg-paper px-3 py-2 text-text-primary"
-            onClick={() => setMobileMenuOpen(true)}
+            className="md:hidden rounded-full border border-border-color bg-paper p-2.5 text-text-primary transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
+            onClick={handleOpenMobileMenu}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
             aria-label="பட்டியலைத் திறக்க"
           >
             <svg
@@ -79,7 +89,7 @@ export default function Header() {
       {/* Mobile Navigation */}
       <MobileNavigation 
         isOpen={mobileMenuOpen} 
-        onClose={() => setMobileMenuOpen(false)} 
+        onClose={handleCloseMobileMenu} 
       />
     </header>
   );

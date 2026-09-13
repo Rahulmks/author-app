@@ -46,7 +46,7 @@ export default async function HomePage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/posts"
-                  className="inline-flex items-center rounded-full border border-[rgba(138,90,60,0.3)] bg-[rgba(255,249,242,0.9)] px-6 py-3 text-sm font-medium text-text-primary transition-colors hover:border-accent hover:text-accent"
+                  className="inline-flex items-center rounded-full border border-accent/30 bg-paper/90 px-6 py-3 text-sm font-medium text-text-primary transition-colors hover:border-accent hover:text-accent"
                 >
                   எழுதுகளை வாசிக்க
                 </Link>
@@ -61,7 +61,7 @@ export default async function HomePage() {
 
             <div className="space-y-6">
               <div className="manuscript-card overflow-hidden rounded-[2rem] p-4 md:p-5">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-neutral-200">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-paper">
                   <Image
                     src={resolveImagePath('/images/author/jaya-mohan.jpg') ?? '/images/author/jaya-mohan.jpg'}
                     alt="எழுத்தாளரின் உருவப்படம்"
@@ -173,7 +173,7 @@ export default async function HomePage() {
         <Container>
           <div className="grid items-center gap-8 border-t border-border-color pt-12 md:grid-cols-[0.9fr_1.1fr]">
             <div className="manuscript-card rounded-[2rem] p-4">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-neutral-200">
+              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
               <Image
                 src={resolveImagePath('/images/author/profile.svg') ?? '/images/author/profile.svg'}
                 alt="எழுத்தாளர் குறித்த படம்"

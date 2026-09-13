@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { navigationItems, siteConfig } from '@/lib/navigation';
 
 interface MobileNavigationProps {
@@ -12,11 +12,31 @@ interface MobileNavigationProps {
 
 export default function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
   const pathname = usePathname();
+  const prevPathnameRef = useRef(pathname);
 
-  // Close menu on route change
+  // Close menu only when route actually changes
   useEffect(() => {
-    onClose();
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      onClose();
+    }
   }, [pathname, onClose]);
+
+  // Handle Escape key to close menu
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   // Prevent body scroll when menu is open
   useEffect(() => {
@@ -34,45 +54,59 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
 
   return (
     <>
+      {/* Backdrop */}
       <div
-        className="fixed inset-0 z-40 bg-[rgba(36,28,24,0.48)] backdrop-blur-sm md:hidden"
+        className="fixed inset-0 z-40 bg-[rgba(15,10,22,0.7)] backdrop-blur-sm md:hidden animate-fade-in"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      <div className="fixed inset-y-0 right-0 z-50 w-full max-w-sm border-l border-border-color bg-[linear-gradient(180deg,rgba(249,242,232,0.98),rgba(242,232,219,0.98))] shadow-xl md:hidden">
+      {/* Drawer */}
+      <div
+        id="mobile-navigation"
+        role="dialog"
+        aria-modal="true"
+        aria-label="முதன்மை வழிசெலுத்தல் பட்டியல்"
+        className="fixed inset-y-0 right-0 z-50 flex w-full max-w-sm flex-col border-l border-border-color bg-[linear-gradient(180deg,rgba(46,32,56,0.98),rgba(36,25,45,0.98))] shadow-2xl backdrop-blur-xl md:hidden"
+      >
         <div className="flex flex-col h-full">
+          {/* Header */}
           <div className="border-b border-border-color p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <span className="block font-display text-xl leading-tight">{siteConfig.authorName}</span>
-                <span className="mt-2 block text-[0.68rem] uppercase tracking-[0.28em] text-text-secondary">{siteConfig.authorTitle}</span>
+                <span className="block font-display text-xl leading-tight text-text-primary">
+                  {siteConfig.authorName}
+                </span>
+                <span className="mt-1 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-accent">
+                  {siteConfig.authorTitle}
+                </span>
               </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="-mr-2 rounded-full p-2 text-text-primary"
-              aria-label="பட்டியலை மூடு"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+              <button
+                type="button"
+                onClick={onClose}
+                className="-mr-2 rounded-full border border-border-color bg-paper p-2 text-text-primary transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
+                aria-label="பட்டியலை மூடு"
               >
-                <path d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
-            <p className="mt-4 text-sm leading-7 text-text-secondary">
-              கதைகள், நினைவுகள், வாசிப்புகள் மற்றும் எழுத்தின் மெதுவான ஒலிகள்.
+            <p className="mt-4 text-xs leading-6 text-text-secondary">
+              {siteConfig.tagline}
             </p>
           </div>
 
-          <nav className="flex-1 overflow-y-auto p-6">
+          {/* Navigation Links */}
+          <nav className="flex-1 overflow-y-auto p-6" aria-label="பட்டியல் இணைப்புகள்">
             <ul className="space-y-2">
               {navigationItems.map((item) => {
                 const isActive = pathname === item.href || 
@@ -82,10 +116,11 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`block rounded-2xl border px-4 py-4 text-base font-medium transition-colors ${
+                      onClick={onClose}
+                      className={`block rounded-2xl border px-4 py-3.5 text-base font-medium transition-colors ${
                         isActive
-                            ? 'border-[rgba(138,90,60,0.28)] bg-accent-soft text-accent'
-                            : 'border-transparent text-text-secondary hover:border-border-color hover:bg-[rgba(255,250,242,0.8)] hover:text-text-primary'
+                          ? 'border-accent/40 bg-accent-soft text-accent font-semibold'
+                          : 'border-transparent text-text-secondary hover:border-border-color hover:bg-paper/70 hover:text-text-primary'
                       }`}
                     >
                       {item.name}
@@ -94,6 +129,76 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                 );
               })}
             </ul>
+
+            {/* Additional Links */}
+            <div className="mt-6 border-t border-border-color pt-6">
+              <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-text-secondary/70">
+                கூடுதல் பக்கங்கள்
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <Link
+                  href="/about"
+                  onClick={onClose}
+                  className={`rounded-xl border px-3 py-2.5 text-center text-sm font-medium transition-colors ${
+                    pathname === '/about'
+                      ? 'border-accent/40 bg-accent-soft text-accent'
+                      : 'border-border-color bg-paper/50 text-text-secondary hover:text-text-primary hover:border-accent/50'
+                  }`}
+                >
+                  அறிமுகம்
+                </Link>
+                <Link
+                  href="/contact"
+                  onClick={onClose}
+                  className={`rounded-xl border px-3 py-2.5 text-center text-sm font-medium transition-colors ${
+                    pathname === '/contact'
+                      ? 'border-accent/40 bg-accent-soft text-accent'
+                      : 'border-border-color bg-paper/50 text-text-secondary hover:text-text-primary hover:border-accent/50'
+                  }`}
+                >
+                  தொடர்பு
+                </Link>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="mt-6 border-t border-border-color pt-6">
+              <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-text-secondary/70">
+                சமூக வலைப்பின்னல்
+              </p>
+              <div className="flex items-center gap-3">
+                {siteConfig.social.youtube && (
+                  <a
+                    href={siteConfig.social.youtube}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-border-color bg-paper/50 px-3 py-2 text-xs text-text-secondary transition-colors hover:border-accent hover:text-accent"
+                  >
+                    YouTube
+                  </a>
+                )}
+                {siteConfig.social.spotify && (
+                  <a
+                    href={siteConfig.social.spotify}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-border-color bg-paper/50 px-3 py-2 text-xs text-text-secondary transition-colors hover:border-accent hover:text-accent"
+                  >
+                    Spotify
+                  </a>
+                )}
+                {siteConfig.social.instagram && (
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-xl border border-border-color bg-paper/50 px-3 py-2 text-xs text-text-secondary transition-colors hover:border-accent hover:text-accent"
+                  >
+                    Instagram
+                  </a>
+                )}
+              </div>
+            </div>
           </nav>
         </div>
       </div>

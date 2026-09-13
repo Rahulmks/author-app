@@ -10,7 +10,7 @@ export default async function AboutPage() {
     <Container className="py-12 md:py-20">
       <div className="grid items-start gap-10 md:grid-cols-[0.9fr_1.1fr]">
         <div className="manuscript-card rounded-[2rem] p-4">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-neutral-200">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
           <Image
             src={resolveImagePath(about?.image) ?? resolveImagePath('/images/author/jaya-mohan.jpg') ?? '/images/author/jaya-mohan.jpg'}
             alt={about?.name || 'எழுத்தாளரின் உருவப்படம்'}

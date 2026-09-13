@@ -19,10 +19,10 @@ export default function VideoCard({ video }: VideoCardProps) {
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-[rgba(36,28,24,0.2)] transition-all group-hover:bg-[rgba(36,28,24,0.3)]">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(255,248,240,0.92)] transition-transform group-hover:scale-110">
+            <div className="absolute inset-0 flex items-center justify-center bg-[rgba(26,18,37,0.25)] transition-all group-hover:bg-[rgba(26,18,37,0.4)]">
+              <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[rgba(232,165,72,0.92)] transition-transform group-hover:scale-110">
                 <svg 
-                  className="w-8 h-8 text-text-primary ml-1" 
+                  className="w-8 h-8 text-surface-foreground ml-1" 
                   fill="currentColor" 
                   viewBox="0 0 24 24"
                 >

@@ -48,7 +48,7 @@ export default function AdminShell({ children }: { children: React.ReactNode }) 
                   className={[
                     'block rounded-xl border px-3 py-2 text-sm transition',
                     isActive
-                      ? 'border-accent bg-[rgba(176,66,58,0.1)] text-text-primary'
+                      ? 'border-accent bg-accent-soft text-text-primary'
                       : 'border-transparent text-text-secondary hover:border-border-color hover:text-text-primary',
                   ].join(' ')}
                 >

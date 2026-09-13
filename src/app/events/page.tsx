@@ -19,10 +19,10 @@ export default function EventsPage() {
           வாசகர்கள், எழுத்தாளர்கள், மொழி மற்றும் நினைவை மையமாகக் கொண்ட மேடைகள் இங்கு தொகுக்கப்பட்டுள்ளன.
         </p>
         <div className="mt-6 flex flex-wrap gap-2">
-          <span className="rounded-full border border-border-color bg-[rgba(255,249,242,0.8)] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
+          <span className="rounded-full border border-border-color bg-paper/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
             வரவிருக்கும் நிகழ்வுகள்
           </span>
-          <span className="rounded-full border border-border-color bg-[rgba(255,249,242,0.8)] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
+          <span className="rounded-full border border-border-color bg-paper/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
             கடந்த நிகழ்வுகள்
           </span>
         </div>

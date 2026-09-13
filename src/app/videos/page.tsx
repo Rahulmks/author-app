@@ -51,8 +51,8 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
                 href={href}
                 className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
                   isActive
-                    ? 'border-accent bg-accent text-white'
-                    : 'border-border-color bg-[rgba(255,249,242,0.8)] text-text-secondary hover:border-accent hover:text-accent'
+                    ? 'border-accent bg-accent text-surface-foreground'
+                    : 'border-border-color bg-paper/80 text-text-secondary hover:border-accent hover:text-accent'
                 }`}
               >
                 {category}

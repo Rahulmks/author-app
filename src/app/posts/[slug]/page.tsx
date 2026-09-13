@@ -40,7 +40,7 @@ export default async function PostDetailPage({
 
         {post.coverImage && (
           <div className="manuscript-card mb-10 overflow-hidden rounded-[2rem] p-4">
-            <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-border-color bg-neutral-200">
+            <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
             <Image
               src={post.coverImage}
               alt={post.title}

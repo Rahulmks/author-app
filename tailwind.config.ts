@@ -10,11 +10,17 @@ const config: Config = {
     extend: {
       colors: {
         background: 'var(--background)',
+        'background-secondary': 'var(--background-secondary)',
         foreground: 'var(--foreground)',
         'text-primary': 'var(--text-primary)',
         'text-secondary': 'var(--text-secondary)',
         'border-color': 'var(--border-color)',
         accent: 'var(--accent)',
+        'accent-soft': 'var(--accent-soft)',
+        'accent-secondary': 'var(--accent-secondary)',
+        surface: 'var(--surface)',
+        'surface-foreground': 'var(--surface-foreground)',
+        paper: 'var(--paper)',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
