@@ -39,6 +39,11 @@ export async function GET(
   const s3Key = rawKey.startsWith('media/') ? rawKey : `media/${rawKey}`;
   const localRelativePath = rawKey.startsWith('media/') ? rawKey.slice('media/'.length) : rawKey;
 
+  // S3 objects can be replaced/deleted at the same key, so avoid "immutable"
+  // caching here — it made Vercel's image optimizer keep serving deleted
+  // images from CDN cache indefinitely.
+  const s3CacheControl = 'public, max-age=300, stale-while-revalidate=86400';
+
   // 1. Try fetching primary S3 key (e.g. media/books/aram.jpg)
   const s3Result = await getS3Object(s3Key);
   if (s3Result) {
@@ -47,7 +52,7 @@ export async function GET(
       status: 200,
       headers: {
         'Content-Type': contentType,
-        'Cache-Control': 'public, max-age=31536000, immutable',
+        'Cache-Control': s3CacheControl,
       },
     });
   }
@@ -61,7 +66,7 @@ export async function GET(
         status: 200,
         headers: {
           'Content-Type': contentType,
-          'Cache-Control': 'public, max-age=31536000, immutable',
+          'Cache-Control': s3CacheControl,
         },
       });
     }
