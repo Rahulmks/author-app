@@ -63,7 +63,7 @@ export default async function HomePage() {
               <div className="manuscript-card overflow-hidden rounded-[2rem] p-4 md:p-5">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-paper">
                   <Image
-                    src={resolveImagePath('/images/author/jaya-mohan.jpg') ?? '/images/author/jaya-mohan.jpg'}
+                    src={resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
                     alt="எழுத்தாளரின் உருவப்படம்"
                     fill
                     className="object-cover"
