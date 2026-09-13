@@ -25,8 +25,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50">
-      <div className="border-b border-border-color bg-[#1A1225]/95 backdrop-blur-md">
+    <header>
+      <div className="border-b border-border-color">
         <Container>
           <nav className="flex items-center justify-between gap-4 py-4 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:gap-8" aria-label="முதன்மை வழிசெலுத்தல்">
             <Link 
@@ -50,11 +50,12 @@ export default function Header() {
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className={`ink-link text-sm font-medium tracking-[0.08em] transition-colors ${
+                      className={`text-sm font-medium tracking-[0.08em] transition-colors ${
                         isActive 
-                          ? 'text-text-primary' 
-                          : 'text-text-secondary hover:text-accent'
+                          ? 'text-accent border-b-2 border-accent pb-1 font-semibold' 
+                          : 'text-text-secondary hover:text-accent pb-1'
                       }`}
+                      aria-current={isActive ? 'page' : undefined}
                     >
                       {item.name}
                     </Link>
@@ -66,7 +67,7 @@ export default function Header() {
             {/* Mobile Menu Button */}
             <button
               type="button"
-              className="flex items-center justify-center rounded-xl border border-border-color bg-paper p-2.5 text-text-primary transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50 lg:hidden"
+              className="flex items-center justify-center p-2 text-text-primary transition-colors hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent lg:hidden"
               onClick={handleOpenMobileMenu}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"

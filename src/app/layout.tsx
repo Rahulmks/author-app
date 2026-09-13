@@ -26,6 +26,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
   title: 'எழுத்தாளர் இல்லம் | கட்டுரைகள், நூல்கள், குரல் மற்றும் காட்சி',
   description: 'தமிழிலும் ஆங்கிலத்திலும் இயங்கும் ஒரு எழுத்தாளரின் தனிப்பட்ட படைப்புலகம்',
 };

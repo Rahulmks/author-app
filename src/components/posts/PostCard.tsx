@@ -9,46 +9,45 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article className="group hover-lift manuscript-card overflow-hidden rounded-[1.75rem]">
-      <Link href={`/posts/${post.slug}`} className="block h-full p-4 md:p-5">
+    <article className="group border-t border-border-color py-4 md:py-5 first:border-t-0">
+      <Link href={`/posts/${post.slug}`} className="flex items-start justify-between gap-4 md:gap-6">
+        <div className="flex-1 min-w-0">
+          <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
+            {post.category && <span>{post.category}</span>}
+            {post.category && post.publishedAt && <span>·</span>}
+            {post.publishedAt && (
+              <time dateTime={post.publishedAt} className="text-text-secondary font-normal tracking-normal">
+                {formatTamilDate(post.publishedAt)}
+              </time>
+            )}
+            {post.readingTimeMinutes && (
+              <span className="text-text-secondary font-normal tracking-normal">
+                · {formatTamilReadingTime(post.readingTimeMinutes)}
+              </span>
+            )}
+          </div>
+          
+          <h3 className="mb-1.5 text-base md:text-lg font-medium leading-snug transition-colors group-hover:text-accent">
+            {post.title}
+          </h3>
+          
+          {post.excerpt && (
+            <p className="line-clamp-1 text-xs md:text-sm leading-relaxed text-text-secondary">
+              {post.excerpt}
+            </p>
+          )}
+        </div>
+
         {post.coverImage && (
-          <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-border-color">
+          <div className="relative h-20 w-20 md:h-24 md:w-24 flex-shrink-0 overflow-hidden rounded border border-border-color/60 bg-paper">
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         )}
-        
-        {post.category && (
-          <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-accent">
-            {post.category}
-          </p>
-        )}
-        
-        <h3 className="mb-3 text-2xl font-semibold leading-snug transition-colors group-hover:text-accent">
-          {post.title}
-        </h3>
-        
-        <p className="mb-6 line-clamp-3 text-sm leading-7 text-text-secondary md:text-base">
-          {post.excerpt}
-        </p>
-        
-        <div className="flex flex-wrap items-center gap-3 border-t border-border-color pt-4 text-sm text-text-secondary">
-          {post.publishedAt && (
-            <time dateTime={post.publishedAt}>
-              {formatTamilDate(post.publishedAt)}
-            </time>
-          )}
-          {post.readingTimeMinutes && (
-            <>
-              {post.publishedAt && <span>·</span>}
-              <span>{formatTamilReadingTime(post.readingTimeMinutes)}</span>
-            </>
-          )}
-        </div>
       </Link>
     </article>
   );

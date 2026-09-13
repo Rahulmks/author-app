@@ -3,34 +3,23 @@ import Image from 'next/image';
 import Container from '@/components/layout/Container';
 import PostCard from '@/components/posts/PostCard';
 import FeaturedPost from '@/components/posts/FeaturedPost';
-import BookCard from '@/components/books/BookCard';
-import EventCard from '@/components/events/EventCard';
-import VideoCard from '@/components/media/VideoCard';
-import PodcastCard from '@/components/media/PodcastCard';
 import SectionHeading from '@/components/ui/SectionHeading';
-import { getUpcomingEvents } from '@/data/events';
-import { getBooks } from '@/lib/books/get-books';
+import ManuscriptDivider from '@/components/ui/ManuscriptDivider';
 import { siteConfig } from '@/lib/navigation';
-import { getPodcasts } from '@/lib/podcasts/get-podcasts';
 import { getPost } from '@/lib/posts/get-post';
 import { getPosts } from '@/lib/posts/get-posts';
-import { getVideos } from '@/lib/videos/get-videos';
 import { resolveImagePath } from '@/lib/media/resolve-image-path';
 
 export default async function HomePage() {
   const posts = await getPosts();
   const featuredPost = posts[0] ? await getPost(posts[0].slug) : null;
   const latestPosts = posts.slice(0, 3);
-  const books = await getBooks();
-  const videos = await getVideos();
-  const podcasts = await getPodcasts();
-  const upcomingEvents = getUpcomingEvents().slice(0, 2);
 
   return (
     <>
       <section className="py-10 md:py-16 lg:py-20">
         <Container>
-          <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="grid items-start gap-14 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="paper-panel grain-border rounded-[2.25rem] p-7 md:p-10 lg:p-12">
               <p className="eyebrow mb-5">
                 {siteConfig.authorTitle}
@@ -46,7 +35,7 @@ export default async function HomePage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/posts"
-                  className="inline-flex items-center rounded-full border border-accent/30 bg-paper/90 px-6 py-3 text-sm font-medium text-text-primary transition-colors hover:border-accent hover:text-accent"
+                    className="ink-link inline-flex items-center text-sm font-medium text-accent"
                 >
                   எழுதுகளை வாசிக்க
                 </Link>
@@ -60,8 +49,8 @@ export default async function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <div className="manuscript-card overflow-hidden rounded-[2rem] p-4 md:p-5">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-paper">
+                <div className="border border-border-color p-3 md:p-4">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-paper">
                   <Image
                     src={resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
                     alt="எழுத்தாளரின் உருவப்படம்"
@@ -88,12 +77,14 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="py-12 md:py-20">
+      <ManuscriptDivider />
+
+      <section className="py-10 md:py-16">
         <Container>
-          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டைப்பக்கத் தேர்வைப் போலத் தொகுக்கப்பட்டுள்ளன.">
+          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டவணை போலத் தொகுக்கப்பட்டுள்ளன.">
             சமீபத்திய எழுத்துகள்
           </SectionHeading>
-          <div className="grid gap-10 md:grid-cols-3">
+          <div className="max-w-3xl mx-auto divide-y divide-border-color border-t border-border-color pt-2">
             {latestPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -102,107 +93,19 @@ export default async function HomePage() {
       </section>
 
       {featuredPost && (
-        <section className="py-12 md:py-20">
-          <Container>
-            <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
-              சிறப்புப் பதிவு
-            </SectionHeading>
-            <FeaturedPost post={featuredPost} />
-          </Container>
-        </section>
+        <>
+          <ManuscriptDivider />
+          <section className="py-12 md:py-20">
+            <Container>
+              <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
+                சிறப்புப் பதிவு
+              </SectionHeading>
+              <FeaturedPost post={featuredPost} />
+            </Container>
+          </section>
+        </>
       )}
 
-      <section className="py-12 md:py-20">
-        <Container>
-          <SectionHeading subtitle="நூல்கள் ஒரு பட்டியலாக அல்ல, தனித் தனிப் படைப்புகளாகச் சுவாசிக்கட்டும்.">
-            நூல்கள்
-          </SectionHeading>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {books.map((book) => (
-              <BookCard key={book.id} book={book} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <Container>
-          <SectionHeading subtitle="நிகழும் சந்திப்புகள், வாசிப்பு மாலைகள், கைவினை உரையாடல்கள்.">
-            நிகழ்வுகள்
-          </SectionHeading>
-          <div className="grid gap-8 lg:grid-cols-2">
-            {upcomingEvents.map((event) => (
-              <EventCard key={event.id} event={event} />
-            ))}
-          </div>
-          <div className="mt-8">
-            <Link href="/events" className="ink-link text-sm font-medium text-accent">
-              அனைத்து நிகழ்வுகளையும் பார்க்க
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <Container>
-          <SectionHeading subtitle="வாசிப்புகள், உரையாடல்கள், குரலின் அடுக்குகள்.">
-            காணொளிகள்
-          </SectionHeading>
-          <div className="grid gap-8 md:grid-cols-3">
-            {videos.slice(0, 3).map((video) => (
-              <VideoCard key={video.id} video={video} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <Container>
-          <SectionHeading subtitle="கேட்கத்தக்க சிந்தனைகள் மற்றும் மெதுவான உரையாடல்கள்.">
-            ஒலிப்பதிவு
-          </SectionHeading>
-          <div className="space-y-5">
-            {podcasts.slice(0, 2).map((podcast) => (
-              <PodcastCard key={podcast.id} podcast={podcast} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <Container>
-          <div className="grid items-center gap-8 border-t border-border-color pt-12 md:grid-cols-[0.9fr_1.1fr]">
-            <div className="manuscript-card rounded-[2rem] p-4">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
-              <Image
-                src={resolveImagePath('/images/author/profile.svg') ?? '/images/author/profile.svg'}
-                alt="எழுத்தாளர் குறித்த படம்"
-                fill
-                className="object-cover"
-              />
-              </div>
-            </div>
-            <div>
-              <p className="eyebrow mb-4">
-                எழுத்தாளர் குறித்துத்
-              </p>
-              <h2 className="mb-5 text-3xl font-semibold md:text-4xl">
-                அனுபவம், நினைவு, மெளனம் ஆகிய மூன்றின் இடைவெளியில் எழுத்து பிறக்கிறது.
-              </h2>
-              <p className="mb-6 text-lg leading-8 text-text-secondary">
-                குடும்ப வரலாறு, சொந்த ஊரின் ஒலி, அன்றாட வாழ்க்கையின் சிறிய இடைவெளிகள்,
-                மொழி மாறும்போதும் மாறாத உணர்வுகள் ஆகியவற்றைத் தொடர்ந்தே இந்தப் படைப்புகள் நகர்கின்றன.
-              </p>
-              <Link
-                href="/about"
-                className="ink-link inline-flex items-center text-sm font-medium text-accent"
-              >
-                மேலும் படிக்க
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
     </>
   );
 }

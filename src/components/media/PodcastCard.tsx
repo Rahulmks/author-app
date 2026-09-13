@@ -8,47 +8,44 @@ interface PodcastCardProps {
 
 export default function PodcastCard({ podcast }: PodcastCardProps) {
   return (
-    <article className="group hover-lift manuscript-card rounded-[1.75rem] p-5 transition-colors hover:border-accent">
-      <div className="flex gap-4">
+    <article className="group border-t border-border-color py-4 md:py-5 first:border-t-0">
+      <div className="flex items-start gap-4">
         {podcast.coverImage && (
-          <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-[1rem] bg-border-color">
+          <div className="relative h-16 w-16 md:h-20 md:w-20 flex-shrink-0 overflow-hidden rounded border border-border-color/60 bg-paper">
             <Image
               src={podcast.coverImage}
               alt={podcast.title}
               fill
-              className="object-cover"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           </div>
         )}
         
         <div className="flex-1 min-w-0">
-          {podcast.episodeNumber && (
-            <p className="mb-1 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-accent">
-              {formatTamilEpisode(podcast.episodeNumber)}
-            </p>
-          )}
+          <div className="mb-1 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
+            {podcast.episodeNumber && (
+              <span>{formatTamilEpisode(podcast.episodeNumber)}</span>
+            )}
+            {podcast.episodeNumber && podcast.duration && <span>·</span>}
+            {podcast.duration && <span className="text-text-secondary font-normal tracking-normal">{podcast.duration}</span>}
+            {podcast.publishedAt && (
+              <span className="text-text-secondary font-normal tracking-normal">
+                · <time dateTime={podcast.publishedAt}>{formatTamilDate(podcast.publishedAt)}</time>
+              </span>
+            )}
+          </div>
           
-          <h3 className="mb-2 line-clamp-2 text-lg font-semibold transition-colors group-hover:text-accent md:text-xl">
+          <h3 className="mb-1 text-base md:text-lg font-medium leading-snug transition-colors group-hover:text-accent">
             {podcast.title}
           </h3>
           
           {podcast.description && (
-            <p className="mb-3 line-clamp-2 text-sm leading-7 text-text-secondary">
+            <p className="mb-2 line-clamp-2 text-xs md:text-sm leading-relaxed text-text-secondary">
               {podcast.description}
             </p>
           )}
           
-          <div className="flex flex-wrap items-center gap-3 text-xs text-text-secondary">
-            {podcast.duration && <span>{podcast.duration}</span>}
-            {podcast.duration && podcast.publishedAt && <span>·</span>}
-            {podcast.publishedAt && (
-              <time dateTime={podcast.publishedAt}>
-                {formatTamilDate(podcast.publishedAt)}
-              </time>
-            )}
-          </div>
-          
-          <div className="flex gap-3 mt-3">
+          <div className="flex items-center gap-3">
             {podcast.platforms?.spotify && (
               <a
                 href={podcast.platforms.spotify}

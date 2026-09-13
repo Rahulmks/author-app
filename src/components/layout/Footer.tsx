@@ -6,9 +6,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="mt-20 border-t border-border-color bg-[rgba(46,32,56,0.5)] py-14">
+    <footer className="mt-32 border-t border-border-color py-16">
       <Container>
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.2fr_0.8fr_0.9fr]">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-[1.4fr_0.7fr_0.7fr]">
           <div>
             <p className="eyebrow mb-4">எழுத்தின் வீடு</p>
             <h3 className="mb-4 text-2xl font-semibold">{siteConfig.authorName}</h3>
