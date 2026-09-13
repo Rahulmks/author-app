@@ -175,7 +175,7 @@ export default async function HomePage() {
             <div className="manuscript-card rounded-[2rem] p-4">
               <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-neutral-200">
               <Image
-                src="/images/author/profile.svg"
+                src={resolveImagePath('/images/author/profile.svg') ?? '/images/author/profile.svg'}
                 alt="எழுத்தாளர் குறித்த படம்"
                 fill
                 className="object-cover"

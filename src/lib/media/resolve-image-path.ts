@@ -3,53 +3,43 @@ export function resolveImagePath(imagePath?: string): string | undefined {
     return undefined;
   }
 
-  const bucket = process.env.S3_BUCKET_NAME;
-  const region = process.env.AWS_REGION;
-
-  const toUrl = (objectKey: string) => {
-    const cleanKey = objectKey.replace(/^\/+/, '');
-    if (bucket && region) {
-      return `/api/media/${cleanKey}`;
-    }
-    if (cleanKey.startsWith('media/')) {
-      return `/images/${cleanKey.slice('media/'.length)}`;
-    }
-    return `/${cleanKey}`;
-  };
-
-  if (imagePath.startsWith('/api/media/')) {
-    return imagePath;
+  const trimmed = imagePath.trim();
+  if (!trimmed) {
+    return undefined;
   }
 
-  if (
-    imagePath.startsWith('http://') ||
-    imagePath.startsWith('https://') ||
-    imagePath.startsWith('data:') ||
-    imagePath.startsWith('blob:')
-  ) {
-    if (imagePath.includes('.amazonaws.com/')) {
-      const urlParts = imagePath.split('.amazonaws.com/');
-      if (urlParts[1]) {
-        const objectKey = decodeURIComponent(urlParts[1]);
-        return toUrl(objectKey);
+  // Already pointing to our media proxy API
+  if (trimmed.startsWith('/api/media/')) {
+    return trimmed;
+  }
+
+  // Data or blob URLs
+  if (trimmed.startsWith('data:') || trimmed.startsWith('blob:')) {
+    return trimmed;
+  }
+
+  // Full HTTP/HTTPS URLs
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    // If it's an S3 bucket URL, extract the object key and route through /api/media/
+    if (trimmed.includes('.amazonaws.com/')) {
+      const parts = trimmed.split('.amazonaws.com/');
+      if (parts[1]) {
+        const objectKey = decodeURIComponent(parts[1]);
+        return resolveImagePath(objectKey);
       }
     }
-    return imagePath;
+    // External non-S3 URL
+    return trimmed;
   }
 
-  if (imagePath.startsWith('/images/')) {
-    const objectKey = `media/${imagePath.slice('/images/'.length)}`;
-    return toUrl(objectKey);
+  // Normalize path by stripping leading slashes, 'media/', 'images/'
+  let cleanKey = trimmed.replace(/^\/+/, '');
+
+  if (cleanKey.startsWith('media/')) {
+    cleanKey = cleanKey.slice('media/'.length);
+  } else if (cleanKey.startsWith('images/')) {
+    cleanKey = cleanKey.slice('images/'.length);
   }
 
-  if (imagePath.startsWith('images/')) {
-    const objectKey = `media/${imagePath.slice('images/'.length)}`;
-    return toUrl(objectKey);
-  }
-
-  if (imagePath.startsWith('media/') || imagePath.startsWith('/media/')) {
-    return toUrl(imagePath);
-  }
-
-  return imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+  return `/api/media/${cleanKey}`;
 }
