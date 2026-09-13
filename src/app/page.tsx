@@ -30,93 +30,72 @@ export default async function HomePage() {
     <>
       <section className="py-10 md:py-16 lg:py-20">
         <Container>
-          <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="paper-panel grain-border rounded-[2.25rem] p-7 md:p-10 lg:p-12">
-              <p className="eyebrow mb-5">
-                {siteConfig.authorTitle}
-              </p>
-              <h1 className="mb-6 text-4xl font-semibold leading-[1.12] sm:text-5xl lg:text-6xl">
-                {siteConfig.authorName}
-              </h1>
-              <p className="max-w-2xl text-lg leading-9 text-text-secondary md:text-xl">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+            <div className="max-w-3xl">
+              <p className="eyebrow mb-5">{siteConfig.authorTitle}</p>
+              <h1 className="mb-5">{siteConfig.authorName}</h1>
+              <p className="max-w-xl text-lg leading-8 text-text-secondary md:text-xl">
                 நினைவின் விளிம்பில் நின்று, இடங்களின் மெளனத்தையும் மனிதர்களின் உள் உலகத்தையும்
-                பதிவு செய்யும் எழுத்துகள். தமிழ் மற்றும் ஆங்கிலத்தின் இடையே நகரும் இந்த
-                தளம், ஒரு படைப்பாளியின் மெதுவான கையெழுத்தைப் போல வடிவமைக்கப்பட்டுள்ளது.
+                பதிவு செய்யும் எழுத்துகள். தமிழ் மற்றும் ஆங்கிலத்தின் இடையே நகரும் இந்தத் தளம்,
+                ஒரு படைப்பாளியின் மெதுவான கையெழுத்தைப் போல அமைந்துள்ளது.
               </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  href="/posts"
-                  className="inline-flex items-center rounded-full border border-accent/30 bg-paper/90 px-6 py-3 text-sm font-medium text-text-primary transition-colors hover:border-accent hover:text-accent"
-                >
-                  எழுதுகளை வாசிக்க
+              <div className="mt-8 flex flex-wrap items-center gap-6">
+                <Link href="/posts" className="ink-link text-sm font-medium uppercase tracking-[0.18em] text-accent">
+                  வாசிக்கத் தொடங்குங்கள்
                 </Link>
-                <Link
-                  href="/about"
-                  className="ink-link inline-flex items-center text-sm font-medium text-text-secondary hover:text-accent"
-                >
-                  எழுத்தாளரை அறிய
+                <Link href="/about" className="ink-link text-sm font-medium uppercase tracking-[0.18em] text-text-secondary">
+                  எழுத்தாளர் பற்றி
                 </Link>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="manuscript-card overflow-hidden rounded-[2rem] p-4 md:p-5">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-paper">
-                  <Image
-                    src={resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
-                    alt="எழுத்தாளரின் உருவப்படம்"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <blockquote className="pull-quote rounded-[1.5rem] text-base leading-8 text-text-secondary md:text-lg">
-                ஒரு நல்ல வாக்கியம் வாசகரின் நினைவில் நிழலாக அல்ல, வாசம் போல தங்க வேண்டும்.
-              </blockquote>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="manuscript-card rounded-[1.5rem] p-5">
-                  <p className="eyebrow mb-3">மொழிகள்</p>
-                  <p className="text-lg text-text-primary">தமிழ் • English</p>
-                </div>
-                <div className="manuscript-card rounded-[1.5rem] p-5">
-                  <p className="eyebrow mb-3">மையங்கள்</p>
-                  <p className="text-lg text-text-primary">நினைவு • இடம் • குடும்பம்</p>
-                </div>
-              </div>
+            <div className="border-t border-border-color pt-6 lg:pt-0 lg:border-t-0 lg:border-l lg:pl-10">
+              <p className="section-kicker">01 / Notebook</p>
+              <p className="text-base leading-8 text-text-secondary">
+                ஒரு நல்ல வாக்கியம் வாசகரின் நினைவில் நிழலாக அல்ல, வாசம் போலத் தங்க வேண்டும்.
+              </p>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <Container>
-          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டைப்பக்கத் தேர்வைப் போலத் தொகுக்கப்பட்டுள்ளன.">
-            சமீபத்திய எழுத்துகள்
-          </SectionHeading>
-          <div className="grid gap-10 md:grid-cols-3">
-            {latestPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
           </div>
         </Container>
       </section>
 
       {featuredPost && (
-        <section className="py-12 md:py-20">
+        <section className="py-10 md:py-16">
           <Container>
-            <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
-              சிறப்புப் பதிவு
-            </SectionHeading>
+            <div className="mb-8 flex items-end justify-between gap-4 border-b border-border-color pb-5">
+              <span className="section-kicker">02 / Featured</span>
+              <Link href="/posts" className="ink-link text-[0.7rem] font-medium uppercase tracking-[0.18em] text-text-secondary">
+                அனைத்து எழுத்துகளும்
+              </Link>
+            </div>
             <FeaturedPost post={featuredPost} />
           </Container>
         </section>
       )}
 
-      <section className="py-12 md:py-20">
+      <section className="py-10 md:py-16">
         <Container>
-          <SectionHeading subtitle="நூல்கள் ஒரு பட்டியலாக அல்ல, தனித் தனிப் படைப்புகளாகச் சுவாசிக்கட்டும்.">
-            நூல்கள்
+          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டைப்பக்கத் தேர்வைப் போலத் தொகுக்கப்பட்டுள்ளன.">
+            சமீபத்திய எழுத்துகள்
           </SectionHeading>
+          <div className="archive-list">
+            {latestPosts.map((post) => (
+              <div key={post.id} className="archive-item">
+                <PostCard post={post} />
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="py-10 md:py-16">
+        <Container>
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-border-color pb-5">
+            <span className="section-kicker">03 / Books</span>
+            <Link href="/books" className="ink-link text-[0.7rem] font-medium uppercase tracking-[0.18em] text-text-secondary">
+              browse library
+            </Link>
+          </div>
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {books.map((book) => (
               <BookCard key={book.id} book={book} />
@@ -125,29 +104,30 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="py-12 md:py-20">
+      <section className="py-10 md:py-16">
         <Container>
-          <SectionHeading subtitle="நிகழும் சந்திப்புகள், வாசிப்பு மாலைகள், கைவினை உரையாடல்கள்.">
-            நிகழ்வுகள்
-          </SectionHeading>
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-border-color pb-5">
+            <span className="section-kicker">04 / Events</span>
+            <Link href="/events" className="ink-link text-[0.7rem] font-medium uppercase tracking-[0.18em] text-text-secondary">
+              calendar
+            </Link>
+          </div>
           <div className="grid gap-8 lg:grid-cols-2">
             {upcomingEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
           </div>
-          <div className="mt-8">
-            <Link href="/events" className="ink-link text-sm font-medium text-accent">
-              அனைத்து நிகழ்வுகளையும் பார்க்க
-            </Link>
-          </div>
         </Container>
       </section>
 
-      <section className="py-12 md:py-20">
+      <section className="py-10 md:py-16">
         <Container>
-          <SectionHeading subtitle="வாசிப்புகள், உரையாடல்கள், குரலின் அடுக்குகள்.">
-            காணொளிகள்
-          </SectionHeading>
+          <div className="mb-8 flex items-end justify-between gap-4 border-b border-border-color pb-5">
+            <span className="section-kicker">05 / Conversations</span>
+            <Link href="/videos" className="ink-link text-[0.7rem] font-medium uppercase tracking-[0.18em] text-text-secondary">
+              archive
+            </Link>
+          </div>
           <div className="grid gap-8 md:grid-cols-3">
             {videos.slice(0, 3).map((video) => (
               <VideoCard key={video.id} video={video} />
@@ -156,47 +136,27 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <section className="py-12 md:py-20">
+      <section className="py-10 md:py-16">
         <Container>
-          <SectionHeading subtitle="கேட்கத்தக்க சிந்தனைகள் மற்றும் மெதுவான உரையாடல்கள்.">
-            ஒலிப்பதிவு
-          </SectionHeading>
-          <div className="space-y-5">
-            {podcasts.slice(0, 2).map((podcast) => (
-              <PodcastCard key={podcast.id} podcast={podcast} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <section className="py-12 md:py-20">
-        <Container>
-          <div className="grid items-center gap-8 border-t border-border-color pt-12 md:grid-cols-[0.9fr_1.1fr]">
-            <div className="manuscript-card rounded-[2rem] p-4">
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
-              <Image
-                src={resolveImagePath('/images/author/profile.svg') ?? '/images/author/profile.svg'}
-                alt="எழுத்தாளர் குறித்த படம்"
-                fill
-                className="object-cover"
-              />
+          <div className="grid items-center gap-8 border-t border-border-color pt-12 md:grid-cols-[0.85fr_1.15fr]">
+            <div className="manuscript-card p-4">
+              <div className="relative aspect-[4/5] overflow-hidden border border-border-color bg-paper">
+                <Image
+                  src={resolveImagePath('/images/author/profile.svg') ?? '/images/author/profile.svg'}
+                  alt="எழுத்தாளர் குறித்த படம்"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
             <div>
-              <p className="eyebrow mb-4">
-                எழுத்தாளர் குறித்துத்
-              </p>
-              <h2 className="mb-5 text-3xl font-semibold md:text-4xl">
-                அனுபவம், நினைவு, மெளனம் ஆகிய மூன்றின் இடைவெளியில் எழுத்து பிறக்கிறது.
-              </h2>
+              <p className="section-kicker">06 / About</p>
+              <h2 className="mb-5">அனுபவம், நினைவு, மெளனம் ஆகிய மூன்றின் இடைவெளியில் எழுத்து பிறக்கிறது.</h2>
               <p className="mb-6 text-lg leading-8 text-text-secondary">
                 குடும்ப வரலாறு, சொந்த ஊரின் ஒலி, அன்றாட வாழ்க்கையின் சிறிய இடைவெளிகள்,
                 மொழி மாறும்போதும் மாறாத உணர்வுகள் ஆகியவற்றைத் தொடர்ந்தே இந்தப் படைப்புகள் நகர்கின்றன.
               </p>
-              <Link
-                href="/about"
-                className="ink-link inline-flex items-center text-sm font-medium text-accent"
-              >
+              <Link href="/about" className="ink-link inline-flex items-center text-sm font-medium uppercase tracking-[0.18em] text-accent">
                 மேலும் படிக்க
               </Link>
             </div>

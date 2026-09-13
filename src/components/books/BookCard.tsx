@@ -8,31 +8,35 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
   return (
-    <article className="group hover-lift manuscript-card rounded-[1.75rem] p-4 md:p-5">
+    <article className="group hover-lift">
       <Link href={`/books/${book.slug}`} className="block h-full">
         {book.coverImage && (
-          <div className="relative mb-5 aspect-[2/3] overflow-hidden rounded-[1.4rem] bg-border-color shadow-sm">
+          <div className="relative mb-5 aspect-[2/3] overflow-hidden border border-border-color bg-paper">
             <Image
               src={book.coverImage}
               alt={book.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
             />
           </div>
         )}
-        
-        <h3 className="mb-2 text-xl font-semibold leading-snug transition-colors group-hover:text-accent md:text-2xl">
+
+        <div className="mb-2 flex items-center justify-between gap-3 text-[0.68rem] uppercase tracking-[0.18em] text-text-secondary">
+          <span>{book.publishedYear}</span>
+          {book.language && <span>{book.language}</span>}
+        </div>
+
+        <h3 className="mb-2 text-2xl font-semibold leading-tight transition-colors group-hover:text-accent">
           {book.title}
         </h3>
-        
-        <p className="mb-3 text-sm text-text-secondary">
-          {book.publishedYear}
-          {book.language && ` · ${book.language}`}
-        </p>
-        
-        <p className="line-clamp-3 text-sm leading-7 text-text-secondary">
+
+        <p className="mb-4 text-base leading-7 text-text-secondary">
           {book.description}
         </p>
+
+        <span className="ink-link text-sm font-medium uppercase tracking-[0.18em] text-accent">
+          learn more
+        </span>
       </Link>
     </article>
   );

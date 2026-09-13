@@ -50,18 +50,14 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 
   return (
     <Container className="py-12 md:py-20">
-      <div className="max-w-3xl mb-12">
-        <p className="eyebrow mb-4">
-          எழுத்துகள்
-        </p>
-        <h1 className="mb-5 text-4xl font-semibold md:text-5xl">
-          கட்டுரைகள், கதைகள், மனநினைவுகள்
-        </h1>
+      <div className="mb-12 max-w-3xl">
+        <p className="eyebrow mb-4">எழுத்துகள்</p>
+        <h1 className="mb-5">கட்டுரைகள், கதைகள், மனநினைவுகள்</h1>
         <p className="text-lg leading-8 text-text-secondary">
           விளிம்புகளில் எழுதப்பட்ட குறிப்புகள், நிலமும் நினைவும் குறித்த கவனிப்புகள்,
           வாசித்துப் பின் நீண்ட நேரம் மனதில் தங்கும் சிறு கதைகள்.
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-8 flex flex-wrap gap-4 border-t border-border-color pt-5">
           {postCategories.map((category) => {
             const isActive = (!activeCategory && category === 'அனைத்தும்') || activeCategory === category;
             const href = category === 'அனைத்தும்' ? '/posts' : `/posts?category=${encodeURIComponent(category)}`;
@@ -69,10 +65,8 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
-                  isActive
-                    ? 'border-accent bg-accent text-surface-foreground'
-                    : 'border-border-color bg-paper/80 text-text-secondary hover:border-accent hover:text-accent'
+                className={`text-[0.7rem] font-medium uppercase tracking-[0.18em] transition-colors ${
+                  isActive ? 'text-accent' : 'text-text-secondary hover:text-accent'
                 }`}
               >
                 {category}
@@ -82,13 +76,13 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         </div>
       </div>
 
-      <div className="border-t border-border-color pt-10">
+      <div className="archive-list">
         {posts.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
-            {posts.map((post) => (
-              <PostCard key={post.id} post={post as any} />
-            ))}
-          </div>
+          posts.map((post) => (
+            <div key={post.id} className="archive-item">
+              <PostCard post={post as any} />
+            </div>
+          ))
         ) : (
           <div className="py-12 text-center">
             <p className="text-text-secondary">இந்தப் பிரிவில் தற்சமயம் பதிவுகள் எதுவும் இல்லை.</p>
@@ -97,14 +91,6 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
             </Link>
           </div>
         )}
-      </div>
-
-      <div className="mt-12 flex justify-center">
-        <div className="inline-flex items-center gap-3 rounded-full border border-border-color px-5 py-3 text-sm text-text-secondary">
-          <Link href="#" className="hover:text-accent">முந்தைய</Link>
-          <span>1</span>
-          <Link href="#" className="hover:text-accent">அடுத்த</Link>
-        </div>
       </div>
     </Container>
   );

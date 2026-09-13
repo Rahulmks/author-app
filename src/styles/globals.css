@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global CSS Variables — vintage cinema-ticket palette */
+/* Global CSS Variables — completed literary palette */
 :root {
   --background: #1A1225;
   --background-secondary: #2E2038;
@@ -19,11 +19,10 @@
   --paper-strong: #3A2A46;
   --paper-cream: #241A2E;
   --shadow-color: rgba(0, 0, 0, 0.45);
-  
-  /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-display: 'Libre Baskerville', Georgia, serif;
-  --font-tamil: 'Inter', 'Segoe UI', sans-serif;
+
+  --font-sans: 'Segoe UI', 'Noto Sans Tamil', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Iowan Old Style', 'Georgia', 'Noto Serif Tamil', 'Times New Roman', serif;
+  --font-tamil: 'Noto Sans Tamil', 'Segoe UI', sans-serif;
 }
 
 * {
@@ -48,10 +47,7 @@ body {
   position: relative;
   min-height: 100vh;
   overflow-x: clip;
-  background-image:
-    radial-gradient(circle at 10% 8%, rgba(232, 165, 72, 0.08), transparent 34%),
-    radial-gradient(circle at 95% 14%, rgba(46, 125, 110, 0.12), transparent 28%),
-    linear-gradient(180deg, #1A1225 0%, #221A2E 52%, #2E2038 100%);
+  background: linear-gradient(180deg, #1A1225 0%, #221A2E 35%, #2E2038 100%);
 }
 
 body::before {
@@ -59,46 +55,40 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  opacity: 0.3;
-  background-image:
-    radial-gradient(rgba(242, 233, 228, 0.05) 0.7px, transparent 0.7px),
-    radial-gradient(rgba(232, 165, 72, 0.05) 0.6px, transparent 0.6px),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px);
-  background-size: 3px 3px, 5px 5px, 24px 24px;
-  mix-blend-mode: screen;
+  opacity: 0.18;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
   z-index: -1;
 }
 
-/* Typography Styles */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
   font-weight: 600;
-  line-height: 1.28;
-  letter-spacing: -0.015em;
+  line-height: 1.18;
+  letter-spacing: -0.025em;
   color: var(--text-primary);
 }
 
 h1 {
-  font-size: 2.5rem;
-  line-height: 1.2;
+  font-size: clamp(2.9rem, 5vw, 6rem);
+  line-height: 0.98;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: clamp(2.05rem, 3vw, 3.2rem);
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: clamp(1.35rem, 2vw, 2rem);
 }
 
 p {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.4rem;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease;
+  transition: color 0.25s ease, border-color 0.25s ease, background-color 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
 }
 
 img {
@@ -107,42 +97,42 @@ img {
   display: block;
 }
 
-/* Article Content Styles */
 .article-content {
-  font-size: 1.125rem;
-  line-height: 1.95;
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 1.12rem;
+  line-height: 1.9;
   color: var(--text-primary);
 }
 
 .article-content h2 {
-  font-size: 1.75rem;
-  margin-top: 3rem;
-  margin-bottom: 1.5rem;
+  font-size: clamp(1.8rem, 2vw, 2.3rem);
+  margin-top: 4rem;
+  margin-bottom: 1.3rem;
 }
 
 .article-content h3 {
-  font-size: 1.375rem;
-  margin-top: 2.5rem;
+  font-size: 1.35rem;
+  margin-top: 2.75rem;
   margin-bottom: 1rem;
 }
 
 .article-content p {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.6rem;
 }
 
 .article-content blockquote {
   position: relative;
-  border-left: 3px solid var(--accent);
-  padding: 1.5rem 1.5rem 1.5rem 2rem;
   margin: 2.5rem 0;
-  color: var(--surface-foreground);
-  background: var(--surface);
+  padding: 1.5rem 1.5rem 1.5rem 2.2rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(242, 233, 228, 0.03);
+  color: var(--text-primary);
 }
 
 .article-content ul,
 .article-content ol {
-  margin-bottom: 1.75rem;
-  padding-left: 1.5rem;
+  margin: 1.2rem 0 1.8rem 1.4rem;
 }
 
 .article-content li {
@@ -153,29 +143,29 @@ img {
   color: var(--accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
 .article-content img {
-  margin: 2rem 0;
-  border-radius: 1rem;
+  margin: 2.25rem 0;
+  border-radius: 0;
 }
 
 .article-content blockquote::before {
   content: '“';
   position: absolute;
-  top: 0.75rem;
+  top: 0.7rem;
   left: 0.9rem;
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 2.6rem;
   line-height: 1;
-  color: rgba(26, 18, 37, 0.35);
+  color: rgba(242, 233, 228, 0.38);
 }
 
 .eyebrow {
-  font-size: 0.76rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.28em;
+  letter-spacing: 0.24em;
   text-transform: uppercase;
   color: var(--accent);
 }
@@ -185,33 +175,75 @@ img {
 }
 
 .paper-panel {
-  background: linear-gradient(180deg, rgba(46, 32, 56, 0.9), rgba(36, 26, 46, 0.94));
+  background: rgba(46, 32, 56, 0.62);
   border: 1px solid var(--border-color);
-  box-shadow: 0 24px 60px -36px var(--shadow-color);
-  backdrop-filter: blur(6px);
+  box-shadow: none;
 }
 
 .manuscript-card {
-  background: linear-gradient(180deg, rgba(46, 32, 56, 0.82), rgba(36, 26, 46, 0.9));
+  background: rgba(46, 32, 56, 0.45);
   border: 1px solid var(--border-color);
-  box-shadow: 0 18px 40px -32px var(--shadow-color);
+  box-shadow: none;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.editorial-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.archive-list {
+  border-top: 1px solid var(--border-color);
+  margin-top: 2.5rem;
+}
+
+.archive-item {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.35rem 0;
+}
+
+.archive-item:hover {
+  opacity: 0.95;
+}
+
+.issue-mark {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
 }
 
 .pull-quote {
   position: relative;
-  padding: 1.5rem 1.5rem 1.5rem 2.5rem;
-  border-left: 3px solid var(--accent);
-  background: var(--surface);
-  color: var(--surface-foreground);
+  padding: 1.6rem 1.5rem 1.5rem 2.4rem;
+  border-left: 2px solid var(--accent);
+  background: rgba(242, 233, 228, 0.02);
+  color: var(--text-primary);
 }
 
 .pull-quote::before {
   content: '“';
   position: absolute;
-  top: 0.5rem;
+  top: 0.4rem;
   left: 0.8rem;
-  color: rgba(26, 18, 37, 0.35);
-  font-size: 2.6rem;
+  color: rgba(242, 233, 228, 0.35);
+  font-size: 2.7rem;
   line-height: 1;
   font-family: var(--font-display);
 }
@@ -226,7 +258,7 @@ img {
   left: 0;
   bottom: -0.15rem;
   width: 100%;
-  height: 2px;
+  height: 1px;
   background: currentColor;
   transform: scaleX(0.2);
   transform-origin: left center;
@@ -239,17 +271,17 @@ img {
 }
 
 .hover-lift {
-  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+  transition: transform 0.25s ease, border-color 0.25s ease, opacity 0.25s ease;
 }
 
 .hover-lift:hover,
 .hover-lift:focus-within {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 42px -30px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+  border-color: rgba(232, 165, 72, 0.28);
 }
 
 .grain-border {
-  border: 1px solid rgba(232, 165, 72, 0.18);
+  border: 1px solid rgba(232, 165, 72, 0.16);
   position: relative;
 }
 
@@ -257,7 +289,7 @@ img {
   content: '';
   position: absolute;
   inset: 0.5rem;
-  border: 1px solid rgba(232, 165, 72, 0.1);
+  border: 1px solid rgba(232, 165, 72, 0.08);
   pointer-events: none;
 }
 
