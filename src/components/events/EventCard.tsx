@@ -13,14 +13,14 @@ const statusLabel: Record<AuthorEvent['status'], string> = {
 
 export default function EventCard({ event }: EventCardProps) {
   return (
-    <article className="group hover-lift manuscript-card rounded-[1.75rem] p-5 md:p-6">
+    <article className="group border-t border-border-color py-7 md:py-8">
       <div className="mb-4 flex flex-wrap items-center gap-3 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-accent">
         <span>{statusLabel[event.status]}</span>
         <span>•</span>
         <span>{event.format}</span>
       </div>
 
-      <h3 className="mb-3 text-2xl font-semibold leading-snug transition-colors group-hover:text-accent">
+      <h3 className="mb-3 text-2xl font-medium leading-snug transition-colors group-hover:text-accent">
         {event.title}
       </h3>
 

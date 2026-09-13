@@ -9,15 +9,15 @@ interface PostCardProps {
 
 export default function PostCard({ post }: PostCardProps) {
   return (
-    <article className="group hover-lift manuscript-card overflow-hidden rounded-[1.75rem]">
-      <Link href={`/posts/${post.slug}`} className="block h-full p-4 md:p-5">
+    <article className="group border-t border-border-color py-7 first:border-t-0">
+      <Link href={`/posts/${post.slug}`} className="block max-w-3xl">
         {post.coverImage && (
-          <div className="relative mb-5 aspect-[4/3] overflow-hidden rounded-[1.25rem] bg-border-color">
+          <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-border-color">
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className="object-cover"
             />
           </div>
         )}
@@ -28,7 +28,7 @@ export default function PostCard({ post }: PostCardProps) {
           </p>
         )}
         
-        <h3 className="mb-3 text-2xl font-semibold leading-snug transition-colors group-hover:text-accent">
+        <h3 className="mb-3 text-2xl font-medium leading-snug transition-colors group-hover:text-accent">
           {post.title}
         </h3>
         

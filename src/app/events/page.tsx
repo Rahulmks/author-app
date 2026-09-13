@@ -18,11 +18,11 @@ export default function EventsPage() {
         <p className="text-lg leading-8 text-text-secondary">
           வாசகர்கள், எழுத்தாளர்கள், மொழி மற்றும் நினைவை மையமாகக் கொண்ட மேடைகள் இங்கு தொகுக்கப்பட்டுள்ளன.
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
-          <span className="rounded-full border border-border-color bg-paper/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
+        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
+          <span className="border-b border-border-color pb-1 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
             வரவிருக்கும் நிகழ்வுகள்
           </span>
-          <span className="rounded-full border border-border-color bg-paper/80 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
+          <span className="border-b border-border-color pb-1 text-xs font-medium uppercase tracking-[0.08em] text-text-secondary">
             கடந்த நிகழ்வுகள்
           </span>
         </div>
@@ -31,7 +31,7 @@ export default function EventsPage() {
       {upcomingEvents.length > 0 && (
         <section className="mb-12">
           <h2 className="mb-5 text-2xl font-semibold md:text-3xl">வரவிருக்கும் நிகழ்வுகள்</h2>
-          <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="max-w-3xl">
             {upcomingEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
@@ -42,7 +42,7 @@ export default function EventsPage() {
       {pastEvents.length > 0 && (
         <section>
           <h2 className="mb-5 text-2xl font-semibold md:text-3xl">கடந்த நிகழ்வுகள்</h2>
-          <div className="grid gap-8 lg:grid-cols-2 xl:grid-cols-3">
+          <div className="max-w-3xl">
             {pastEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}

@@ -8,20 +8,20 @@ interface BookCardProps {
 
 export default function BookCard({ book }: BookCardProps) {
   return (
-    <article className="group hover-lift manuscript-card rounded-[1.75rem] p-4 md:p-5">
+    <article className="group border-t border-border-color pt-6">
       <Link href={`/books/${book.slug}`} className="block h-full">
         {book.coverImage && (
-          <div className="relative mb-5 aspect-[2/3] overflow-hidden rounded-[1.4rem] bg-border-color shadow-sm">
+          <div className="relative mb-6 aspect-[2/3] overflow-hidden bg-border-color">
             <Image
               src={book.coverImage}
               alt={book.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              className="object-cover"
             />
           </div>
         )}
         
-        <h3 className="mb-2 text-xl font-semibold leading-snug transition-colors group-hover:text-accent md:text-2xl">
+        <h3 className="mb-2 text-xl font-medium leading-snug transition-colors group-hover:text-accent md:text-2xl">
           {book.title}
         </h3>
         

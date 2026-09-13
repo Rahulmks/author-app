@@ -8,10 +8,10 @@ interface PodcastCardProps {
 
 export default function PodcastCard({ podcast }: PodcastCardProps) {
   return (
-    <article className="group hover-lift manuscript-card rounded-[1.75rem] p-5 transition-colors hover:border-accent">
-      <div className="flex gap-4">
+    <article className="group border-t border-border-color py-6 transition-colors hover:border-accent">
+      <div className="flex gap-5">
         {podcast.coverImage && (
-          <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-[1rem] bg-border-color">
+          <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden bg-border-color">
             <Image
               src={podcast.coverImage}
               alt={podcast.title}
@@ -28,7 +28,7 @@ export default function PodcastCard({ podcast }: PodcastCardProps) {
             </p>
           )}
           
-          <h3 className="mb-2 line-clamp-2 text-lg font-semibold transition-colors group-hover:text-accent md:text-xl">
+          <h3 className="mb-2 line-clamp-2 text-lg font-medium transition-colors group-hover:text-accent md:text-xl">
             {podcast.title}
           </h3>
           

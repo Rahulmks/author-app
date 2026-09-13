@@ -9,8 +9,8 @@ export default async function AboutPage() {
   return (
     <Container className="py-12 md:py-20">
       <div className="grid items-start gap-10 md:grid-cols-[0.9fr_1.1fr]">
-        <div className="manuscript-card rounded-[2rem] p-4">
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color bg-paper">
+        <div className="border border-border-color p-3">
+          <div className="relative aspect-[4/5] overflow-hidden bg-paper">
           <Image
             src={resolveImagePath(about?.image) ?? resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
             alt={about?.name || 'எழுத்தாளரின் உருவப்படம்'}
@@ -20,7 +20,7 @@ export default async function AboutPage() {
           </div>
         </div>
 
-        <div className="paper-panel rounded-[2rem] p-7 md:p-10">
+        <div className="border-l border-accent pl-6 md:pl-10">
           <p className="eyebrow mb-4">
             எழுத்தாளர் குறித்துப்
           </p>
@@ -36,13 +36,13 @@ export default async function AboutPage() {
 
       <div className="mt-16 border-t border-border-color pt-12">
         <h2 className="mb-6 text-2xl font-semibold md:text-3xl">சிறப்புக் குறிப்புகள்</h2>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-8 md:grid-cols-3">
           {[
             'இலக்கிய இதழ்களில் வெளிவந்த கட்டுரைகள் மற்றும் சிறுகதைகள்',
             'மொழி, நினைவு, இடம் குறித்து நடைபெற்ற உரையாடல்களில் பங்கேற்பு',
             'தமிழ் மற்றும் ஆங்கில இலக்கிய மரபுகளுக்கு இடையில் இயங்கும் படைப்புப் பணிகள்',
           ].map((item) => (
-            <div key={item} className="manuscript-card rounded-[1.5rem] p-6">
+            <div key={item} className="border-t border-border-color pt-5">
               <p className="leading-7 text-text-secondary">{item}</p>
             </div>
           ))}

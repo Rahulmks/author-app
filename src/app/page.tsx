@@ -30,7 +30,7 @@ export default async function HomePage() {
     <>
       <section className="py-10 md:py-16 lg:py-20">
         <Container>
-          <div className="grid items-start gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+            <div className="grid items-start gap-14 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="paper-panel grain-border rounded-[2.25rem] p-7 md:p-10 lg:p-12">
               <p className="eyebrow mb-5">
                 {siteConfig.authorTitle}
@@ -46,7 +46,7 @@ export default async function HomePage() {
               <div className="mt-8 flex flex-wrap gap-4">
                 <Link
                   href="/posts"
-                  className="inline-flex items-center rounded-full border border-accent/30 bg-paper/90 px-6 py-3 text-sm font-medium text-text-primary transition-colors hover:border-accent hover:text-accent"
+                    className="ink-link inline-flex items-center text-sm font-medium text-accent"
                 >
                   எழுதுகளை வாசிக்க
                 </Link>
@@ -60,8 +60,8 @@ export default async function HomePage() {
             </div>
 
             <div className="space-y-6">
-              <div className="manuscript-card overflow-hidden rounded-[2rem] p-4 md:p-5">
-                <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-paper">
+                <div className="border border-border-color p-3 md:p-4">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-paper">
                   <Image
                     src={resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
                     alt="எழுத்தாளரின் உருவப்படம்"
@@ -117,7 +117,7 @@ export default async function HomePage() {
           <SectionHeading subtitle="நூல்கள் ஒரு பட்டியலாக அல்ல, தனித் தனிப் படைப்புகளாகச் சுவாசிக்கட்டும்.">
             நூல்கள்
           </SectionHeading>
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="max-w-3xl">
             {books.map((book) => (
               <BookCard key={book.id} book={book} />
             ))}

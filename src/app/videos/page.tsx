@@ -41,7 +41,7 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
           பட்டறைகள், நிகழ்வுகள், நேர்காணல்கள் மற்றும் இலக்கியம் குறித்த தனிப்பட்ட உரையாடல்களிலிருந்து
           தேர்ந்தெடுக்கப்பட்ட காட்சி பதிவுகள்.
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
           {videoCategories.map((category) => {
             const isActive = (!activeCategory && category === 'அனைத்தும்') || activeCategory === category;
             const href = category === 'அனைத்தும்' ? '/videos' : `/videos?category=${encodeURIComponent(category)}`;
@@ -49,10 +49,10 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`border-b pb-1 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
                   isActive
-                    ? 'border-accent bg-accent text-surface-foreground'
-                    : 'border-border-color bg-paper/80 text-text-secondary hover:border-accent hover:text-accent'
+                    ? 'border-accent text-accent'
+                    : 'border-transparent text-text-secondary hover:border-accent hover:text-accent'
                 }`}
               >
                 {category}
@@ -63,7 +63,7 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
       </div>
 
       {videos.length > 0 ? (
-        <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="max-w-3xl">
           {videos.map((video) => (
             <VideoCard key={video.id} video={video} />
           ))}

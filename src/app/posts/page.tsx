@@ -61,7 +61,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
           விளிம்புகளில் எழுதப்பட்ட குறிப்புகள், நிலமும் நினைவும் குறித்த கவனிப்புகள்,
           வாசித்துப் பின் நீண்ட நேரம் மனதில் தங்கும் சிறு கதைகள்.
         </p>
-        <div className="mt-6 flex flex-wrap gap-2">
+        <div className="mt-8 flex flex-wrap gap-x-5 gap-y-3">
           {postCategories.map((category) => {
             const isActive = (!activeCategory && category === 'அனைத்தும்') || activeCategory === category;
             const href = category === 'அனைத்தும்' ? '/posts' : `/posts?category=${encodeURIComponent(category)}`;
@@ -69,10 +69,10 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`rounded-full border px-4 py-1.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`border-b pb-1 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
                   isActive
-                    ? 'border-accent bg-accent text-surface-foreground'
-                    : 'border-border-color bg-paper/80 text-text-secondary hover:border-accent hover:text-accent'
+                    ? 'border-accent text-accent'
+                    : 'border-transparent text-text-secondary hover:border-accent hover:text-accent'
                 }`}
               >
                 {category}
@@ -84,7 +84,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
 
       <div className="border-t border-border-color pt-10">
         {posts.length > 0 ? (
-          <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+          <div className="max-w-3xl">
             {posts.map((post) => (
               <PostCard key={post.id} post={post as any} />
             ))}
@@ -100,7 +100,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
       </div>
 
       <div className="mt-12 flex justify-center">
-        <div className="inline-flex items-center gap-3 rounded-full border border-border-color px-5 py-3 text-sm text-text-secondary">
+        <div className="inline-flex items-center gap-5 border-t border-border-color pt-4 text-sm text-text-secondary">
           <Link href="#" className="hover:text-accent">முந்தைய</Link>
           <span>1</span>
           <Link href="#" className="hover:text-accent">அடுத்த</Link>

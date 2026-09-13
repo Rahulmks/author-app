@@ -9,18 +9,18 @@ interface FeaturedPostProps {
 
 export default function FeaturedPost({ post }: FeaturedPostProps) {
   return (
-    <article className="group paper-panel overflow-hidden rounded-[2rem] p-5 md:p-8">
+    <article className="group border-y border-border-color py-8 md:py-12">
       <Link 
         href={`/posts/${post.slug}`}
         className="block md:grid md:grid-cols-2 gap-8 md:gap-12 items-center"
       >
         {post.coverImage && (
-          <div className="relative mb-6 aspect-[4/3] overflow-hidden rounded-[1.5rem] bg-border-color md:mb-0">
+          <div className="relative mb-6 aspect-[4/3] overflow-hidden bg-border-color md:mb-0">
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+              className="object-cover"
             />
           </div>
         )}
@@ -32,7 +32,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
             </p>
           )}
           
-          <h2 className="mb-4 text-3xl font-semibold leading-tight transition-colors group-hover:text-accent md:text-4xl">
+          <h2 className="mb-4 text-3xl font-medium leading-tight transition-colors group-hover:text-accent md:text-4xl">
             {post.title}
           </h2>
           
@@ -58,17 +58,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
             )}
           </div>
           
-          <span className="inline-flex items-center font-medium text-accent">
-            கட்டுரையைத் திறக்க
-            <svg 
-              className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" 
-              fill="none" 
-              viewBox="0 0 24 24" 
-              stroke="currentColor"
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </span>
+          <span className="ink-link inline-flex font-medium text-accent">கட்டுரையைத் திறக்க</span>
         </div>
       </Link>
     </article>
