@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Container from '@/components/layout/Container';
 import VideoCard from '@/components/media/VideoCard';
+import EmptyState from '@/components/ui/EmptyState';
 import { getVideos } from '@/lib/videos/get-videos';
 
 const videoCategories = ['அனைத்தும்', 'நேர்காணல்கள்', 'விவாதம்', 'பட்டறை', 'பொது'];
@@ -69,12 +70,14 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
           ))}
         </div>
       ) : (
-        <div className="py-12 text-center">
-          <p className="text-text-secondary">இந்தப் பிரிவில் தற்சமயம் காணொளிகள் எதுவும் இல்லை.</p>
-          <Link href="/videos" className="mt-4 inline-block text-sm font-medium text-accent underline">
-            அனைத்துக் காணொளிகளையும் காண்க
-          </Link>
-        </div>
+        <EmptyState
+          message="இந்தப் பிரிவில் தற்சமயம் காணொளிகள் எதுவும் இல்லை."
+          action={
+            <Link href="/videos" className="ink-link text-sm font-medium text-accent">
+              அனைத்துக் காணொளிகளையும் காண்க
+            </Link>
+          }
+        />
       )}
     </Container>
   );

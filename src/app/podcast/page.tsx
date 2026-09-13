@@ -1,5 +1,6 @@
 import Container from '@/components/layout/Container';
 import PodcastCard from '@/components/media/PodcastCard';
+import EmptyState from '@/components/ui/EmptyState';
 import { getPodcasts } from '@/lib/podcasts/get-podcasts';
 
 export default async function PodcastPage() {
@@ -25,6 +26,10 @@ export default async function PodcastPage() {
           <PodcastCard key={podcast.id} podcast={podcast} />
         ))}
       </div>
+
+      {podcasts.length === 0 && (
+        <EmptyState message="புதிய அத்தியாயங்கள் பதிவாகிக் கொண்டிருக்கின்றன. விரைவில் கேட்கலாம்." />
+      )}
     </Container>
   );
 }

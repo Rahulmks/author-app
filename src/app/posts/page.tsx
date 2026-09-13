@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 
 import Container from '@/components/layout/Container';
 import PostCard from '@/components/posts/PostCard';
+import EmptyState from '@/components/ui/EmptyState';
 import { getPosts } from '@/lib/posts/get-posts';
 
 const postCategories = [
@@ -90,12 +91,14 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
             ))}
           </div>
         ) : (
-          <div className="py-12 text-center">
-            <p className="text-text-secondary">இந்தப் பிரிவில் தற்சமயம் பதிவுகள் எதுவும் இல்லை.</p>
-            <Link href="/posts" className="mt-4 inline-block text-sm font-medium text-accent underline">
-              அனைத்துப் பதிவுகளையும் காண்க
-            </Link>
-          </div>
+          <EmptyState
+            message="இந்தப் பிரிவில் தற்சமயம் பதிவுகள் எதுவும் இல்லை."
+            action={
+              <Link href="/posts" className="ink-link text-sm font-medium text-accent">
+                அனைத்துப் பதிவுகளையும் காண்க
+              </Link>
+            }
+          />
         )}
       </div>
 

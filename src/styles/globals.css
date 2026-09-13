@@ -24,6 +24,39 @@
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-display: 'Libre Baskerville', Georgia, serif;
   --font-tamil: 'Inter', 'Segoe UI', sans-serif;
+
+  /* ---- Design tokens: type scale (ratio 1.25, fluid via clamp) ---- */
+  --step--2: clamp(0.72rem, 0.7rem + 0.1vw, 0.8rem);   /* 11.5 / 12.8 */
+  --step--1: clamp(0.83rem, 0.8rem + 0.15vw, 0.94rem); /* 13.3 / 15 */
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);    /* 16 / 18 */
+  --step-1: clamp(1.2rem, 1.12rem + 0.4vw, 1.4rem);    /* 19.2 / 22.4 */
+  --step-2: clamp(1.44rem, 1.3rem + 0.7vw, 1.75rem);   /* 23 / 28 */
+  --step-3: clamp(1.75rem, 1.5rem + 1.2vw, 2.25rem);   /* 28 / 36 */
+  --step-4: clamp(2.1rem, 1.7rem + 2vw, 2.85rem);      /* 33.6 / 45.6 */
+  --step-5: clamp(2.5rem, 1.9rem + 3vw, 3.6rem);       /* 40 / 57.6 */
+
+  /* ---- Design tokens: 8pt spacing scale ---- */
+  --space-1: 0.25rem;  /* 4  */
+  --space-2: 0.5rem;   /* 8  */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16 */
+  --space-6: 1.5rem;   /* 24 */
+  --space-8: 2rem;     /* 32 */
+  --space-12: 3rem;    /* 48 */
+  --space-16: 4rem;    /* 64 */
+  --space-24: 6rem;    /* 96 */
+  --space-32: 8rem;    /* 128 */
+
+  /* ---- Design tokens: motion (single easing system, reused everywhere) ---- */
+  --ease-editorial: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 200ms;
+  --duration-base: 400ms;
+  --duration-slow: 650ms;
+
+  /* ---- Design tokens: grid / content widths ---- */
+  --content-max: 1280px;
+  --article-max: 760px;
+  --gallery-max: 1440px;
 }
 
 * {
@@ -72,16 +105,16 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
-  line-height: 1.2;
+  font-size: var(--step-5);
+  line-height: 1.15;
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: var(--step-3);
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: var(--step-2);
 }
 
 p {
@@ -91,7 +124,45 @@ p {
 a {
   color: inherit;
   text-decoration: none;
-  transition: color 400ms ease-out, border-color 400ms ease-out, opacity 400ms ease-out;
+  transition: color var(--duration-base) var(--ease-editorial), border-color var(--duration-base) var(--ease-editorial), opacity var(--duration-base) var(--ease-editorial);
+}
+
+/* Old-style figures for dates/numerals — numerals sit on the baseline like lowercase, not like a spreadsheet */
+time,
+.oldstyle-nums {
+  font-feature-settings: 'onum' 1, 'lnum' 0, 'liga' 1;
+  font-variant-numeric: oldstyle-nums;
+}
+
+/* Custom text-selection highlight instead of the OS default */
+::selection {
+  background: var(--accent);
+  color: var(--surface-foreground);
+}
+
+/* Thin, restrained scrollbar matching the site's palette */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent) var(--background-secondary);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(232, 165, 72, 0.5);
+  border-radius: 9999px;
+  border: 2px solid var(--background-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--accent);
 }
 
 img {
@@ -184,16 +255,27 @@ img {
 }
 
 .pull-quote {
+  position: relative;
   padding: 0.5rem 0 0.5rem 1.5rem;
   border-left: 1px solid var(--accent);
   background: transparent;
   color: var(--text-secondary);
   font-family: var(--font-display);
+  font-size: var(--step-2);
   font-style: italic;
 }
 
+/* Hanging punctuation: the opening mark sits slightly outside the text block */
 .pull-quote::before {
-  content: none;
+  content: '\201C';
+  position: absolute;
+  left: 0.55rem;
+  top: 0.3rem;
+  font-family: var(--font-display);
+  font-size: 1.6em;
+  line-height: 1;
+  color: var(--accent);
+  transform: translateX(-0.62em);
 }
 
 .ink-link {
@@ -210,7 +292,7 @@ img {
   background: currentColor;
   transform: scaleX(0);
   transform-origin: left center;
-  transition: transform 400ms ease-out;
+  transition: transform var(--duration-base) var(--ease-editorial);
 }
 
 .ink-link:hover::after,
@@ -219,7 +301,7 @@ img {
 }
 
 .hover-lift {
-  transition: border-color 400ms ease-out;
+  transition: border-color var(--duration-base) var(--ease-editorial);
 }
 
 .hover-lift:hover,
@@ -366,7 +448,7 @@ img {
   border: 1px solid var(--border-color);
   background: rgba(46, 32, 56, 0.7);
   padding: 1rem;
-  transition: transform 0.25s ease, border-color 0.25s ease;
+  transition: transform var(--duration-base) var(--ease-editorial), border-color var(--duration-base) var(--ease-editorial);
 }
 
 .browse-tile::after {
@@ -581,10 +663,97 @@ img {
   }
 }
 
-/* Focus Styles */
+/* ---- Custom visual identity: hand-drawn ink-line section divider ---- */
+.manuscript-divider {
+  display: flex;
+  justify-content: center;
+  margin: var(--space-16) 0;
+  color: var(--accent);
+}
+
+.manuscript-divider svg {
+  width: 168px;
+  height: 20px;
+  overflow: visible;
+}
+
+.manuscript-divider path {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-dasharray: 320;
+  stroke-dashoffset: 320;
+}
+
+.manuscript-divider.in-view path {
+  animation: inkDraw 1.4s var(--ease-editorial) forwards;
+}
+
+/* ---- Loading skeleton: a calm fade-in, never a spinner ---- */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--paper-strong);
+  border-radius: 0.5rem;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(242, 233, 228, 0.06), transparent);
+  animation: skeletonSheen 1.8s ease-in-out infinite;
+}
+
+.skeleton-fade-in {
+  animation: heroFadeUp 0.6s var(--ease-editorial) forwards;
+}
+
+@keyframes skeletonSheen {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ---- Empty state ---- */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-24) var(--space-4);
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.empty-state-mark {
+  color: var(--accent);
+  opacity: 0.85;
+}
+
+.empty-state p {
+  margin-bottom: 0;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--step-1);
+  max-width: 32ch;
+}
+
+/* Focus Styles — one consistent, elegant keyboard-focus ring, never the browser default */
 *:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
+  border-radius: 2px;
+  transition: outline-offset var(--duration-fast) var(--ease-editorial);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline-offset: 4px;
 }
 
 /* Responsive Typography */

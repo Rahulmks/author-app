@@ -1,5 +1,6 @@
 import Container from '@/components/layout/Container';
 import BookCard from '@/components/books/BookCard';
+import EmptyState from '@/components/ui/EmptyState';
 import { getBooks } from '@/lib/books/get-books';
 
 export default async function BooksPage() {
@@ -25,6 +26,10 @@ export default async function BooksPage() {
           <BookCard key={book.id} book={book} />
         ))}
       </div>
+
+      {books.length === 0 && (
+        <EmptyState message="புதிய நூல்கள் தற்சமயம் அச்சில் உள்ளன. விரைவில் இங்கு வந்து சேரும்." />
+      )}
     </Container>
   );
 }

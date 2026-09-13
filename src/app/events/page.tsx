@@ -1,5 +1,6 @@
 import Container from '@/components/layout/Container';
 import EventCard from '@/components/events/EventCard';
+import EmptyState from '@/components/ui/EmptyState';
 import { mockEvents } from '@/data/events';
 
 export default function EventsPage() {
@@ -48,6 +49,10 @@ export default function EventsPage() {
             ))}
           </div>
         </section>
+      )}
+
+      {upcomingEvents.length === 0 && pastEvents.length === 0 && (
+        <EmptyState message="தற்சமயம் அறிவிக்கப்பட்ட நிகழ்வுகள் எதுவும் இல்லை. விரைவில் புதிய தேதிகள் இங்கு சேர்க்கப்படும்." />
       )}
     </Container>
   );

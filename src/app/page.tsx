@@ -4,6 +4,7 @@ import Container from '@/components/layout/Container';
 import PostCard from '@/components/posts/PostCard';
 import FeaturedPost from '@/components/posts/FeaturedPost';
 import SectionHeading from '@/components/ui/SectionHeading';
+import ManuscriptDivider from '@/components/ui/ManuscriptDivider';
 import { siteConfig } from '@/lib/navigation';
 import { getPost } from '@/lib/posts/get-post';
 import { getPosts } from '@/lib/posts/get-posts';
@@ -76,6 +77,8 @@ export default async function HomePage() {
         </Container>
       </section>
 
+      <ManuscriptDivider />
+
       <section className="py-12 md:py-20">
         <Container>
           <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டைப்பக்கத் தேர்வைப் போலத் தொகுக்கப்பட்டுள்ளன.">
@@ -90,14 +93,17 @@ export default async function HomePage() {
       </section>
 
       {featuredPost && (
-        <section className="py-12 md:py-20">
-          <Container>
-            <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
-              சிறப்புப் பதிவு
-            </SectionHeading>
-            <FeaturedPost post={featuredPost} />
-          </Container>
-        </section>
+        <>
+          <ManuscriptDivider />
+          <section className="py-12 md:py-20">
+            <Container>
+              <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
+                சிறப்புப் பதிவு
+              </SectionHeading>
+              <FeaturedPost post={featuredPost} />
+            </Container>
+          </section>
+        </>
       )}
 
     </>
