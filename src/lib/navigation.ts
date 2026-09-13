@@ -12,7 +12,7 @@ export const navigationItems: NavigationItem[] = [
 ];
 
 export const siteConfig = {
-  authorName: 'எழுத்தாளர் பெயர்',
+  authorName: 'லட்சுமிஹர்',
   authorTitle: 'எழுத்தாளர் • நாவலாசிரியர்',
   tagline: 'கதைகள், கட்டுரைகள், நினைவுகளின் மெளனம்',
   email: 'author@example.com',

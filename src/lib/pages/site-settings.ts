@@ -15,7 +15,7 @@ export interface SiteSettings {
 export async function getSiteSettings(): Promise<SiteSettings> {
   const fallback: SiteSettings = {
     siteName: 'Author Website',
-    authorName: 'எழுத்தாளர்',
+    authorName: 'லட்சுமிஹர்',
     description: 'கதைகள், கட்டுரைகள், நினைவுகளின் மெளனம்.',
     email: 'author@example.com',
     socialLinks: {
