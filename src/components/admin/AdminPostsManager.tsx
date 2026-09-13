@@ -37,6 +37,23 @@ interface PostFormState {
   featured: boolean;
 }
 
+const PREDEFINED_POST_CATEGORIES = [
+  'கட்டுரை',
+  'சிறுகதை',
+  'இலக்கிய விமர்சனம்',
+  'புதின ஆய்வு',
+  'காப்பிய இலக்கியம்',
+  'குறுங்கற்பனை கதைகள்',
+  'சிந்தனைகள்',
+  'பொது',
+  'Essays',
+  'Literary Criticism',
+  'Novel Study',
+  'Epic Literature',
+  'Reflections',
+  'Writing',
+];
+
 const initialForm: PostFormState = {
   title: '',
   slug: '',
@@ -68,6 +85,7 @@ export default function AdminPostsManager() {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [form, setForm] = useState<PostFormState>(initialForm);
+  const [isCustomCategory, setIsCustomCategory] = useState(false);
 
   const editingId = useMemo(() => form.id, [form.id]);
 
@@ -96,9 +114,13 @@ export default function AdminPostsManager() {
 
   const resetForm = () => {
     setForm(initialForm);
+    setIsCustomCategory(false);
   };
 
   const populateFormForEdit = (post: PostRecord) => {
+    const categoryVal = post.category ?? '';
+    const isKnown = PREDEFINED_POST_CATEGORIES.includes(categoryVal);
+
     setForm({
       id: post.id,
       title: post.title,
@@ -108,13 +130,14 @@ export default function AdminPostsManager() {
       coverImage: post.coverImage ?? '',
       author: post.author ?? 'எழுத்தாளர்',
       status: post.status ?? 'draft',
-      category: post.category ?? '',
+      category: categoryVal,
       tags: (post.tags ?? []).join(', '),
       readingTimeMinutes: post.readingTimeMinutes ? String(post.readingTimeMinutes) : '',
       publishedAt: toDateInput(post.publishedAt),
       featured: Boolean(post.featured),
     });
 
+    setIsCustomCategory(!isKnown && categoryVal !== '');
     setSuccessMessage(null);
   };
 
@@ -241,8 +264,51 @@ export default function AdminPostsManager() {
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-sm font-medium text-text-secondary">Category</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.category} onChange={(event) => setForm((prev) => ({ ...prev, category: event.target.value }))} />
+            <label className="mb-1 block text-sm font-medium text-text-secondary">Category (பிரிவு)</label>
+            <select
+              className="w-full rounded-xl border border-border-color bg-paper px-3 py-2"
+              value={isCustomCategory ? '__custom__' : form.category}
+              onChange={(event) => {
+                const val = event.target.value;
+                if (val === '__custom__') {
+                  setIsCustomCategory(true);
+                  setForm((prev) => ({ ...prev, category: '' }));
+                } else {
+                  setIsCustomCategory(false);
+                  setForm((prev) => ({ ...prev, category: val }));
+                }
+              }}
+            >
+              <option value="">தேர்ந்தெடுக்கவும் (Select Category)...</option>
+              <optgroup label="தமிழ் பிரிவுகள் (Tamil Categories)">
+                <option value="கட்டுரை">கட்டுரை (Essay)</option>
+                <option value="சிறுகதை">சிறுகதை (Short Story)</option>
+                <option value="இலக்கிய விமர்சனம்">இலக்கிய விமர்சனம் (Literary Criticism)</option>
+                <option value="புதின ஆய்வு">புதின ஆய்வு (Novel Study)</option>
+                <option value="காப்பிய இலக்கியம்">காப்பிய இலக்கியம் (Epic Literature)</option>
+                <option value="குறுங்கற்பனை கதைகள்">குறுங்கற்பனை கதைகள் (Flash Fiction)</option>
+                <option value="சிந்தனைகள்">சிந்தனைகள் (Reflections)</option>
+                <option value="பொது">பொது (General)</option>
+              </optgroup>
+              <optgroup label="English Categories">
+                <option value="Essays">Essays</option>
+                <option value="Literary Criticism">Literary Criticism</option>
+                <option value="Novel Study">Novel Study</option>
+                <option value="Epic Literature">Epic Literature</option>
+                <option value="Reflections">Reflections</option>
+                <option value="Writing">Writing</option>
+              </optgroup>
+              <option value="__custom__">-- பிற / Custom Category --</option>
+            </select>
+            {isCustomCategory && (
+              <input
+                type="text"
+                className="mt-2 w-full rounded-xl border border-border-color bg-paper px-3 py-2 text-sm"
+                placeholder="விருப்பப் பிரிவு / Type custom category..."
+                value={form.category}
+                onChange={(event) => setForm((prev) => ({ ...prev, category: event.target.value }))}
+              />
+            )}
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Reading Time (minutes)</label>

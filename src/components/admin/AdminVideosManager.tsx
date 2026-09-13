@@ -9,6 +9,7 @@ interface VideoRecord {
   title: string;
   slug?: string;
   description?: string;
+  category?: string;
   platform: 'youtube' | 'vimeo' | 'other';
   videoUrl: string;
   thumbnailUrl?: string;
@@ -21,6 +22,7 @@ interface VideoFormState {
   title: string;
   slug: string;
   description: string;
+  category: string;
   platform: 'youtube' | 'vimeo' | 'other';
   videoUrl: string;
   thumbnailUrl: string;
@@ -28,10 +30,22 @@ interface VideoFormState {
   publishedAt: string;
 }
 
+const PREDEFINED_VIDEO_CATEGORIES = [
+  'நேர்காணல்கள்',
+  'விவாதம்',
+  'பட்டறை',
+  'சொற்பொழிவு',
+  'பொது',
+  'Interviews',
+  'Discussions',
+  'Workshops',
+];
+
 const initialForm: VideoFormState = {
   title: '',
   slug: '',
   description: '',
+  category: '',
   platform: 'youtube',
   videoUrl: '',
   thumbnailUrl: '',
@@ -51,6 +65,7 @@ function toDateInput(value?: string) {
 export default function AdminVideosManager() {
   const [videos, setVideos] = useState<VideoRecord[]>([]);
   const [form, setForm] = useState<VideoFormState>(initialForm);
+  const [isCustomCategory, setIsCustomCategory] = useState(false);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -101,6 +116,7 @@ export default function AdminVideosManager() {
 
       await fetchVideos();
       setForm(initialForm);
+      setIsCustomCategory(false);
       setMessage(form.id ? 'Video updated.' : 'Video created.');
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : 'Unable to save video.');
@@ -110,17 +126,22 @@ export default function AdminVideosManager() {
   };
 
   const onEdit = (video: VideoRecord) => {
+    const categoryVal = video.category ?? '';
+    const isKnown = PREDEFINED_VIDEO_CATEGORIES.includes(categoryVal);
+
     setForm({
       id: video.id,
       title: video.title,
       slug: video.slug ?? '',
       description: video.description ?? '',
+      category: categoryVal,
       platform: video.platform,
       videoUrl: video.videoUrl,
       thumbnailUrl: video.thumbnailUrl ?? '',
       duration: video.duration ?? '',
       publishedAt: toDateInput(video.publishedAt),
     });
+    setIsCustomCategory(!isKnown && categoryVal !== '');
     setMessage(null);
   };
 
@@ -173,7 +194,48 @@ export default function AdminVideosManager() {
           <textarea className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" rows={3} value={form.description} onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))} />
         </div>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 md:grid-cols-4">
+          <div>
+            <label className="mb-1 block text-sm text-text-secondary">Category (பிரிவு)</label>
+            <select
+              className="w-full rounded-xl border border-border-color bg-paper px-3 py-2"
+              value={isCustomCategory ? '__custom__' : form.category}
+              onChange={(event) => {
+                const val = event.target.value;
+                if (val === '__custom__') {
+                  setIsCustomCategory(true);
+                  setForm((prev) => ({ ...prev, category: '' }));
+                } else {
+                  setIsCustomCategory(false);
+                  setForm((prev) => ({ ...prev, category: val }));
+                }
+              }}
+            >
+              <option value="">தேர்ந்தெடுக்கவும் (Select Category)...</option>
+              <optgroup label="தமிழ் பிரிவுகள் (Tamil Categories)">
+                <option value="நேர்காணல்கள்">நேர்காணல்கள் (Interviews)</option>
+                <option value="விவாதம்">விவாதம் (Discussions)</option>
+                <option value="பட்டறை">பட்டறை (Workshops)</option>
+                <option value="சொற்பொழிவு">சொற்பொழிவு (Lectures)</option>
+                <option value="பொது">பொது (General)</option>
+              </optgroup>
+              <optgroup label="English Categories">
+                <option value="Interviews">Interviews</option>
+                <option value="Discussions">Discussions</option>
+                <option value="Workshops">Workshops</option>
+              </optgroup>
+              <option value="__custom__">-- பிற / Custom Category --</option>
+            </select>
+            {isCustomCategory && (
+              <input
+                type="text"
+                className="mt-2 w-full rounded-xl border border-border-color bg-paper px-3 py-2 text-sm"
+                placeholder="Type custom category..."
+                value={form.category}
+                onChange={(event) => setForm((prev) => ({ ...prev, category: event.target.value }))}
+              />
+            )}
+          </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Platform</label>
             <select className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.platform} onChange={(event) => setForm((prev) => ({ ...prev, platform: event.target.value as VideoFormState['platform'] }))}>

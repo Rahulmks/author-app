@@ -33,6 +33,12 @@ export default function VideoCard({ video }: VideoCardProps) {
           </div>
         )}
         
+        {video.category && (
+          <p className="mb-2 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-accent">
+            {video.category}
+          </p>
+        )}
+
         <h3 className="mb-2 line-clamp-2 text-xl font-semibold transition-colors group-hover:text-accent md:text-2xl">
           {video.title}
         </h3>

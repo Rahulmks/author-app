@@ -5,6 +5,7 @@ export interface Video {
   title: string;
   slug?: string;
   description?: string;
+  category?: string;
   platform: VideoPlatform;
   videoUrl: string;
   url?: string;

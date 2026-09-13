@@ -52,6 +52,7 @@ function normalizeVideo(input: Record<string, unknown>, existing?: Video): Video
     title,
     slug: toOptionalString(input.slug) ?? toSlug(title),
     description: toOptionalString(input.description),
+    category: toOptionalString(input.category),
     platform: normalizePlatform(input.platform),
     videoUrl,
     url: videoUrl,
