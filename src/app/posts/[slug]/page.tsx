@@ -97,5 +97,6 @@ export default async function PostDetailPage({
         </nav>
       </article>
     </Container>
+    </>
   );
 }

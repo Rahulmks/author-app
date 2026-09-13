@@ -21,7 +21,7 @@ export default function BookCard({ book }: BookCardProps) {
             {/* Book Cover Hover Quote Reveal Overlay */}
             <div className="absolute inset-0 bg-background/90 p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 flex items-center justify-center text-center backdrop-blur-sm border border-accent/30">
               <blockquote className="font-serif text-xs md:text-sm italic leading-relaxed text-accent">
-                "{book.description ? (book.description.length > 90 ? `${book.description.slice(0, 90)}...` : book.description) : book.title}"
+                &ldquo;{book.description ? (book.description.length > 90 ? `${book.description.slice(0, 90)}...` : book.description) : book.title}&rdquo;
               </blockquote>
             </div>
           </div>
