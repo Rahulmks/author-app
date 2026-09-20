@@ -7,15 +7,13 @@ import HeroSection from '@/components/home/HeroSection';
 import AwardsStrip from '@/components/home/AwardsStrip';
 import QuoteGrid from '@/components/home/QuoteGrid';
 import PostGridCard from '@/components/home/PostGridCard';
-import BooksStrip from '@/components/home/BooksStrip';
 import { getAboutPage } from '@/lib/pages/about-page';
 import { getPost } from '@/lib/posts/get-post';
 import { getPosts } from '@/lib/posts/get-posts';
-import { getBooks } from '@/lib/books/get-books';
 import { quotes } from '@/data/quotes';
 
 export default async function HomePage() {
-  const [posts, about, books] = await Promise.all([getPosts(), getAboutPage(), getBooks()]);
+  const [posts, about] = await Promise.all([getPosts(), getAboutPage()]);
 
   const featuredSummary = posts
     .filter((post) => post.featured)
@@ -70,8 +68,6 @@ export default async function HomePage() {
           </Container>
         </section>
       )}
-
-      <BooksStrip books={books} />
     </>
   );
 }
