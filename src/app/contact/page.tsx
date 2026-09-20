@@ -16,26 +16,13 @@ export default function ContactPage() {
           இலக்கியத் தொடர்புகள், உரையாடல் அழைப்புகள், இணைப்பு முயற்சிகள் அல்லது ஒரு அன்பான வணக்கத்திற்காக.
         </p>
 
-        <div className="space-y-4 text-lg">
-          <p>
-            மின்னஞ்சல்:{' '}
-            <a href={`mailto:${siteConfig.email}`} className="ink-link text-accent">
-              {siteConfig.email}
-            </a>
-          </p>
-          <p>
-            YouTube:{' '}
-            <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" className="ink-link text-accent">
-              youtube.com
-            </a>
-          </p>
-          <p>
-            Instagram:{' '}
-            <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="ink-link text-accent">
-              instagram.com
-            </a>
-          </p>
-        </div>
+        {(siteConfig.email || siteConfig.social.youtube || siteConfig.social.instagram) && (
+          <div className="space-y-4 text-lg">
+            {siteConfig.email && <p>மின்னஞ்சல்: <a href={`mailto:${siteConfig.email}`} className="ink-link text-accent">{siteConfig.email}</a></p>}
+            {siteConfig.social.youtube && <p>YouTube: <a href={siteConfig.social.youtube} target="_blank" rel="noopener noreferrer" className="ink-link text-accent">YouTube</a></p>}
+            {siteConfig.social.instagram && <p>Instagram: <a href={siteConfig.social.instagram} target="_blank" rel="noopener noreferrer" className="ink-link text-accent">Instagram</a></p>}
+          </div>
+        )}
       </div>
     </Container>
   );

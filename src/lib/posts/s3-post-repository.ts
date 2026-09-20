@@ -117,6 +117,7 @@ export class S3PostRepository implements PostRepository {
         tags: post.tags ?? [],
         publishedAt: post.publishedAt,
         readingTimeMinutes: post.readingTimeMinutes,
+        featured: Boolean(post.featured),
       });
     }
 
@@ -147,6 +148,7 @@ export class S3PostRepository implements PostRepository {
         tags: post.tags ?? [],
         publishedAt: post.publishedAt,
         readingTimeMinutes: post.readingTimeMinutes,
+        featured: Boolean(post.featured),
       });
     }
 

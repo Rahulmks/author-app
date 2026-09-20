@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Container from '@/components/layout/Container';
 import { getAboutPage } from '@/lib/pages/about-page';
 import { resolveImagePath } from '@/lib/media/resolve-image-path';
+import { quotes } from '@/data/quotes';
 
 export default async function AboutPage() {
   const about = await getAboutPage();
@@ -21,16 +22,6 @@ export default async function AboutPage() {
             </div>
           </div>
 
-          {/* Currently Status Note */}
-          <div className="rounded-lg border border-border-color/60 bg-paper/40 p-4 text-xs space-y-2">
-            <p className="font-semibold uppercase tracking-wider text-accent text-[0.68rem]">
-              • தற்போது மேசையில்
-            </p>
-            <div className="text-text-secondary leading-relaxed space-y-1">
-              <p><span className="text-text-primary font-medium">வாசிப்பது:</span> சங்க இலக்கிய நற்றிணை உரைகள்</p>
-              <p><span className="text-text-primary font-medium">எழுதுவது:</span> நிலமும் நினைவும் நாவல் பணி</p>
-            </div>
-          </div>
         </div>
 
         <div className="border-l-2 border-accent pl-5 md:pl-8">
@@ -42,25 +33,30 @@ export default async function AboutPage() {
           </h1>
 
           <div className="space-y-4 text-base md:text-lg leading-relaxed text-text-secondary">
-            <p>{about?.biography}</p>
+            {(Array.isArray(about?.biography) ? about.biography : about?.biography ? [about.biography] : []).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
+
+          {about?.awards && (
+            <div className="mt-8 border-t border-border-color pt-6">
+              <h2 className="mb-3 text-xl font-semibold">விருதுகள்</h2>
+              <ul className="list-disc space-y-2 pl-5 text-base leading-relaxed text-text-secondary">
+                {about.awards.map((award) => <li key={award}>{award}</li>)}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="mt-12 border-t border-border-color pt-8 max-w-4xl mx-auto">
-        <h2 className="mb-4 text-xl font-semibold md:text-2xl">சிறப்புக் குறிப்புகள்</h2>
-        <div className="grid gap-6 md:grid-cols-3">
-          {[
-            'இலக்கிய இதழ்களில் வெளிவந்த கட்டுரைகள் மற்றும் சிறுகதைகள்',
-            'மொழி, நினைவு, இடம் குறித்து நடைபெற்ற உரையாடல்களில் பங்கேற்பு',
-            'தமிழ் மற்றும் ஆங்கில இலக்கிய மரபுகளுக்கு இடையில் இயங்கும் படைப்புப் பணிகள்',
-          ].map((item) => (
-            <div key={item} className="border-t border-border-color/60 pt-4">
-              <p className="text-sm leading-relaxed text-text-secondary">{item}</p>
-            </div>
-          ))}
-        </div>
+      <div className="mx-auto mt-12 grid max-w-4xl gap-4 border-t border-border-color pt-8 md:grid-cols-3">
+        {quotes.map((quote) => (
+          <blockquote key={quote} className="pull-quote text-base leading-8 text-text-secondary">
+            {quote}
+          </blockquote>
+        ))}
       </div>
+
     </Container>
   );
 }

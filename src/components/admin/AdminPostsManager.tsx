@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from 'react';
 
 import AdminImageFieldUploader from '@/components/admin/AdminImageFieldUploader';
+import { postCategories } from '@/lib/posts/categories';
 
 interface PostRecord {
   id: string;
@@ -37,22 +38,7 @@ interface PostFormState {
   featured: boolean;
 }
 
-const PREDEFINED_POST_CATEGORIES = [
-  'கட்டுரை',
-  'சிறுகதை',
-  'இலக்கிய விமர்சனம்',
-  'புதின ஆய்வு',
-  'காப்பிய இலக்கியம்',
-  'குறுங்கற்பனை கதைகள்',
-  'சிந்தனைகள்',
-  'பொது',
-  'Essays',
-  'Literary Criticism',
-  'Novel Study',
-  'Epic Literature',
-  'Reflections',
-  'Writing',
-];
+const PREDEFINED_POST_CATEGORIES: string[] = [...postCategories];
 
 const initialForm: PostFormState = {
   title: '',
@@ -280,23 +266,8 @@ export default function AdminPostsManager() {
               }}
             >
               <option value="">தேர்ந்தெடுக்கவும் (Select Category)...</option>
-              <optgroup label="தமிழ் பிரிவுகள் (Tamil Categories)">
-                <option value="கட்டுரை">கட்டுரை (Essay)</option>
-                <option value="சிறுகதை">சிறுகதை (Short Story)</option>
-                <option value="இலக்கிய விமர்சனம்">இலக்கிய விமர்சனம் (Literary Criticism)</option>
-                <option value="புதின ஆய்வு">புதின ஆய்வு (Novel Study)</option>
-                <option value="காப்பிய இலக்கியம்">காப்பிய இலக்கியம் (Epic Literature)</option>
-                <option value="குறுங்கற்பனை கதைகள்">குறுங்கற்பனை கதைகள் (Flash Fiction)</option>
-                <option value="சிந்தனைகள்">சிந்தனைகள் (Reflections)</option>
-                <option value="பொது">பொது (General)</option>
-              </optgroup>
-              <optgroup label="English Categories">
-                <option value="Essays">Essays</option>
-                <option value="Literary Criticism">Literary Criticism</option>
-                <option value="Novel Study">Novel Study</option>
-                <option value="Epic Literature">Epic Literature</option>
-                <option value="Reflections">Reflections</option>
-                <option value="Writing">Writing</option>
+              <optgroup label="தமிழ் பிரிவுகள்">
+                {postCategories.map((category) => <option key={category} value={category}>{category}</option>)}
               </optgroup>
               <option value="__custom__">-- பிற / Custom Category --</option>
             </select>
@@ -329,7 +300,7 @@ export default function AdminPostsManager() {
 
         <label className="inline-flex items-center gap-2 text-sm text-text-secondary">
           <input type="checkbox" checked={form.featured} onChange={(event) => setForm((prev) => ({ ...prev, featured: event.target.checked }))} />
-          Featured post
+          சிறப்புப் பதிவு
         </label>
 
         {error && <p className="text-sm text-red-700">{error}</p>}

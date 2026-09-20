@@ -7,7 +7,7 @@ export class MockPostRepository implements PostRepository {
   async getPublishedPosts(): Promise<PostSummary[]> {
     return mockPosts
       .filter((post) => post.status === 'published' || post.published !== false)
-      .map(({ id, title, slug, excerpt, coverImage, category, tags, publishedAt, readingTimeMinutes }) => ({
+      .map(({ id, title, slug, excerpt, coverImage, category, tags, publishedAt, readingTimeMinutes, featured }) => ({
         id,
         title,
         slug,
@@ -17,6 +17,7 @@ export class MockPostRepository implements PostRepository {
         tags,
         publishedAt,
         readingTimeMinutes,
+        featured: Boolean(featured),
       }));
   }
 
@@ -27,7 +28,7 @@ export class MockPostRepository implements PostRepository {
   async getDrafts(): Promise<PostSummary[]> {
     return mockPosts
       .filter((post) => post.status === 'draft')
-      .map(({ id, title, slug, excerpt, coverImage, category, tags, publishedAt, readingTimeMinutes }) => ({
+      .map(({ id, title, slug, excerpt, coverImage, category, tags, publishedAt, readingTimeMinutes, featured }) => ({
         id,
         title,
         slug,
@@ -37,6 +38,7 @@ export class MockPostRepository implements PostRepository {
         tags,
         publishedAt,
         readingTimeMinutes,
+        featured: Boolean(featured),
       }));
   }
 

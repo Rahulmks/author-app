@@ -1,21 +1,14 @@
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
 
 import Container from '@/components/layout/Container';
 import PostCard from '@/components/posts/PostCard';
 import EmptyState from '@/components/ui/EmptyState';
 import { getPosts } from '@/lib/posts/get-posts';
+import { isPostInCategory, postCategories as configuredPostCategories } from '@/lib/posts/categories';
 
 const postCategories = [
   'அனைத்தும்',
-  'கட்டுரை',
-  'சிறுகதை',
-  'இலக்கிய விமர்சனம்',
-  'புதின ஆய்வு',
-  'காப்பிய இலக்கியம்',
-  'குறுங்கற்பனை கதைகள்',
-  'சிந்தனைகள்',
-  'பொது',
+  ...configuredPostCategories,
 ];
 
 interface PostsPageProps {
@@ -26,27 +19,8 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
   const { category: activeCategory } = (await searchParams) || {};
   const allPosts = await getPosts();
 
-  if (!allPosts.length) {
-    notFound();
-  }
-
   const posts = activeCategory && activeCategory !== 'அனைத்தும்'
-    ? allPosts.filter((post) => {
-        if (!post.category) return false;
-        const postCat = post.category.trim().toLowerCase();
-        const activeCat = activeCategory.trim().toLowerCase();
-        if (postCat === activeCat) return true;
-
-        if (activeCategory === 'கட்டுரை' && (postCat.includes('essay') || postCat.includes('கட்டுரை'))) return true;
-        if (activeCategory === 'சிறுகதை' && (postCat.includes('story') || postCat.includes('சிறுகதை'))) return true;
-        if (activeCategory === 'இலக்கிய விமர்சனம்' && (postCat.includes('criticism') || postCat.includes('விமர்சனம்'))) return true;
-        if (activeCategory === 'புதின ஆய்வு' && (postCat.includes('novel') || postCat.includes('ஆய்வு'))) return true;
-        if (activeCategory === 'காப்பிய இலக்கியம்' && (postCat.includes('epic') || postCat.includes('காப்பியம்'))) return true;
-        if (activeCategory === 'குறுங்கற்பனை கதைகள்' && (postCat.includes('flash') || postCat.includes('குறுங்கற்பனை'))) return true;
-        if (activeCategory === 'சிந்தனைகள்' && (postCat.includes('reflection') || postCat.includes('writing') || postCat.includes('சிந்தனை'))) return true;
-        if (activeCategory === 'பொது' && (postCat.includes('general') || postCat.includes('பொது'))) return true;
-        return false;
-      })
+    ? allPosts.filter((post) => isPostInCategory(post.category, activeCategory))
     : allPosts;
 
   return (

@@ -31,14 +31,10 @@ function toSlug(value: string) {
 function normalizeBook(input: Record<string, unknown>, existing?: Book): Book {
   const now = new Date().toISOString();
   const title = toOptionalString(input.title);
-  const description = toOptionalString(input.description);
+  const description = toOptionalString(input.description) ?? '';
 
   if (!title) {
     throw new Error('Title is required.');
-  }
-
-  if (!description) {
-    throw new Error('Description is required.');
   }
 
   const slug = toSlug(toOptionalString(input.slug) || title);

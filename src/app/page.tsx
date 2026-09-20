@@ -9,11 +9,19 @@ import { siteConfig } from '@/lib/navigation';
 import { getPost } from '@/lib/posts/get-post';
 import { getPosts } from '@/lib/posts/get-posts';
 import { resolveImagePath } from '@/lib/media/resolve-image-path';
+import { quotes } from '@/data/quotes';
 
 export default async function HomePage() {
   const posts = await getPosts();
-  const featuredPost = posts[0] ? await getPost(posts[0].slug) : null;
-  const latestPosts = posts.slice(0, 3);
+  const featuredSummary = posts
+    .filter((post) => post.featured)
+    .sort((first, second) => {
+      const firstTime = first.publishedAt ? new Date(first.publishedAt).getTime() : 0;
+      const secondTime = second.publishedAt ? new Date(second.publishedAt).getTime() : 0;
+      return secondTime - firstTime;
+    })[0];
+  const featuredPost = featuredSummary ? await getPost(featuredSummary.slug) : null;
+  const latestPosts = posts.filter((post) => post.slug !== featuredPost?.slug).slice(0, 3);
 
   return (
     <>
@@ -37,7 +45,7 @@ export default async function HomePage() {
                   href="/posts"
                     className="ink-link inline-flex items-center text-sm font-medium text-accent"
                 >
-                  எழுதுகளை வாசிக்க
+                    எழுத்துகளை வாசிக்க
                 </Link>
                 <Link
                   href="/about"
@@ -59,25 +67,31 @@ export default async function HomePage() {
                   />
                 </div>
               </div>
-              <blockquote className="pull-quote rounded-[1.5rem] text-base leading-8 text-text-secondary md:text-lg">
-                ஒரு நல்ல வாக்கியம் வாசகரின் நினைவில் நிழலாக அல்ல, வாசம் போல தங்க வேண்டும்.
-              </blockquote>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div className="manuscript-card rounded-[1.5rem] p-5">
-                  <p className="eyebrow mb-3">மொழிகள்</p>
-                  <p className="text-lg text-text-primary">தமிழ் • English</p>
-                </div>
-                <div className="manuscript-card rounded-[1.5rem] p-5">
-                  <p className="eyebrow mb-3">மையங்கள்</p>
-                  <p className="text-lg text-text-primary">நினைவு • இடம் • குடும்பம்</p>
-                </div>
+              <div className="space-y-4">
+                {quotes.map((quote) => (
+                  <blockquote key={quote} className="pull-quote rounded-[1.5rem] text-base leading-8 text-text-secondary md:text-lg">
+                    {quote}
+                  </blockquote>
+                ))}
               </div>
             </div>
           </div>
         </Container>
       </section>
 
-      <ManuscriptDivider />
+      {featuredPost && (
+        <>
+          <section className="pt-10 md:pt-16">
+            <Container>
+              <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
+                சிறப்புப் பதிவு
+              </SectionHeading>
+              <FeaturedPost post={featuredPost} />
+            </Container>
+          </section>
+          <ManuscriptDivider />
+        </>
+      )}
 
       <section className="py-10 md:py-16">
         <Container>
@@ -91,20 +105,6 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
-
-      {featuredPost && (
-        <>
-          <ManuscriptDivider />
-          <section className="py-12 md:py-20">
-            <Container>
-              <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
-                சிறப்புப் பதிவு
-              </SectionHeading>
-              <FeaturedPost post={featuredPost} />
-            </Container>
-          </section>
-        </>
-      )}
 
     </>
   );
