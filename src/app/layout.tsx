@@ -40,9 +40,7 @@ export default function RootLayout({
     <html lang="ta">
       <body className={`${bodyFont.variable} ${displayFont.variable} font-sans`}>
         <Header />
-        <main className="min-h-screen">
-          {children}
-        </main>
+        <main>{children}</main>
         <Footer />
       </body>
     </html>

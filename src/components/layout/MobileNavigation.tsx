@@ -53,7 +53,7 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[60] lg:hidden">
+    <div className="fixed inset-0 z-[60] xl:hidden">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/75 backdrop-blur-sm"

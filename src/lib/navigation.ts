@@ -19,12 +19,13 @@ export const navigationItems: NavigationItem[] = [
       { name: 'சினிமா', href: '/posts?category=சினிமா' },
     ],
   },
-  { name: 'ஒலிப்பதிவு', href: '/podcast', hidden: true },
-  { name: 'காணொளிகள்', href: '/videos' },
-  { name: 'நூல்கள்', href: '/books' },
+  { name: 'நேர்காணல்', href: '/interviews' },
   { name: 'நிகழ்வுகள்', href: '/events' },
   { name: 'வகுப்பு', href: '/classes' },
   { name: 'அறிவிப்புகள்', href: '/announcements' },
+  { name: 'ஒலிப்பதிவு', href: '/podcast', hidden: true },
+  { name: 'காணொளிகள்', href: '/videos' },
+  { name: 'நூல்கள்', href: '/books' },
 ];
 
 export const siteConfig = {

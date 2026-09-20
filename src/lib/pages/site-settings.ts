@@ -17,7 +17,7 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     siteName: 'Author Website',
     authorName: 'லட்சுமிஹர்',
     description: 'கதைகள், கட்டுரைகள், நினைவுகளின் மெளனம்.',
-    email: 'author@example.com',
+    email: '',
     socialLinks: {
       youtube: '',
       spotify: '',

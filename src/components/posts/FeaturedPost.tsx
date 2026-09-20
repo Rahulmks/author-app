@@ -40,10 +40,6 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
             {post.excerpt}
           </p>
 
-          <blockquote className="pull-quote mb-6 text-base leading-8 text-text-secondary">
-            மொழி மாறினாலும் உணர்வின் அமைதி மாறாது; ஒரு நல்ல உரை இரு உலகங்களையும் இணைக்கிறது.
-          </blockquote>
-          
           <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-text-secondary">
             {post.publishedAt && (
               <time dateTime={post.publishedAt}>
