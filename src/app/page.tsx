@@ -1,18 +1,22 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import Container from '@/components/layout/Container';
-import PostCard from '@/components/posts/PostCard';
 import FeaturedPost from '@/components/posts/FeaturedPost';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ManuscriptDivider from '@/components/ui/ManuscriptDivider';
-import { siteConfig } from '@/lib/navigation';
+import HeroSection from '@/components/home/HeroSection';
+import AwardsStrip from '@/components/home/AwardsStrip';
+import QuoteGrid from '@/components/home/QuoteGrid';
+import PostGridCard from '@/components/home/PostGridCard';
+import BooksStrip from '@/components/home/BooksStrip';
+import { getAboutPage } from '@/lib/pages/about-page';
 import { getPost } from '@/lib/posts/get-post';
 import { getPosts } from '@/lib/posts/get-posts';
-import { resolveImagePath } from '@/lib/media/resolve-image-path';
+import { getBooks } from '@/lib/books/get-books';
 import { quotes } from '@/data/quotes';
 
 export default async function HomePage() {
-  const posts = await getPosts();
+  const [posts, about, books] = await Promise.all([getPosts(), getAboutPage(), getBooks()]);
+
   const featuredSummary = posts
     .filter((post) => post.featured)
     .sort((first, second) => {
@@ -25,63 +29,12 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="py-10 md:py-16 lg:py-20">
-        <Container>
-            <div className="grid items-start gap-14 lg:grid-cols-[1.15fr_0.85fr]">
-            <div className="paper-panel grain-border rounded-[2.25rem] p-7 md:p-10 lg:p-12">
-              <p className="eyebrow mb-5">
-                {siteConfig.authorTitle}
-              </p>
-              <h1 className="mb-6 text-4xl font-semibold leading-[1.12] sm:text-5xl lg:text-6xl">
-                {siteConfig.authorName}
-              </h1>
-              <p className="max-w-2xl text-lg leading-9 text-text-secondary md:text-xl">
-                நினைவின் விளிம்பில் நின்று, இடங்களின் மெளனத்தையும் மனிதர்களின் உள் உலகத்தையும்
-                பதிவு செய்யும் எழுத்துகள். தமிழ் மற்றும் ஆங்கிலத்தின் இடையே நகரும் இந்த
-                தளம், ஒரு படைப்பாளியின் மெதுவான கையெழுத்தைப் போல வடிவமைக்கப்பட்டுள்ளது.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link
-                  href="/posts"
-                    className="ink-link inline-flex items-center text-sm font-medium text-accent"
-                >
-                    எழுத்துகளை வாசிக்க
-                </Link>
-                <Link
-                  href="/about"
-                  className="ink-link inline-flex items-center text-sm font-medium text-text-secondary hover:text-accent"
-                >
-                  எழுத்தாளரை அறிய
-                </Link>
-              </div>
-            </div>
-
-            <div className="space-y-6">
-                <div className="border border-border-color p-3 md:p-4">
-                  <div className="relative aspect-[4/5] overflow-hidden bg-paper">
-                  <Image
-                    src={resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
-                    alt="எழுத்தாளரின் உருவப்படம்"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-              <div className="space-y-4">
-                {quotes.map((quote) => (
-                  <blockquote key={quote} className="pull-quote rounded-[1.5rem] text-base leading-8 text-text-secondary md:text-lg">
-                    {quote}
-                  </blockquote>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <HeroSection />
+      <AwardsStrip awards={about?.awards ?? []} />
 
       {featuredPost && (
         <>
-          <section className="pt-10 md:pt-16">
+          <section className="py-10 md:py-14">
             <Container>
               <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
                 சிறப்புப் பதிவு
@@ -93,19 +46,32 @@ export default async function HomePage() {
         </>
       )}
 
-      <section className="py-10 md:py-16">
-        <Container>
-          <SectionHeading subtitle="சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டவணை போலத் தொகுக்கப்பட்டுள்ளன.">
-            சமீபத்திய எழுத்துகள்
-          </SectionHeading>
-          <div className="max-w-3xl mx-auto divide-y divide-border-color border-t border-border-color pt-2">
-            {latestPosts.map((post) => (
-              <PostCard key={post.id} post={post} />
-            ))}
-          </div>
-        </Container>
-      </section>
+      <QuoteGrid quotes={quotes} />
 
+      {latestPosts.length > 0 && (
+        <section className="py-10 md:py-14">
+          <Container>
+            <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <h2 className="text-2xl font-semibold md:text-3xl">சமீபத்திய எழுத்துகள்</h2>
+                <p className="mt-2 max-w-2xl text-base leading-8 text-text-secondary">
+                  சமீபத்திய பதிவுகள் ஒரு இலக்கிய இதழின் அட்டவணை போலத் தொகுக்கப்பட்டுள்ளன.
+                </p>
+              </div>
+              <Link href="/posts" className="ink-link whitespace-nowrap text-sm font-medium text-accent">
+                எல்லாவற்றையும் காண்க
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {latestPosts.map((post) => (
+                <PostGridCard key={post.id} post={post} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
+
+      <BooksStrip books={books} />
     </>
   );
 }
