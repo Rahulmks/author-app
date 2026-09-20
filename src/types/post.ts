@@ -39,4 +39,5 @@ export interface PostSummary {
   tags: string[];
   publishedAt?: string;
   readingTimeMinutes?: number;
+  featured?: boolean;
 }

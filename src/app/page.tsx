@@ -12,11 +12,29 @@ import { resolveImagePath } from '@/lib/media/resolve-image-path';
 
 export default async function HomePage() {
   const posts = await getPosts();
-  const featuredPost = posts[0] ? await getPost(posts[0].slug) : null;
+  const featuredSummary = posts
+    .filter((post) => post.featured)
+    .sort((first, second) => {
+      const firstTime = first.publishedAt ? new Date(first.publishedAt).getTime() : 0;
+      const secondTime = second.publishedAt ? new Date(second.publishedAt).getTime() : 0;
+      return secondTime - firstTime;
+    })[0];
+  const featuredPost = featuredSummary ? await getPost(featuredSummary.slug) : null;
   const latestPosts = posts.slice(0, 3);
 
   return (
     <>
+      {featuredPost && (
+        <section className="pt-10 md:pt-16">
+          <Container>
+            <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
+              சிறப்புப் பதிவு
+            </SectionHeading>
+            <FeaturedPost post={featuredPost} />
+          </Container>
+        </section>
+      )}
+
       <section className="py-10 md:py-16 lg:py-20">
         <Container>
             <div className="grid items-start gap-14 lg:grid-cols-[1.15fr_0.85fr]">
@@ -91,20 +109,6 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
-
-      {featuredPost && (
-        <>
-          <ManuscriptDivider />
-          <section className="py-12 md:py-20">
-            <Container>
-              <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
-                சிறப்புப் பதிவு
-              </SectionHeading>
-              <FeaturedPost post={featuredPost} />
-            </Container>
-          </section>
-        </>
-      )}
 
     </>
   );

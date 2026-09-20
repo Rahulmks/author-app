@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Container from '@/components/layout/Container';
 import { getAboutPage } from '@/lib/pages/about-page';
 import { resolveImagePath } from '@/lib/media/resolve-image-path';
+import { quotes } from '@/data/quotes';
 
 export default async function AboutPage() {
   const about = await getAboutPage();
@@ -42,9 +43,28 @@ export default async function AboutPage() {
           </h1>
 
           <div className="space-y-4 text-base md:text-lg leading-relaxed text-text-secondary">
-            <p>{about?.biography}</p>
+            {(Array.isArray(about?.biography) ? about.biography : about?.biography ? [about.biography] : []).map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
           </div>
+
+          {about?.awards && (
+            <div className="mt-8 border-t border-border-color pt-6">
+              <h2 className="mb-3 text-xl font-semibold">விருதுகள்</h2>
+              <ul className="list-disc space-y-2 pl-5 text-base leading-relaxed text-text-secondary">
+                {about.awards.map((award) => <li key={award}>{award}</li>)}
+              </ul>
+            </div>
+          )}
         </div>
+      </div>
+
+      <div className="mx-auto mt-12 grid max-w-4xl gap-4 border-t border-border-color pt-8 md:grid-cols-3">
+        {quotes.map((quote) => (
+          <blockquote key={quote} className="pull-quote text-base leading-8 text-text-secondary">
+            {quote}
+          </blockquote>
+        ))}
       </div>
 
       <div className="mt-12 border-t border-border-color pt-8 max-w-4xl mx-auto">
