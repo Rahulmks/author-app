@@ -1,38 +1,8 @@
 [
-  {
-    "id": "book-001",
-    "title": "Vishnupuram",
-    "slug": "vishnupuram",
-    "description": "A landmark modern Tamil novel known for its philosophical depth, layered narrative architecture, and civilizational scope.",
-    "coverImage": "media/books/vishnupuram.jpg",
-    "publicationYear": 1997,
-    "publisher": "Tamilini",
-    "purchaseUrl": "https://jeyamohan.in",
-    "createdAt": "2026-09-01T10:00:00Z",
-    "updatedAt": "2026-09-12T10:00:00Z"
-  },
-  {
-    "id": "book-002",
-    "title": "Aram",
-    "slug": "aram",
-    "description": "A widely read short story collection that explores ethics, compassion, and moral responsibility in everyday life.",
-    "coverImage": "media/books/aram.jpg",
-    "publicationYear": 2011,
-    "publisher": "Kizhakku Pathippagam",
-    "purchaseUrl": "https://jeyamohan.in",
-    "createdAt": "2026-08-20T10:00:00Z",
-    "updatedAt": "2026-09-12T10:00:00Z"
-  },
-  {
-    "id": "book-003",
-    "title": "Kaadu",
-    "slug": "kaadu",
-    "description": "A novel of wilderness and interior transformation, celebrated for its ecological imagination and psychological insight.",
-    "coverImage": "media/books/kaadu.jpg",
-    "publicationYear": 2003,
-    "publisher": "Uyirmmai",
-    "purchaseUrl": "https://jeyamohan.in",
-    "createdAt": "2026-09-05T10:00:00Z",
-    "updatedAt": "2026-09-12T10:00:00Z"
-  }
+  { "id": "book-001", "title": "ஸெல்மா சாண்டாவின் அலமாரிப் பூச்சிகள் & பிற கதைகள்", "slug": "selma-sandhas-alamarai-poochigal", "description": "", "coverImage": "/images/placeholder.svg", "publicationYear": 2021, "publisher": "யாவரும்" },
+  { "id": "book-002", "title": "'டார்லிங்' என பெயர்சூட்டப்பட்ட சித்தாந்தம்", "slug": "darling-enap-peyarsoottappatta-sithantham", "description": "", "coverImage": "/images/placeholder.svg", "publicationYear": 2022, "publisher": "யாவரும்" },
+  { "id": "book-003", "title": "கிளாஸிக் டச்", "slug": "classic-touch", "description": "", "coverImage": "/images/placeholder.svg", "publicationYear": 2023, "publisher": "யாவரும்" },
+  { "id": "book-004", "title": "கூத்தொன்று கூடிற்று & பிற கதைகள்", "slug": "koothondru-kooditru", "description": "", "coverImage": "/images/placeholder.svg", "publicationYear": 2024, "publisher": "யாவரும்" },
+  { "id": "book-005", "title": "புலிசாரை", "slug": "pulisaarai", "description": "குறுநாவல்", "coverImage": "/images/placeholder.svg", "publicationYear": 2025, "publisher": "யாவரும் பதிப்பகம்" },
+  { "id": "book-006", "title": "21 ஆம் நூற்றாண்டின் திரைமொழி", "slug": "21-am-nootrandin-thiraimozhi", "description": "சமகால உலக சினிமா குறித்தான கட்டுரைத் தொகுப்பு", "coverImage": "/images/placeholder.svg", "publicationYear": 2026, "publisher": "" }
 ]

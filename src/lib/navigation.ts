@@ -19,18 +19,17 @@ export const navigationItems: NavigationItem[] = [
       { name: 'சினிமா', href: '/posts?category=சினிமா' },
     ],
   },
-  { name: 'நேர்காணல்', href: '/interviews' },
+  { name: 'ஒலிப்பதிவு', href: '/podcast', hidden: true },
+  { name: 'காணொளிகள்', href: '/videos' },
+  { name: 'நூல்கள்', href: '/books' },
   { name: 'நிகழ்வுகள்', href: '/events' },
   { name: 'வகுப்பு', href: '/classes' },
   { name: 'அறிவிப்புகள்', href: '/announcements' },
-  { name: 'காணொளிகள்', href: '/videos' },
-  { name: 'நூல்கள்', href: '/books' },
-  { name: 'ஒலிப்பதிவு', href: '/podcast', hidden: true },
 ];
 
 export const siteConfig = {
   authorName: 'லட்சுமிஹர்',
-  authorTitle: 'எழுத்தாளர் • நாவலாசிரியர்',
+  authorTitle: 'எழுத்தாளர்',
   tagline: 'கதைகள், கட்டுரைகள், நினைவுகளின் மெளனம்',
   email: '',
   social: {

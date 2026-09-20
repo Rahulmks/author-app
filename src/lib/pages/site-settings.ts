@@ -19,9 +19,9 @@ export async function getSiteSettings(): Promise<SiteSettings> {
     description: 'கதைகள், கட்டுரைகள், நினைவுகளின் மெளனம்.',
     email: 'author@example.com',
     socialLinks: {
-      youtube: 'https://youtube.com',
-      spotify: 'https://spotify.com',
-      instagram: 'https://instagram.com',
+      youtube: '',
+      spotify: '',
+      instagram: '',
     },
   };
 
