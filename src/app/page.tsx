@@ -24,17 +24,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {featuredPost && (
-        <section className="pt-10 md:pt-16">
-          <Container>
-            <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
-              சிறப்புப் பதிவு
-            </SectionHeading>
-            <FeaturedPost post={featuredPost} />
-          </Container>
-        </section>
-      )}
-
       <section className="py-10 md:py-16 lg:py-20">
         <Container>
             <div className="grid items-start gap-14 lg:grid-cols-[1.15fr_0.85fr]">
@@ -95,7 +84,19 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      <ManuscriptDivider />
+      {featuredPost && (
+        <>
+          <section className="pt-10 md:pt-16">
+            <Container>
+              <SectionHeading subtitle="இப்போது வாசிக்க வேண்டிய ஒரு முக்கிய உரை.">
+                சிறப்புப் பதிவு
+              </SectionHeading>
+              <FeaturedPost post={featuredPost} />
+            </Container>
+          </section>
+          <ManuscriptDivider />
+        </>
+      )}
 
       <section className="py-10 md:py-16">
         <Container>
