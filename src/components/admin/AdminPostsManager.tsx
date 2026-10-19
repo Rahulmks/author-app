@@ -207,44 +207,44 @@ export default function AdminPostsManager() {
         <p className="text-sm text-text-secondary">Create drafts, publish articles, and edit existing content.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="grid gap-4 rounded-2xl border border-border-color p-4">
+      <form onSubmit={handleSubmit} className="grid gap-4 rounded-xl border border-line p-4">
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Title</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.title} required onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.title} required onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Slug</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.slug} onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))} placeholder="auto-generated if empty" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.slug} onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))} placeholder="auto-generated if empty" />
           </div>
         </div>
 
         <div>
           <label className="mb-1 block text-sm font-medium text-text-secondary">Excerpt</label>
-          <textarea className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" rows={3} value={form.excerpt} required onChange={(event) => setForm((prev) => ({ ...prev, excerpt: event.target.value }))} />
+          <textarea className="w-full rounded-lg border border-line bg-cream px-3 py-2" rows={3} value={form.excerpt} required onChange={(event) => setForm((prev) => ({ ...prev, excerpt: event.target.value }))} />
         </div>
 
         <div>
           <label className="mb-1 block text-sm font-medium text-text-secondary">Content (HTML)</label>
-          <textarea className="w-full rounded-xl border border-border-color bg-paper px-3 py-2 font-mono text-sm" rows={10} value={form.content} required onChange={(event) => setForm((prev) => ({ ...prev, content: event.target.value }))} />
+          <textarea className="w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm" rows={10} value={form.content} required onChange={(event) => setForm((prev) => ({ ...prev, content: event.target.value }))} />
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Cover Image Path</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/posts/example.jpg" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/posts/example.jpg" />
             <AdminImageFieldUploader folder="posts" onUploaded={(path) => setForm((prev) => ({ ...prev, coverImage: path }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Author</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.author} required onChange={(event) => setForm((prev) => ({ ...prev, author: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.author} required onChange={(event) => setForm((prev) => ({ ...prev, author: event.target.value }))} />
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Status</label>
-            <select className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.status} onChange={(event) => setForm((prev) => ({ ...prev, status: event.target.value as 'draft' | 'published' }))}>
+            <select className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.status} onChange={(event) => setForm((prev) => ({ ...prev, status: event.target.value as 'draft' | 'published' }))}>
               <option value="draft">draft</option>
               <option value="published">published</option>
             </select>
@@ -252,7 +252,7 @@ export default function AdminPostsManager() {
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Category (பிரிவு)</label>
             <select
-              className="w-full rounded-xl border border-border-color bg-paper px-3 py-2"
+              className="w-full rounded-lg border border-line bg-cream px-3 py-2"
               value={isCustomCategory ? '__custom__' : form.category}
               onChange={(event) => {
                 const val = event.target.value;
@@ -274,7 +274,7 @@ export default function AdminPostsManager() {
             {isCustomCategory && (
               <input
                 type="text"
-                className="mt-2 w-full rounded-xl border border-border-color bg-paper px-3 py-2 text-sm"
+                className="mt-2 w-full rounded-lg border border-line bg-cream px-3 py-2 text-sm"
                 placeholder="விருப்பப் பிரிவு / Type custom category..."
                 value={form.category}
                 onChange={(event) => setForm((prev) => ({ ...prev, category: event.target.value }))}
@@ -283,18 +283,18 @@ export default function AdminPostsManager() {
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Reading Time (minutes)</label>
-            <input type="number" min={1} className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.readingTimeMinutes} onChange={(event) => setForm((prev) => ({ ...prev, readingTimeMinutes: event.target.value }))} />
+            <input type="number" min={1} className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.readingTimeMinutes} onChange={(event) => setForm((prev) => ({ ...prev, readingTimeMinutes: event.target.value }))} />
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Tags (comma separated)</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.tags} onChange={(event) => setForm((prev) => ({ ...prev, tags: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.tags} onChange={(event) => setForm((prev) => ({ ...prev, tags: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm font-medium text-text-secondary">Published At</label>
-            <input type="datetime-local" className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.publishedAt} onChange={(event) => setForm((prev) => ({ ...prev, publishedAt: event.target.value }))} />
+            <input type="datetime-local" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.publishedAt} onChange={(event) => setForm((prev) => ({ ...prev, publishedAt: event.target.value }))} />
           </div>
         </div>
 
@@ -303,14 +303,14 @@ export default function AdminPostsManager() {
           சிறப்புப் பதிவு
         </label>
 
-        {error && <p className="text-sm text-red-700">{error}</p>}
-        {successMessage && <p className="text-sm text-green-800">{successMessage}</p>}
+        {error && <p className="border-l-4 border-sun bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{error}</p>}
+        {successMessage && <p className="border-l-4 border-sky bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{successMessage}</p>}
 
         <div className="flex flex-wrap gap-3">
           <button type="submit" disabled={saving} className="btn-primary">
             {saving ? 'Saving...' : editingId ? 'Update Post' : 'Create Post'}
           </button>
-          <button type="button" className="rounded-xl border border-border-color px-4 py-2 text-sm" onClick={resetForm}>
+          <button type="button" className="btn-secondary text-sm" onClick={resetForm}>
             Reset
           </button>
         </div>
@@ -325,16 +325,16 @@ export default function AdminPostsManager() {
         ) : (
           <div className="space-y-2">
             {posts.map((post) => (
-              <div key={post.id} className="flex flex-col gap-3 rounded-2xl border border-border-color p-4 md:flex-row md:items-center md:justify-between">
+              <div key={post.id} className="flex flex-col gap-3 rounded-xl border border-line p-4 md:flex-row md:items-center md:justify-between">
                 <div>
                   <p className="font-medium">{post.title}</p>
                   <p className="text-sm text-text-secondary">/{post.slug} • {post.status ?? 'draft'}</p>
                 </div>
                 <div className="flex gap-2">
-                  <button type="button" className="rounded-xl border border-border-color px-3 py-2 text-sm" onClick={() => populateFormForEdit(post)}>
+                  <button type="button" className="btn-secondary text-sm" onClick={() => populateFormForEdit(post)}>
                     Edit
                   </button>
-                  <button type="button" className="rounded-xl border border-red-400 px-3 py-2 text-sm text-red-700" onClick={() => handleDelete(post.id)}>
+                  <button type="button" className="btn-secondary text-sm" onClick={() => handleDelete(post.id)}>
                     Delete
                   </button>
                 </div>

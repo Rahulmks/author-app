@@ -12,10 +12,10 @@ export default async function EventsPage() {
   return (
     <Container className="py-8 md:py-12">
       <div className="mb-8 max-w-3xl">
-        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
+        <p className="eyebrow mb-2">
           {t('eyebrow')}
         </p>
-        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
+        <h1 className="mb-3 text-3xl font-bold md:text-4xl">
           {t('heading')}
         </h1>
         <p className="text-base leading-relaxed text-text-secondary">
@@ -24,9 +24,9 @@ export default async function EventsPage() {
       </div>
 
       {upcomingEvents.length > 0 && (
-        <section className="mb-10">
-          <h2 className="mb-4 text-xl font-semibold md:text-2xl text-accent border-b border-border-color/60 pb-2">{t('upcomingHeading')}</h2>
-          <div className="relative border-l border-border-color/60 ml-2 max-w-3xl divide-y divide-border-color/40">
+        <section className="paper-panel mb-10 max-w-3xl p-5 md:p-8">
+          <h2 className="mb-4 border-b border-line pb-2 text-xl font-bold md:text-2xl">{t('upcomingHeading')}</h2>
+          <div className="relative ml-2 border-l border-line divide-y divide-line">
             {upcomingEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}
@@ -35,9 +35,9 @@ export default async function EventsPage() {
       )}
 
       {pastEvents.length > 0 && (
-        <section>
-          <h2 className="mb-4 text-xl font-semibold md:text-2xl text-text-secondary border-b border-border-color/60 pb-2">{t('pastHeading')}</h2>
-          <div className="relative border-l border-border-color/60 ml-2 max-w-3xl divide-y divide-border-color/40">
+        <section className="paper-panel max-w-3xl p-5 md:p-8">
+          <h2 className="mb-4 border-b border-line pb-2 text-xl font-bold text-text-secondary md:text-2xl">{t('pastHeading')}</h2>
+          <div className="relative ml-2 border-l border-line divide-y divide-line">
             {pastEvents.map((event) => (
               <EventCard key={event.id} event={event} />
             ))}

@@ -16,10 +16,10 @@ export default function PostGridCard({ post }: PostGridCardProps) {
   const categoryKey = getCategoryLabelKey(post.category);
   const locale = useLocale();
   return (
-    <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border-color/60 bg-paper/30 transition-colors hover:border-accent/60">
-      <Link href={`/posts/${post.slug}`} className="flex h-full flex-col">
+    <article className="card card-tilt group flex h-full flex-col">
+      <Link href={`/posts/${post.slug}`} className="card-link flex h-full flex-col">
         {post.coverImage && (
-          <div className="relative aspect-[16/10] overflow-hidden bg-border-color">
+          <div className="media-frame relative aspect-[16/10]">
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -28,24 +28,24 @@ export default function PostGridCard({ post }: PostGridCardProps) {
             />
           </div>
         )}
-        <div className="flex flex-1 flex-col p-4 md:p-5">
-          <div className="mb-2 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
+        <div className="card-body card-body-lg">
+          <h3 className="card-title">
+            {post.title}
+          </h3>
+          <div className="label mb-2 flex flex-wrap items-center gap-2">
             {post.category && <span>{categoryKey ? tNav(categoryKey) : post.category}</span>}
             {post.category && post.publishedAt && <span>·</span>}
             {post.publishedAt && (
-              <time dateTime={post.publishedAt} className="font-normal tracking-normal text-text-secondary">
+              <time dateTime={post.publishedAt} className="font-normal normal-case tracking-normal">
                 {formatDate(post.publishedAt, locale)}
               </time>
             )}
           </div>
-          <h3 className="mb-2 text-base font-medium leading-snug transition-colors group-hover:text-accent md:text-lg">
-            {post.title}
-          </h3>
           {post.excerpt && (
-            <p className="line-clamp-2 text-sm leading-relaxed text-text-secondary">{post.excerpt}</p>
+            <p className="mb-0 line-clamp-2 text-sm leading-relaxed text-text-secondary">{post.excerpt}</p>
           )}
           {post.readingTimeMinutes && (
-            <p className="mt-auto pt-3 text-xs text-text-secondary">
+            <p className="mb-0 mt-auto pt-3 text-xs text-text-secondary">
               {t('readingTime', { minutes: post.readingTimeMinutes })}
             </p>
           )}

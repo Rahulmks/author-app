@@ -63,26 +63,26 @@ export default function AdminImageFieldUploader({ folder, onUploaded }: AdminIma
   };
 
   return (
-    <div className="mt-2 rounded-xl border border-border-color/70 bg-paper/60 p-3">
+    <div className="mt-2 rounded-lg border border-line bg-cream p-3">
       <p className="text-xs text-text-secondary">Upload image to {folderHint}</p>
       <div className="mt-2 flex flex-col gap-2 md:flex-row md:items-center">
         <input
           type="file"
           accept="image/*"
           onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-          className="w-full rounded-xl border border-border-color bg-paper px-3 py-2 text-sm md:w-auto"
+          className="w-full rounded-lg border border-line bg-paper px-3 py-2 text-sm md:w-auto"
         />
         <button
           type="button"
           onClick={handleUpload}
           disabled={uploading}
-          className="rounded-xl border border-border-color px-3 py-2 text-sm"
+          className="btn-secondary text-sm"
         >
           {uploading ? 'Uploading...' : 'Upload image'}
         </button>
       </div>
-      {error && <p className="mt-2 text-xs text-red-700">{error}</p>}
-      {uploadedPath && <p className="mt-2 text-xs text-green-800">Uploaded and applied: {uploadedPath}</p>}
+      {error && <p className="mt-2 border-l-4 border-sun bg-cream px-3 py-2 text-xs font-semibold text-text-primary">{error}</p>}
+      {uploadedPath && <p className="mt-2 border-l-4 border-sky bg-cream px-3 py-2 text-xs font-semibold text-text-primary">Uploaded and applied: {uploadedPath}</p>}
     </div>
   );
 }

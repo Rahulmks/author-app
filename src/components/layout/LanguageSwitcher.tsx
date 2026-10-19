@@ -19,7 +19,7 @@ export default function LanguageSwitcher({ className = '' }: { className?: strin
     <div
       role="group"
       aria-label="Language / மொழி"
-      className={`inline-flex items-center divide-x divide-border-color border border-border-color text-xs font-semibold tracking-[0.12em] ${className}`}
+      className={`inline-flex items-center divide-x divide-line overflow-hidden rounded-lg border border-line text-xs font-semibold tracking-[0.08em] ${className}`}
     >
       {locales.map((locale) => {
         const isActive = locale === current;
@@ -33,7 +33,7 @@ export default function LanguageSwitcher({ className = '' }: { className?: strin
             aria-current={isActive ? 'true' : undefined}
             aria-label={labels[locale].name}
             className={`flex min-h-11 min-w-11 items-center justify-center px-3 transition-colors ${
-              isActive ? 'bg-accent text-background' : 'text-text-secondary hover:text-accent'
+              isActive ? 'bg-ink text-white' : 'text-text-secondary hover:bg-line hover:text-text-primary'
             }`}
           >
             {labels[locale].short}

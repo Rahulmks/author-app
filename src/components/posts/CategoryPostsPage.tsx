@@ -24,18 +24,18 @@ export default async function CategoryPostsPage({ category, labelKey }: Category
   return (
     <Container className="py-8 md:py-12">
       <div className="mb-8 max-w-3xl">
-        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">{eyebrow}</p>
-        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">{title}</h1>
+        <p className="eyebrow mb-2">{eyebrow}</p>
+        <h1 className="mb-3 text-3xl font-bold md:text-4xl">{title}</h1>
       </div>
-      <div className="border-t border-border-color pt-4">
+      <div>
         {posts.length > 0 ? (
-          <div className="max-w-3xl divide-y divide-border-color">
+          <div className="paper-panel max-w-3xl divide-y divide-line px-4 md:px-6">
             {posts.map((post) => <PostCard key={post.id} post={post} />)}
           </div>
         ) : (
           <EmptyState
             message={t('empty')}
-            action={category ? <Link href="/posts" className="ink-link text-sm font-medium text-accent">{t('viewAll')}</Link> : undefined}
+            action={category ? <Link href="/posts" className="ink-link inline-flex min-h-11 items-center text-sm">{t('viewAll')}</Link> : undefined}
           />
         )}
       </div>

@@ -41,9 +41,9 @@ export default async function AdminDashboardPage() {
 
         <div className="grid gap-4 md:grid-cols-2">
           {cards.map((card) => (
-            <Link key={card.href} href={card.href} className="rounded-2xl border border-border-color bg-paper/70 p-5 transition hover:border-accent">
-              <h3 className="mb-2 text-xl font-semibold">{card.title}</h3>
-              <p className="text-sm text-text-secondary">{card.description}</p>
+            <Link key={card.href} href={card.href} className="card card-body bg-cream">
+              <h3 className="card-title">{card.title}</h3>
+              <p className="mb-0 text-sm text-text-secondary">{card.description}</p>
             </Link>
           ))}
         </div>

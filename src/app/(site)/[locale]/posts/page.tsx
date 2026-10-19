@@ -32,16 +32,16 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
   return (
     <Container className="py-8 md:py-12">
       <div className="max-w-3xl mb-8">
-        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
+        <p className="eyebrow mb-2">
           {t('eyebrow')}
         </p>
-        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
+        <h1 className="mb-3 text-3xl font-bold md:text-4xl">
           {t('heading')}
         </h1>
         <p className="text-base leading-relaxed text-text-secondary">
           {t('body')}
         </p>
-        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
           {postCategories.map((category) => {
             const isActive = (!activeCategory && category === ALL_CATEGORY) || activeCategory === category;
             const href = category === ALL_CATEGORY ? '/posts' : `/posts?category=${encodeURIComponent(category)}`;
@@ -50,10 +50,10 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`border-b pb-0.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`label inline-flex min-h-11 items-center border-b-2 text-text-primary transition-colors ${
                   isActive
-                    ? 'border-accent text-accent'
-                    : 'border-transparent text-text-secondary hover:border-accent hover:text-accent'
+                    ? 'border-pink font-bold'
+                    : 'border-transparent hover:border-line'
                 }`}
               >
                 {category === ALL_CATEGORY ? t('all') : labelKey ? tNav(labelKey) : category}
@@ -63,9 +63,9 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
         </div>
       </div>
 
-      <div className="border-t border-border-color pt-4">
+      <div>
         {posts.length > 0 ? (
-          <div className="max-w-3xl divide-y divide-border-color">
+          <div className="paper-panel max-w-3xl divide-y divide-line px-4 md:px-6">
             {posts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
@@ -74,7 +74,7 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
           <EmptyState
             message={t('empty')}
             action={
-              <Link href="/posts" className="ink-link text-sm font-medium text-accent">
+              <Link href="/posts" className="ink-link inline-flex min-h-11 items-center text-sm">
                 {t('viewAll')}
               </Link>
             }
@@ -83,10 +83,10 @@ export default async function PostsPage({ searchParams }: PostsPageProps) {
       </div>
 
       <div className="mt-12 flex justify-center">
-        <div className="inline-flex items-center gap-5 border-t border-border-color pt-4 text-sm text-text-secondary">
-          <Link href="#" className="hover:text-accent">{t('previousPage')}</Link>
+        <div className="inline-flex items-center gap-5 text-sm text-text-secondary">
+          <Link href="#" className="inline-flex min-h-11 items-center hover:underline underline-offset-4">{t('previousPage')}</Link>
           <span>1</span>
-          <Link href="#" className="hover:text-accent">{t('nextPage')}</Link>
+          <Link href="#" className="inline-flex min-h-11 items-center hover:underline underline-offset-4">{t('nextPage')}</Link>
         </div>
       </div>
     </Container>

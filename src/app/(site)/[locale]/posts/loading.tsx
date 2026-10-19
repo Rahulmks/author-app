@@ -9,7 +9,7 @@ export default function Loading() {
         <div className="skeleton mb-5 h-10 w-3/4" />
         <div className="skeleton h-16 w-full" />
       </div>
-      <div className="border-t border-border-color pt-10">
+      <div className="pt-10">
         <div className="max-w-3xl space-y-6">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="skeleton-fade-in space-y-3" style={{ animationDelay: `${i * 60}ms` }}>

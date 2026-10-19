@@ -11,21 +11,21 @@ export default function QuoteGrid({ quotes }: QuoteGridProps) {
   }
 
   return (
-    <section className="py-10 md:py-14">
+    <section className="py-8 md:py-14">
       <Container>
-        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:overflow-visible md:pb-0">
+        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 pb-8 pt-1 md:grid md:grid-cols-3 md:overflow-visible md:p-0">
           {quotes.map((quote) => (
             <blockquote
               key={quote}
-              className="relative w-[82%] flex-shrink-0 snap-center rounded-2xl border border-border-color/60 bg-paper/40 p-6 sm:w-[65%] md:w-auto md:p-7"
+              className="card relative w-[82%] flex-shrink-0 snap-center p-6 sm:w-[65%] md:w-auto md:p-7"
             >
               <span
                 aria-hidden="true"
-                className="absolute left-4 top-1 font-display text-5xl leading-none text-accent/25 md:text-6xl"
+                className="absolute left-4 top-1 font-display text-5xl leading-none text-text-secondary opacity-30 md:text-6xl"
               >
                 &ldquo;
               </span>
-              <p className="relative text-base leading-8 text-text-secondary md:text-lg md:leading-9">
+              <p className="relative mb-0 text-base leading-8 text-text-secondary md:text-lg md:leading-9">
                 {quote}
               </p>
             </blockquote>

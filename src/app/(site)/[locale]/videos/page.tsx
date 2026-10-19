@@ -42,16 +42,16 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
   return (
     <Container className="py-8 md:py-12">
       <div className="max-w-3xl mb-8">
-        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
+        <p className="eyebrow mb-2">
           {t('eyebrow')}
         </p>
-        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
+        <h1 className="mb-3 text-3xl font-bold md:text-4xl">
           {t('heading')}
         </h1>
         <p className="text-base leading-relaxed text-text-secondary">
           {t('body')}
         </p>
-        <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2">
+        <div className="mt-4 flex flex-wrap gap-x-5 gap-y-1">
           {videoCategories.map(({ value: category, key }) => {
             const isActive = (!activeCategory && category === ALL_CATEGORY) || activeCategory === category;
             const href = category === ALL_CATEGORY ? '/videos' : `/videos?category=${encodeURIComponent(category)}`;
@@ -59,10 +59,10 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
               <Link
                 key={category}
                 href={href}
-                className={`border-b pb-0.5 text-xs font-medium uppercase tracking-[0.08em] transition-colors ${
+                className={`label inline-flex min-h-11 items-center border-b-2 text-text-primary transition-colors ${
                   isActive
-                    ? 'border-accent text-accent'
-                    : 'border-transparent text-text-secondary hover:border-accent hover:text-accent'
+                    ? 'border-pink font-bold'
+                    : 'border-transparent hover:border-line'
                 }`}
               >
                 {t(key)}
@@ -82,7 +82,7 @@ export default async function VideosPage({ searchParams }: VideosPageProps) {
         <EmptyState
           message={t('empty')}
           action={
-            <Link href="/videos" className="ink-link text-sm font-medium text-accent">
+            <Link href="/videos" className="ink-link inline-flex min-h-11 items-center text-sm">
               {t('viewAll')}
             </Link>
           }

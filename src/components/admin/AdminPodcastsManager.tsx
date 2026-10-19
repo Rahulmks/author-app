@@ -161,27 +161,27 @@ export default function AdminPodcastsManager() {
         <p className="text-sm text-text-secondary">Manage podcast entries shown in the public podcast section.</p>
       </div>
 
-      <form className="grid gap-4 rounded-2xl border border-border-color p-4" onSubmit={onSubmit}>
+      <form className="grid gap-4 rounded-xl border border-line p-4" onSubmit={onSubmit}>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Title</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.title} required onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.title} required onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Slug</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.slug} onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))} placeholder="auto-generated if empty" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.slug} onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))} placeholder="auto-generated if empty" />
           </div>
         </div>
 
         <div>
           <label className="mb-1 block text-sm text-text-secondary">Description</label>
-          <textarea className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" rows={3} value={form.description} onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))} />
+          <textarea className="w-full rounded-lg border border-line bg-cream px-3 py-2" rows={3} value={form.description} onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))} />
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Platform</label>
-            <select className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.platform} onChange={(event) => setForm((prev) => ({ ...prev, platform: event.target.value as PodcastFormState['platform'] }))}>
+            <select className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.platform} onChange={(event) => setForm((prev) => ({ ...prev, platform: event.target.value as PodcastFormState['platform'] }))}>
               <option value="spotify">spotify</option>
               <option value="apple">apple</option>
               <option value="youtube">youtube</option>
@@ -190,39 +190,39 @@ export default function AdminPodcastsManager() {
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Episode Number</label>
-            <input type="number" className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.episodeNumber} onChange={(event) => setForm((prev) => ({ ...prev, episodeNumber: event.target.value }))} />
+            <input type="number" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.episodeNumber} onChange={(event) => setForm((prev) => ({ ...prev, episodeNumber: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Duration</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.duration} onChange={(event) => setForm((prev) => ({ ...prev, duration: event.target.value }))} placeholder="31:02" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.duration} onChange={(event) => setForm((prev) => ({ ...prev, duration: event.target.value }))} placeholder="31:02" />
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Episode URL</label>
-            <input type="url" className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.episodeUrl} required onChange={(event) => setForm((prev) => ({ ...prev, episodeUrl: event.target.value }))} />
+            <input type="url" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.episodeUrl} required onChange={(event) => setForm((prev) => ({ ...prev, episodeUrl: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Cover Image Path</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/podcasts/cover.jpg" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/podcasts/cover.jpg" />
             <AdminImageFieldUploader folder="podcasts" onUploaded={(path) => setForm((prev) => ({ ...prev, coverImage: path }))} />
           </div>
         </div>
 
         <div>
           <label className="mb-1 block text-sm text-text-secondary">Published At</label>
-          <input type="datetime-local" className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.publishedAt} onChange={(event) => setForm((prev) => ({ ...prev, publishedAt: event.target.value }))} />
+          <input type="datetime-local" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.publishedAt} onChange={(event) => setForm((prev) => ({ ...prev, publishedAt: event.target.value }))} />
         </div>
 
-        {error && <p className="text-sm text-red-700">{error}</p>}
-        {message && <p className="text-sm text-green-800">{message}</p>}
+        {error && <p className="border-l-4 border-sun bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{error}</p>}
+        {message && <p className="border-l-4 border-sky bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{message}</p>}
 
         <div className="flex gap-3">
           <button type="submit" className="btn-primary" disabled={saving}>
             {saving ? 'Saving...' : form.id ? 'Update Podcast' : 'Create Podcast'}
           </button>
-          <button type="button" className="rounded-xl border border-border-color px-4 py-2 text-sm" onClick={() => setForm(initialForm)}>
+          <button type="button" className="btn-secondary text-sm" onClick={() => setForm(initialForm)}>
             Reset
           </button>
         </div>
@@ -234,14 +234,14 @@ export default function AdminPodcastsManager() {
           <p className="text-sm text-text-secondary">Loading podcasts...</p>
         ) : (
           episodes.map((episode) => (
-            <div key={episode.id} className="flex flex-col gap-3 rounded-2xl border border-border-color p-4 md:flex-row md:items-center md:justify-between">
+            <div key={episode.id} className="flex flex-col gap-3 rounded-xl border border-line p-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="font-medium">{episode.title}</p>
                 <p className="text-sm text-text-secondary">{episode.platform} • /{episode.slug ?? 'no-slug'}</p>
               </div>
               <div className="flex gap-2">
-                <button type="button" className="rounded-xl border border-border-color px-3 py-2 text-sm" onClick={() => onEdit(episode)}>Edit</button>
-                <button type="button" className="rounded-xl border border-red-400 px-3 py-2 text-sm text-red-700" onClick={() => onDelete(episode.id)}>Delete</button>
+                <button type="button" className="btn-secondary text-sm" onClick={() => onEdit(episode)}>Edit</button>
+                <button type="button" className="btn-secondary text-sm" onClick={() => onDelete(episode.id)}>Delete</button>
               </div>
             </div>
           ))

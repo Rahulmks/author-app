@@ -15,13 +15,13 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
   const categoryKey = getCategoryLabelKey(post.category);
   const locale = useLocale();
   return (
-    <article className="group border-y border-border-color py-6 md:py-8">
+    <article className="card group">
       <Link 
         href={`/posts/${post.slug}`}
-        className="block md:grid md:grid-cols-2 gap-6 md:gap-8 items-center"
+        className="card-link block md:grid md:grid-cols-2 items-center"
       >
         {post.coverImage && (
-          <div className="relative mb-5 aspect-[16/10] overflow-hidden bg-border-color md:mb-0">
+          <div className="media-frame relative aspect-[16/10]">
             <Image
               src={post.coverImage}
               alt={post.title}
@@ -31,14 +31,14 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
           </div>
         )}
         
-        <div>
+        <div className="p-6 md:p-8">
           {post.category && (
-            <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-accent">
+            <p className="label mb-3">
               {categoryKey ? tNav(categoryKey) : post.category}
             </p>
           )}
           
-          <h2 className="mb-3 text-2xl font-medium leading-tight transition-colors group-hover:text-accent md:text-3xl">
+          <h2 className="mb-3 text-2xl font-bold leading-tight group-hover:underline underline-offset-4 md:text-3xl">
             {post.title}
           </h2>
           
@@ -60,7 +60,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
             )}
           </div>
           
-          <span className="ink-link inline-flex font-medium text-accent">{t('openArticle')}</span>
+          <span className="ink-link inline-flex">{t('openArticle')}</span>
         </div>
       </Link>
     </article>
