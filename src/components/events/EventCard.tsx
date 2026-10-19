@@ -13,7 +13,7 @@ export default function EventCard({ event }: EventCardProps) {
   return (
     <article className="group relative pl-6 md:pl-8 py-4 md:py-6">
       {/* Timeline Node */}
-      <div className="absolute left-0 top-6 h-3 w-3 -translate-x-1.2 rounded-full border-2 border-pink bg-paper transition-colors group-hover:bg-pink" />
+      <div className="absolute left-0 top-6 h-3 w-3 -translate-x-1.2 rounded-full border-2 border-highlight bg-paper transition-colors group-hover:bg-highlight" />
 
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
         <div className="flex-1 min-w-0">

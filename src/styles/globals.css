@@ -28,6 +28,7 @@
   --line: rgba(29, 27, 77, 0.14);
   --cta: #D9431F;
   --pink: #C81C6E;
+  --rose: #A82A5E; /* softer raspberry for highlighted text on cream/white (AA-safe) */
   --sun: #F2A32B;
   --sky: #2E7496;
   --indigo: #262463; /* dark-mode surface */
@@ -47,7 +48,7 @@
   --input-bg: var(--cream);
   --structure: var(--ink);
   --ring: var(--pink);
-  --highlight-text: var(--pink);
+  --highlight-text: var(--rose);
   --shadow-card: 0 8px 24px rgba(29, 27, 77, 0.12);
   --shadow-button: 0 2px 6px rgba(29, 27, 77, 0.18);
 
@@ -346,8 +347,28 @@
     letter-spacing: 0.02em;
   }
 
+  /* Highlighted text: labels on cream/white surfaces take the raspberry accent.
+     Labels sitting directly on the wall stay ink, since pink cannot reach AA on the dark patches. */
+  :is(.card, .paper-panel, .on-surface, .site-header) :is(.label, .eyebrow) {
+    color: var(--highlight-text);
+  }
+
+  :is(.label, .eyebrow) .normal-case {
+    color: var(--text-secondary);
+  }
+
   .font-display {
     font-family: var(--font-display);
+  }
+
+  .section-heading h2::after {
+    content: '';
+    display: block;
+    width: 3rem;
+    height: 3px;
+    margin-top: 0.75rem;
+    border-radius: 9999px;
+    background: var(--highlight-text);
   }
 
   /* ---- Links ---- */
@@ -587,6 +608,7 @@
     background: var(--surface-card);
     color: var(--text-primary);
     border: 1px solid var(--line);
+    border-left: 3px solid var(--highlight-text);
     border-radius: 12px;
     box-shadow: var(--shadow-card);
     font-family: var(--font-display);
@@ -599,8 +621,8 @@
     display: flex;
     justify-content: center;
     margin: var(--space-12) 0;
-    color: var(--text-primary);
-    opacity: 0.55;
+    color: var(--highlight-text);
+    opacity: 0.75;
   }
 
   .manuscript-divider svg {
@@ -651,7 +673,7 @@
   }
 
   .empty-state-mark {
-    color: var(--text-secondary);
+    color: var(--highlight-text);
   }
 
   .empty-state p {

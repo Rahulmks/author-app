@@ -25,6 +25,7 @@ const config: Config = {
       line: 'var(--line)',
       cta: 'var(--cta)',
       pink: 'var(--pink)',
+      highlight: 'var(--highlight-text)',
       sun: 'var(--sun)',
       sky: 'var(--sky)',
       link: 'var(--link)',

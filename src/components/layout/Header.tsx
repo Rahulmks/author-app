@@ -98,10 +98,10 @@ export default function Header() {
                         }
                       }}
                       onClick={() => item.children && setOpenMenu(item.href)}
-                      className={`relative inline-flex min-h-11 items-center whitespace-nowrap text-sm font-semibold text-text-primary transition-colors after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:transition-colors ${
+                      className={`relative inline-flex min-h-11 items-center whitespace-nowrap text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:transition-colors ${
                         isActive 
-                          ? 'after:bg-pink' 
-                          : 'after:bg-transparent hover:after:bg-line'
+                          ? 'text-highlight after:bg-pink'
+                          : 'text-text-primary after:bg-transparent hover:text-highlight hover:after:bg-line'
                       }`}
                       aria-current={isActive ? 'page' : undefined}
                     >
@@ -110,8 +110,10 @@ export default function Header() {
                     {item.children && isOpen && (
                       <div className="absolute left-0 top-full z-50 pt-3" onMouseEnter={() => setOpenMenu(item.href)}>
                         <ul className="min-w-52 rounded-lg border border-line bg-paper p-2 shadow-card">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
+                        {item.children.map((child) => {
+                          const isChildActive = pathname === child.href || pathname?.startsWith(`${child.href}/`);
+                          return (
+                            <li key={child.href}>
                             <Link
                               ref={(element) => { childRefs.current[child.href] = element; }}
                               href={child.href}
@@ -129,12 +131,16 @@ export default function Header() {
                                   if (previous) childRefs.current[previous.href]?.focus();
                                 }
                               }}
-                              className="block min-h-11 whitespace-nowrap rounded px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-line hover:text-text-primary"
+                              className={`block min-h-11 whitespace-nowrap rounded px-3 py-2 text-sm font-semibold hover:bg-line hover:text-highlight ${
+                                isChildActive ? 'text-highlight' : 'text-text-secondary'
+                              }`}
+                              aria-current={isChildActive ? 'page' : undefined}
                             >
                               {t(`nav.${child.key}`)}
                             </Link>
-                          </li>
-                        ))}
+                            </li>
+                          );
+                        })}
                         </ul>
                       </div>
                     )}

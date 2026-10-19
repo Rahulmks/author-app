@@ -122,9 +122,10 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                         onClick={onClose}
                         className={`block min-h-11 flex-1 rounded-lg border border-transparent px-4 py-3 text-base font-semibold transition-colors ${
                           isActive
-                            ? 'bg-paper text-text-primary shadow-[inset_0_-2px_0_0_var(--pink)]'
-                            : 'text-text-primary hover:bg-line'
+                            ? 'bg-paper text-highlight shadow-[inset_0_-2px_0_0_var(--pink)]'
+                            : 'text-text-primary hover:bg-line hover:text-highlight'
                         }`}
+                        aria-current={isActive ? 'page' : undefined}
                       >
                         {t(`nav.${item.key}`)}
                       </Link>
@@ -136,13 +137,23 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                     </div>
                     {item.children && postsExpanded && (
                       <ul className="mt-2 space-y-1 pl-4">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
-                            <Link href={child.href} onClick={onClose} className="block min-h-11 border-l-2 border-line px-4 py-2 text-sm font-semibold text-text-secondary hover:border-text-primary hover:text-text-primary">
-                              {t(`nav.${child.key}`)}
-                            </Link>
-                          </li>
-                        ))}
+                        {item.children.map((child) => {
+                          const isChildActive = pathname === child.href || pathname?.startsWith(`${child.href}/`);
+                          return (
+                            <li key={child.href}>
+                              <Link
+                                href={child.href}
+                                onClick={onClose}
+                                className={`block min-h-11 border-l-2 px-4 py-2 text-sm font-semibold hover:border-highlight hover:text-highlight ${
+                                  isChildActive ? 'border-highlight text-highlight' : 'border-line text-text-secondary'
+                                }`}
+                                aria-current={isChildActive ? 'page' : undefined}
+                              >
+                                {t(`nav.${child.key}`)}
+                              </Link>
+                            </li>
+                          );
+                        })}
                       </ul>
                     )}
                   </li>

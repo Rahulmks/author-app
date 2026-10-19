@@ -34,7 +34,7 @@ export default async function AwardsStrip({ awards }: AwardsStripProps) {
               >
                 <svg
                   aria-hidden="true"
-                  className="mt-1 h-6 w-6 flex-shrink-0 text-pink"
+                  className="mt-1 h-6 w-6 flex-shrink-0 text-highlight"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -44,7 +44,7 @@ export default async function AwardsStrip({ awards }: AwardsStripProps) {
                 </svg>
                 <div>
                   {year && (
-                    <span className="block font-display text-2xl font-bold text-text-primary md:text-3xl">
+                    <span className="block font-display text-2xl font-bold text-highlight md:text-3xl">
                       {year}
                     </span>
                   )}
