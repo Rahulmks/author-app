@@ -89,35 +89,34 @@
   --article-max: 780px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
+/* Dark theme is opt-in: add data-theme="dark" to <html>. It does not follow the OS setting. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
 
-    /* The wall shifts to deep indigo; the same texture masks pick these up. */
-    --wall-base: var(--ink);
-    --wall-light: var(--indigo);
-    --wall-dark: #14133A;
-    --wall-grain: var(--cream);
-    --wall-light-opacity: 0.7;
-    --wall-dark-opacity: 0.6;
-    --wall-grain-opacity: 0.05;
+  /* The wall shifts to deep indigo; the same texture masks pick these up. */
+  --wall-base: var(--ink);
+  --wall-light: var(--indigo);
+  --wall-dark: #14133A;
+  --wall-grain: var(--cream);
+  --wall-light-opacity: 0.7;
+  --wall-dark-opacity: 0.6;
+  --wall-grain-opacity: 0.05;
 
-    --line: rgba(245, 241, 221, 0.16);
-    --text-primary: var(--cream);
-    --text-secondary: var(--cream-soft);
-    --text-on-surface-soft: var(--cream-soft);
-    /* Sky fails contrast on indigo (2.7:1), so links fall back to underlined cream. */
-    --link: var(--cream);
-    --link-on-surface: var(--cream);
-    --surface-card: var(--indigo);
-    --surface-panel: var(--indigo);
-    --input-bg: var(--ink);
-    --structure: var(--indigo);
-    /* Pink drops to 2.5:1 on indigo, so text-sized highlights fall back to cream. */
-    --highlight-text: var(--cream);
-    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
-    --shadow-button: 0 2px 6px rgba(0, 0, 0, 0.4);
-  }
+  --line: rgba(245, 241, 221, 0.16);
+  --text-primary: var(--cream);
+  --text-secondary: var(--cream-soft);
+  --text-on-surface-soft: var(--cream-soft);
+  /* Sky fails contrast on indigo (2.7:1), so links fall back to underlined cream. */
+  --link: var(--cream);
+  --link-on-surface: var(--cream);
+  --surface-card: var(--indigo);
+  --surface-panel: var(--indigo);
+  --input-bg: var(--ink);
+  --structure: var(--indigo);
+  /* Pink drops to 2.5:1 on indigo, so text-sized highlights fall back to cream. */
+  --highlight-text: var(--cream);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.35);
+  --shadow-button: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 @layer base {
@@ -513,12 +512,8 @@
   }
 
   .site-footer {
-    background: var(--structure);
-    color: var(--cream);
-    --text-primary: var(--cream);
-    --text-secondary: var(--cream-soft);
-    --link: var(--cream);
-    --line: color-mix(in srgb, var(--cream) 24%, transparent);
+    color: var(--text-primary);
+    border-top: 1px solid var(--line);
   }
 
   /* ---- Article body ---- */
