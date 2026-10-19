@@ -5,25 +5,28 @@ interface PostMetadataProps {
   className?: string;
 }
 
-import { formatTamilDate, formatTamilReadingTime } from '@/lib/navigation';
+import { useLocale, useTranslations } from 'next-intl';
+import { formatDate } from '@/lib/navigation';
 
 export default function PostMetadata({ 
-  author = 'எழுத்தாளர்',
+  author,
   publishedAt, 
   readingTime,
   className = ''
 }: PostMetadataProps) {
+  const t = useTranslations('common');
+  const locale = useLocale();
   return (
     <div className={`flex items-center gap-3 text-sm text-text-secondary ${className}`}>
-      <span>{author}</span>
+      <span>{author ?? t('defaultAuthor')}</span>
       <span>·</span>
       <time dateTime={publishedAt}>
-        {formatTamilDate(publishedAt, 'long')}
+        {formatDate(publishedAt, locale, 'long')}
       </time>
       {readingTime && (
         <>
           <span>·</span>
-          <span>{formatTamilReadingTime(readingTime)}</span>
+          <span>{t('readingTime', { minutes: readingTime })}</span>
         </>
       )}
     </div>

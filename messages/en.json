@@ -1,0 +1,145 @@
+{
+  "_review": "REVIEW: every English string in this file is machine-translated and needs proofreading.",
+  "brand": {
+    "name": "Lakshmihar",
+    "title": "Writer",
+    "tagline": "Stories, essays, and the silence of memory"
+  },
+  "meta": {
+    "title": "The Writer's House | Essays, Books, Voice and Vision",
+    "description": "The personal creative world of a writer working in both Tamil and English",
+    "notFoundTitle": "Page not found | The Writer's House"
+  },
+  "nav": {
+    "home": "Home",
+    "posts": "Writings",
+    "story": "Stories",
+    "essay": "Essays",
+    "experience": "Personal Experiences",
+    "criticism": "Criticism",
+    "readerLetter": "Reader Letters",
+    "cinema": "Cinema",
+    "interviews": "Interviews",
+    "events": "Events",
+    "classes": "Classes",
+    "announcements": "Announcements",
+    "podcast": "Podcast",
+    "videos": "Videos",
+    "books": "Books",
+    "about": "About",
+    "primary": "Main navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "menuDialog": "Main navigation menu",
+    "menuLinks": "Menu links",
+    "toggleSubmenu": "Toggle writings submenu",
+    "social": "Social media"
+  },
+  "footer": {
+    "contacts": "Links",
+    "online": "Online",
+    "rights": "All rights reserved.",
+    "aboutLink": "About →",
+    "notConfigured": "Link not configured"
+  },
+  "home": {
+    "heroBody": "Writing from the edge of memory, recording the silence of places and the inner worlds of people. This site, moving between Tamil and English, is designed like the slow handwriting of a creator.",
+    "heroPortraitAlt": "Portrait of the writer",
+    "readWritings": "Read the writings",
+    "meetAuthor": "Meet the writer",
+    "awards": "Awards",
+    "featured": "Featured Piece",
+    "featuredSubtitle": "An important text to read right now.",
+    "latest": "Latest Writings",
+    "latestSubtitle": "Recent pieces, gathered like the contents page of a literary journal.",
+    "viewAll": "View all",
+    "quotes": [
+      "‘ My reading, my writing, and my cinema run against recommendations.’",
+      "‘ The story itself decides its form and its language, not the writer.’",
+      "‘ Art will turn in the directions you desire, so do not rejoice; the same holds for your enemy.’"
+    ]
+  },
+  "common": {
+    "readingTime": "{minutes, number} min read",
+    "episode": "Episode {number, number}",
+    "openArticle": "Open the article",
+    "defaultAuthor": "Writer",
+    "language": "Language"
+  },
+  "events": {
+    "upcoming": "Upcoming event",
+    "past": "Past event",
+    "register": "Register",
+    "viewNotes": "View notes"
+  },
+  "posts": {
+    "eyebrow": "Writings",
+    "heading": "Essays, stories, memories of the mind",
+    "body": "Notes written in the margins, observations on land and memory, and short stories that stay in the mind long after reading.",
+    "all": "All",
+    "empty": "There are no posts in this category yet.",
+    "viewAll": "View all posts",
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "backToAll": "← All writings",
+    "defaultCategory": "Essays",
+    "wayfinding": "Post navigation",
+    "previousPost": "← Previous post",
+    "nextPost": "Next post →"
+  },
+  "videos": {
+    "eyebrow": "Videos",
+    "heading": "Conversations and readings",
+    "body": "Selected visual recordings from workshops, events, interviews, and personal conversations about literature.",
+    "all": "All",
+    "interviews": "Interviews",
+    "discussion": "Discussions",
+    "workshop": "Workshops",
+    "general": "General",
+    "empty": "There are no videos in this category yet.",
+    "viewAll": "View all videos",
+    "play": "Play video: {title}"
+  },
+  "books": {
+    "eyebrow": "Books",
+    "heading": "Published works",
+    "body": "Memory, movement, and the inner world of everyday places come together here in fiction, essays, and literary impressions.",
+    "empty": "New books are currently in print. They will arrive here soon.",
+    "back": "← All books",
+    "label": "Book",
+    "year": "Year published:",
+    "publisher": "Publisher:",
+    "language": "Language:",
+    "buy": "Buy"
+  },
+  "eventsPage": {
+    "eyebrow": "Events",
+    "heading": "Readings, workshops, live conversations",
+    "body": "Stages centred on readers, writers, language, and memory are gathered here.",
+    "upcomingHeading": "Upcoming events",
+    "pastHeading": "Past events",
+    "empty": "No events have been announced yet. New dates will be added here soon."
+  },
+  "contact": {
+    "eyebrow": "Contact",
+    "heading": "Write to me",
+    "body": "For literary correspondence, invitations to talk, collaborations, or simply a warm hello.",
+    "email": "Email:"
+  },
+  "about": {
+    "eyebrow": "About the writer",
+    "defaultHeading": "Writing from the edge of memory and the undertone of the land."
+  },
+  "podcastPage": {
+    "eyebrow": "Podcast",
+    "heading": "Recent conversations",
+    "body": "Thoughtful talks and interviews around reading, writing, everyday life, and language.",
+    "empty": "New episodes are being recorded. You can listen soon."
+  },
+  "notFound": {
+    "eyebrow": "This page is lost",
+    "heading": "It looks like someone has torn this page out",
+    "body": "The line you are looking for is not here, but many more lines are waiting on other pages.",
+    "backHome": "Back to home"
+  }
+}

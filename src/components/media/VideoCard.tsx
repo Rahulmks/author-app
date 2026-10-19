@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Video } from '@/types/video';
 
 interface VideoCardProps {
@@ -15,6 +16,7 @@ function getYouTubeId(url?: string): string | null {
 }
 
 export default function VideoCard({ video }: VideoCardProps) {
+  const t = useTranslations('videos');
   const [isPlaying, setIsPlaying] = useState(false);
   const videoLink = video.url ?? video.videoUrl;
   const youtubeId = getYouTubeId(videoLink) || getYouTubeId(video.videoUrl);
@@ -48,7 +50,7 @@ export default function VideoCard({ video }: VideoCardProps) {
               }
             }}
             className="relative h-full w-full block text-left group/thumb"
-            aria-label={`${video.title} காணொளியை இயக்குக`}
+            aria-label={t('play', { title: video.title })}
           >
             <Image
               src={thumbnail}

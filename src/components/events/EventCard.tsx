@@ -1,17 +1,15 @@
-import Link from 'next/link';
-import { formatTamilDate } from '@/lib/navigation';
+import { Link } from '@/i18n/routing';
+import { useLocale, useTranslations } from 'next-intl';
+import { formatDate } from '@/lib/navigation';
 import { AuthorEvent } from '@/types/event';
 
 interface EventCardProps {
   event: AuthorEvent;
 }
 
-const statusLabel: Record<AuthorEvent['status'], string> = {
-  upcoming: 'வரவிருக்கும் நிகழ்வு',
-  past: 'நடைபெற்ற நிகழ்வு',
-};
-
 export default function EventCard({ event }: EventCardProps) {
+  const t = useTranslations('events');
+  const locale = useLocale();
   return (
     <article className="group relative pl-6 md:pl-8 py-4 md:py-6">
       {/* Timeline Node */}
@@ -20,7 +18,7 @@ export default function EventCard({ event }: EventCardProps) {
       <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
         <div className="flex-1 min-w-0">
           <div className="mb-1 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
-            <span>{statusLabel[event.status]}</span>
+            <span>{t(event.status)}</span>
             <span>·</span>
             <span>{event.format}</span>
           </div>
@@ -34,7 +32,7 @@ export default function EventCard({ event }: EventCardProps) {
           </p>
 
           <div className="flex flex-wrap items-center gap-2 text-xs text-text-secondary">
-            <time dateTime={event.date}>{formatTamilDate(event.date, 'long')}</time>
+            <time dateTime={event.date}>{formatDate(event.date, locale, 'long')}</time>
             {event.venue && <span>· {event.venue}</span>}
             {event.city && <span>({event.city})</span>}
           </div>
@@ -43,7 +41,7 @@ export default function EventCard({ event }: EventCardProps) {
         {event.registrationUrl && (
           <div className="flex-shrink-0 md:self-center pt-1 md:pt-0">
             <Link href={event.registrationUrl} className="ink-link text-xs font-medium text-accent">
-              {event.status === 'upcoming' ? 'பதிவு செய்ய' : 'குறிப்பைக் காண்க'} →
+              {event.status === 'upcoming' ? t('register') : t('viewNotes')} →
             </Link>
           </div>
         )}

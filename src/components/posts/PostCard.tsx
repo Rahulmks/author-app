@@ -1,28 +1,34 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 import { Post, PostSummary } from '@/types/post';
-import { formatTamilDate, formatTamilReadingTime } from '@/lib/navigation';
+import { formatDate } from '@/lib/navigation';
+import { getCategoryLabelKey } from '@/lib/posts/categories';
 
 interface PostCardProps {
   post: Post | PostSummary;
 }
 
 export default function PostCard({ post }: PostCardProps) {
+  const t = useTranslations('common');
+  const tNav = useTranslations('nav');
+  const categoryKey = getCategoryLabelKey(post.category);
+  const locale = useLocale();
   return (
     <article className="group border-t border-border-color py-4 md:py-5 first:border-t-0">
       <Link href={`/posts/${post.slug}`} className="flex items-start justify-between gap-4 md:gap-6">
         <div className="flex-1 min-w-0">
           <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
-            {post.category && <span>{post.category}</span>}
+            {post.category && <span>{categoryKey ? tNav(categoryKey) : post.category}</span>}
             {post.category && post.publishedAt && <span>·</span>}
             {post.publishedAt && (
               <time dateTime={post.publishedAt} className="text-text-secondary font-normal tracking-normal">
-                {formatTamilDate(post.publishedAt)}
+                {formatDate(post.publishedAt, locale)}
               </time>
             )}
             {post.readingTimeMinutes && (
               <span className="text-text-secondary font-normal tracking-normal">
-                · {formatTamilReadingTime(post.readingTimeMinutes)}
+                · {t('readingTime', { minutes: post.readingTimeMinutes })}
               </span>
             )}
           </div>

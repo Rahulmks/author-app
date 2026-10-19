@@ -1,3 +1,4 @@
+import { getTranslations } from 'next-intl/server';
 import Container from '@/components/layout/Container';
 
 interface AwardsStripProps {
@@ -13,15 +14,16 @@ function splitAward(award: string) {
   return { year: match[1], text: award.slice(0, match.index).trim() };
 }
 
-export default function AwardsStrip({ awards }: AwardsStripProps) {
+export default async function AwardsStrip({ awards }: AwardsStripProps) {
   if (!awards.length) {
     return null;
   }
+  const t = await getTranslations('home');
 
   return (
     <section className="border-y border-border-color bg-background-secondary/40 py-6 md:py-8">
       <Container>
-        <p className="eyebrow mb-4 text-center md:text-left">விருதுகள்</p>
+        <p className="eyebrow mb-4 text-center md:text-left">{t('awards')}</p>
         <div className="grid gap-4 sm:grid-cols-2">
           {awards.map((award) => {
             const { year, text } = splitAward(award);

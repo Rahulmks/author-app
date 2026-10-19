@@ -1,12 +1,15 @@
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 import { Podcast } from '@/types/podcast';
-import { formatTamilDate, formatTamilEpisode } from '@/lib/navigation';
+import { formatDate } from '@/lib/navigation';
 
 interface PodcastCardProps {
   podcast: Podcast;
 }
 
 export default function PodcastCard({ podcast }: PodcastCardProps) {
+  const t = useTranslations('common');
+  const locale = useLocale();
   return (
     <article className="group border-t border-border-color py-4 md:py-5 first:border-t-0">
       <div className="flex items-start gap-4">
@@ -24,13 +27,13 @@ export default function PodcastCard({ podcast }: PodcastCardProps) {
         <div className="flex-1 min-w-0">
           <div className="mb-1 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
             {podcast.episodeNumber && (
-              <span>{formatTamilEpisode(podcast.episodeNumber)}</span>
+              <span>{t('episode', { number: podcast.episodeNumber })}</span>
             )}
             {podcast.episodeNumber && podcast.duration && <span>·</span>}
             {podcast.duration && <span className="text-text-secondary font-normal tracking-normal">{podcast.duration}</span>}
             {podcast.publishedAt && (
               <span className="text-text-secondary font-normal tracking-normal">
-                · <time dateTime={podcast.publishedAt}>{formatTamilDate(podcast.publishedAt)}</time>
+                · <time dateTime={podcast.publishedAt}>{formatDate(podcast.publishedAt, locale)}</time>
               </span>
             )}
           </div>

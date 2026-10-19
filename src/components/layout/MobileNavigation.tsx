@@ -1,8 +1,8 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, usePathname } from '@/i18n/routing';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { navigationItems, siteConfig } from '@/lib/navigation';
 
 interface MobileNavigationProps {
@@ -11,6 +11,7 @@ interface MobileNavigationProps {
 }
 
 export default function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
+  const t = useTranslations();
   const pathname = usePathname();
   const prevPathnameRef = useRef(pathname);
   const [postsExpanded, setPostsExpanded] = useState(pathname?.startsWith('/posts') ?? false);
@@ -66,7 +67,7 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
         id="mobile-navigation"
         role="dialog"
         aria-modal="true"
-        aria-label="முதன்மை வழிசெலுத்தல் பட்டியல்"
+        aria-label={t('nav.menuDialog')}
         className="fixed inset-y-0 right-0 z-10 flex h-full w-[85vw] max-w-sm flex-col border-l border-border-color bg-[#241A2E] bg-gradient-to-b from-[#2E2038] to-[#1A1225] shadow-2xl"
       >
         <div className="flex flex-col h-full">
@@ -75,17 +76,17 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
             <div className="flex items-start justify-between gap-4">
               <div>
                 <span className="block font-display text-lg sm:text-xl leading-tight text-text-primary">
-                  {siteConfig.authorName}
+                  {t('brand.name')}
                 </span>
                 <span className="mt-1 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-accent">
-                  {siteConfig.authorTitle}
+                  {t('brand.title')}
                 </span>
               </div>
               <button
                 type="button"
                 onClick={onClose}
                 className="-mr-1 rounded-full border border-border-color bg-paper p-2 text-text-primary transition-colors hover:border-accent hover:text-accent focus:outline-none focus:ring-2 focus:ring-accent/50"
-                aria-label="பட்டியலை மூடு"
+                aria-label={t('nav.closeMenu')}
               >
                 <svg
                   className="w-5 h-5"
@@ -101,15 +102,15 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
               </button>
             </div>
             <p className="mt-3 text-xs leading-6 text-text-secondary">
-              {siteConfig.tagline}
+              {t('brand.tagline')}
             </p>
           </div>
 
           {/* Navigation Links */}
-          <nav className="flex-1 overflow-y-auto p-5 sm:p-6" aria-label="பட்டியல் இணைப்புகள்">
+          <nav className="flex-1 overflow-y-auto p-5 sm:p-6" aria-label={t('nav.menuLinks')}>
             <ul className="space-y-2">
               {navigationItems.filter((item) => !item.hidden).map((item) => {
-                const isPostsActive = item.name === 'பதிவுகள்' && pathname?.startsWith('/posts');
+                const isPostsActive = item.href === '/posts' && pathname?.startsWith('/posts');
                 const isActive = isPostsActive || pathname === item.href ||
                   (item.href !== '/' && pathname?.startsWith(item.href));
                 
@@ -125,10 +126,10 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                             : 'border-transparent text-text-secondary hover:border-border-color hover:bg-paper/70 hover:text-text-primary'
                         }`}
                       >
-                        {item.name}
+                        {t(`nav.${item.key}`)}
                       </Link>
                       {item.children && (
-                        <button type="button" className="min-h-11 min-w-11 rounded-xl border border-border-color px-3 py-3 text-text-secondary" onClick={() => setPostsExpanded((expanded) => !expanded)} aria-expanded={postsExpanded} aria-label="பதிவுகள் துணைப் பட்டியலைத் திறக்க">
+                        <button type="button" className="min-h-11 min-w-11 rounded-xl border border-border-color px-3 py-3 text-text-secondary" onClick={() => setPostsExpanded((expanded) => !expanded)} aria-expanded={postsExpanded} aria-label={t('nav.toggleSubmenu')}>
                           {postsExpanded ? '−' : '+'}
                         </button>
                       )}
@@ -138,7 +139,7 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
                         {item.children.map((child) => (
                           <li key={child.href}>
                             <Link href={child.href} onClick={onClose} className="block min-h-11 border-l border-border-color px-4 py-2 text-[15px] text-text-secondary hover:border-accent hover:text-accent">
-                              {child.name}
+                              {t(`nav.${child.key}`)}
                             </Link>
                           </li>
                         ))}
@@ -152,7 +153,7 @@ export default function MobileNavigation({ isOpen, onClose }: MobileNavigationPr
             {/* Social Links */}
             <div className="mt-6 border-t border-border-color pt-6">
               <p className="mb-3 text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-text-secondary/70">
-                சமூக வலைப்பின்னல்
+                {t('nav.social')}
               </p>
               <div className="flex flex-wrap items-center gap-2">
                 {siteConfig.social.youtube && (

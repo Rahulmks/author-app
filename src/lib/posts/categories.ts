@@ -38,3 +38,21 @@ export function getCanonicalPostCategory(category?: string) {
 export function isPostInCategory(category: string | undefined, requestedCategory: string) {
   return getCanonicalPostCategory(category) === requestedCategory;
 }
+
+const categoryLabelKeys: Record<(typeof postCategories)[number], string> = {
+  'கதை': 'story',
+  'கட்டுரை': 'essay',
+  'அனுபவ பகிர்வு': 'experience',
+  'விமர்சனம்': 'criticism',
+  'வாசகர் கடிதம்': 'readerLetter',
+  'சினிமா': 'cinema',
+  'வகுப்பு': 'classes',
+  'அறிவிப்புகள்': 'announcements',
+  'நேர்காணல்': 'interviews',
+};
+
+/** Returns the `nav.*` message key for a stored category, or undefined if unknown. */
+export function getCategoryLabelKey(category?: string) {
+  const canonical = getCanonicalPostCategory(category);
+  return canonical ? categoryLabelKeys[canonical as (typeof postCategories)[number]] : undefined;
+}

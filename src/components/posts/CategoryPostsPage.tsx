@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
+import { getTranslations } from 'next-intl/server';
 
 import Container from '@/components/layout/Container';
 import PostCard from '@/components/posts/PostCard';
@@ -8,11 +9,15 @@ import { isPostInCategory } from '@/lib/posts/categories';
 
 interface CategoryPostsPageProps {
   category?: string;
-  eyebrow: string;
-  title: string;
+  /** Key under `nav` in the messages files, used for the eyebrow and title. */
+  labelKey: string;
 }
 
-export default async function CategoryPostsPage({ category, eyebrow, title }: CategoryPostsPageProps) {
+export default async function CategoryPostsPage({ category, labelKey }: CategoryPostsPageProps) {
+  const t = await getTranslations('posts');
+  const tNav = await getTranslations('nav');
+  const eyebrow = tNav(labelKey);
+  const title = eyebrow;
   const allPosts = await getPosts();
   const posts = category ? allPosts.filter((post) => isPostInCategory(post.category, category)) : allPosts;
 
@@ -29,8 +34,8 @@ export default async function CategoryPostsPage({ category, eyebrow, title }: Ca
           </div>
         ) : (
           <EmptyState
-            message="இந்தப் பிரிவில் தற்சமயம் பதிவுகள் எதுவும் இல்லை."
-            action={category ? <Link href="/posts" className="ink-link text-sm font-medium text-accent">அனைத்துப் பதிவுகளையும் காண்க</Link> : undefined}
+            message={t('empty')}
+            action={category ? <Link href="/posts" className="ink-link text-sm font-medium text-accent">{t('viewAll')}</Link> : undefined}
           />
         )}
       </div>

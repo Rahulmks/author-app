@@ -1,7 +1,9 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 import { PostSummary } from '@/types/post';
-import { formatTamilDate, formatTamilReadingTime } from '@/lib/navigation';
+import { formatDate } from '@/lib/navigation';
+import { getCategoryLabelKey } from '@/lib/posts/categories';
 
 interface PostGridCardProps {
   post: PostSummary;
@@ -9,6 +11,10 @@ interface PostGridCardProps {
 
 /** Home page card variant of a post summary, used in the recent-posts grid. */
 export default function PostGridCard({ post }: PostGridCardProps) {
+  const t = useTranslations('common');
+  const tNav = useTranslations('nav');
+  const categoryKey = getCategoryLabelKey(post.category);
+  const locale = useLocale();
   return (
     <article className="group flex h-full flex-col overflow-hidden rounded-xl border border-border-color/60 bg-paper/30 transition-colors hover:border-accent/60">
       <Link href={`/posts/${post.slug}`} className="flex h-full flex-col">
@@ -24,11 +30,11 @@ export default function PostGridCard({ post }: PostGridCardProps) {
         )}
         <div className="flex flex-1 flex-col p-4 md:p-5">
           <div className="mb-2 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
-            {post.category && <span>{post.category}</span>}
+            {post.category && <span>{categoryKey ? tNav(categoryKey) : post.category}</span>}
             {post.category && post.publishedAt && <span>·</span>}
             {post.publishedAt && (
               <time dateTime={post.publishedAt} className="font-normal tracking-normal text-text-secondary">
-                {formatTamilDate(post.publishedAt)}
+                {formatDate(post.publishedAt, locale)}
               </time>
             )}
           </div>
@@ -40,7 +46,7 @@ export default function PostGridCard({ post }: PostGridCardProps) {
           )}
           {post.readingTimeMinutes && (
             <p className="mt-auto pt-3 text-xs text-text-secondary">
-              {formatTamilReadingTime(post.readingTimeMinutes)}
+              {t('readingTime', { minutes: post.readingTimeMinutes })}
             </p>
           )}
         </div>

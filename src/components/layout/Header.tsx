@@ -1,13 +1,15 @@
 'use client';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState, useCallback } from 'react';
+import { Link, usePathname } from '@/i18n/routing';
+import { Suspense, useEffect, useRef, useState, useCallback } from 'react';
+import { useTranslations } from 'next-intl';
 import Container from './Container';
+import LanguageSwitcher from './LanguageSwitcher';
 import MobileNavigation from './MobileNavigation';
-import { navigationItems, siteConfig } from '@/lib/navigation';
+import { navigationItems } from '@/lib/navigation';
 
 export default function Header() {
+  const t = useTranslations();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -52,22 +54,22 @@ export default function Header() {
     <header>
       <div className="border-b border-border-color">
         <Container>
-          <nav ref={navigationRef} className="flex items-center justify-between gap-4 py-4 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-8" aria-label="முதன்மை வழிசெலுத்தல்">
+          <nav ref={navigationRef} className="flex items-center justify-between gap-4 py-4 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-8" aria-label={t('nav.primary')}>
             <Link 
               href="/" 
               className="group block text-text-primary"
             >
               <span className="block font-display text-xl leading-tight md:text-2xl">
-                {siteConfig.authorName}
+                {t('brand.name')}
               </span>
               <span className="mt-1 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-accent transition-opacity group-hover:opacity-80">
-                {siteConfig.authorTitle}
+                {t('brand.title')}
               </span>
             </Link>
 
             <ul className="hidden xl:flex items-center gap-6">
               {navigationItems.filter((item) => !item.hidden).map((item) => {
-                const isPostsActive = item.name === 'பதிவுகள்' && pathname?.startsWith('/posts');
+                const isPostsActive = item.href === '/posts' && pathname?.startsWith('/posts');
                 const isActive = isPostsActive || pathname === item.href ||
                   (item.href !== '/' && pathname?.startsWith(item.href));
                 const isOpen = openMenu === item.href;
@@ -103,7 +105,7 @@ export default function Header() {
                       }`}
                       aria-current={isActive ? 'page' : undefined}
                     >
-                      {item.name}
+                      {t(`nav.${item.key}`)}
                     </Link>
                     {item.children && isOpen && (
                       <div className="absolute left-0 top-full z-50 pt-3" onMouseEnter={() => setOpenMenu(item.href)}>
@@ -129,7 +131,7 @@ export default function Header() {
                               }}
                               className="block min-h-11 whitespace-nowrap px-3 py-2 text-[15px] text-text-secondary hover:bg-accent-soft hover:text-accent"
                             >
-                              {child.name}
+                              {t(`nav.${child.key}`)}
                             </Link>
                           </li>
                         ))}
@@ -142,13 +144,17 @@ export default function Header() {
             </ul>
 
             {/* Mobile Menu Button */}
+            <div className="flex items-center gap-2 xl:justify-self-end">
+            <Suspense fallback={null}>
+              <LanguageSwitcher />
+            </Suspense>
             <button
               type="button"
               className="flex min-h-11 min-w-11 items-center justify-center p-2 text-text-primary transition-colors hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent xl:hidden"
               onClick={handleOpenMobileMenu}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"
-              aria-label="பட்டியலைத் திறக்க"
+              aria-label={t('nav.openMenu')}
             >
               <svg
                 className="w-6 h-6"
@@ -162,6 +168,7 @@ export default function Header() {
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
+            </div>
           </nav>
         </Container>
       </div>

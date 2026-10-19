@@ -1,13 +1,19 @@
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 import Image from 'next/image';
+import { useLocale, useTranslations } from 'next-intl';
 import { Post } from '@/types/post';
-import { formatTamilDate, formatTamilReadingTime } from '@/lib/navigation';
+import { formatDate } from '@/lib/navigation';
+import { getCategoryLabelKey } from '@/lib/posts/categories';
 
 interface FeaturedPostProps {
   post: Post;
 }
 
 export default function FeaturedPost({ post }: FeaturedPostProps) {
+  const t = useTranslations('common');
+  const tNav = useTranslations('nav');
+  const categoryKey = getCategoryLabelKey(post.category);
+  const locale = useLocale();
   return (
     <article className="group border-y border-border-color py-6 md:py-8">
       <Link 
@@ -28,7 +34,7 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
         <div>
           {post.category && (
             <p className="mb-3 text-[0.72rem] font-medium uppercase tracking-[0.24em] text-accent">
-              {post.category}
+              {categoryKey ? tNav(categoryKey) : post.category}
             </p>
           )}
           
@@ -43,18 +49,18 @@ export default function FeaturedPost({ post }: FeaturedPostProps) {
           <div className="mb-6 flex flex-wrap items-center gap-3 text-sm text-text-secondary">
             {post.publishedAt && (
               <time dateTime={post.publishedAt}>
-                {formatTamilDate(post.publishedAt, 'long')}
+                {formatDate(post.publishedAt, locale, 'long')}
               </time>
             )}
             {post.readingTimeMinutes && (
               <>
                 {post.publishedAt && <span>·</span>}
-                <span>{formatTamilReadingTime(post.readingTimeMinutes)}</span>
+                <span>{t('readingTime', { minutes: post.readingTimeMinutes })}</span>
               </>
             )}
           </div>
           
-          <span className="ink-link inline-flex font-medium text-accent">கட்டுரையைத் திறக்க</span>
+          <span className="ink-link inline-flex font-medium text-accent">{t('openArticle')}</span>
         </div>
       </Link>
     </article>
