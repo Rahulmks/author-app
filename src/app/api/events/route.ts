@@ -60,6 +60,9 @@ function normalizeEvent(input: Record<string, unknown>, existing?: AuthorEvent):
   }
 
   const slug = toOptionalString(input.slug) ?? toSlug(title);
+  const imageUrl = Object.prototype.hasOwnProperty.call(input, 'imageUrl')
+    ? toOptionalString(input.imageUrl)
+    : existing?.imageUrl;
 
   return {
     id: existing?.id ?? `event-${crypto.randomUUID()}`,
@@ -72,6 +75,7 @@ function normalizeEvent(input: Record<string, unknown>, existing?: AuthorEvent):
     format,
     status: normalizeEventStatus(input.status),
     registrationUrl: toOptionalString(input.registrationUrl),
+    imageUrl,
   };
 }
 

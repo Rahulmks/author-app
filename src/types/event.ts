@@ -11,4 +11,5 @@ export interface AuthorEvent {
   format: string;
   status: EventStatus;
   registrationUrl?: string;
+  imageUrl?: string;
 }

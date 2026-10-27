@@ -1,6 +1,7 @@
 'use client';
 
 import { FormEvent, useEffect, useState } from 'react';
+import AdminImageFieldUploader from '@/components/admin/AdminImageFieldUploader';
 
 interface EventRecord {
   id: string;
@@ -13,6 +14,7 @@ interface EventRecord {
   format: string;
   status: 'upcoming' | 'past';
   registrationUrl?: string;
+  imageUrl?: string;
 }
 
 interface EventFormState {
@@ -26,6 +28,7 @@ interface EventFormState {
   format: string;
   status: 'upcoming' | 'past';
   registrationUrl: string;
+  imageUrl: string;
 }
 
 const initialForm: EventFormState = {
@@ -38,6 +41,7 @@ const initialForm: EventFormState = {
   format: '',
   status: 'upcoming',
   registrationUrl: '',
+  imageUrl: '',
 };
 
 export default function AdminEventsManager() {
@@ -111,6 +115,7 @@ export default function AdminEventsManager() {
       format: event.format,
       status: event.status,
       registrationUrl: event.registrationUrl ?? '',
+      imageUrl: event.imageUrl ?? '',
     });
     setMessage(null);
     setError(null);
@@ -198,6 +203,12 @@ export default function AdminEventsManager() {
         <div>
           <label htmlFor="event-registration-url" className="mb-1 block text-sm text-text-secondary">Registration / notes URL</label>
           <input id="event-registration-url" type="url" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.registrationUrl} onChange={(event) => setForm((prev) => ({ ...prev, registrationUrl: event.target.value }))} />
+        </div>
+
+        <div>
+          <label htmlFor="event-image-url" className="mb-1 block text-sm text-text-secondary">Event image</label>
+          <input id="event-image-url" type="text" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.imageUrl} onChange={(event) => setForm((prev) => ({ ...prev, imageUrl: event.target.value }))} placeholder="Upload an image or enter its URL" />
+          <AdminImageFieldUploader folder="events" onUploaded={(path) => setForm((prev) => ({ ...prev, imageUrl: path }))} />
         </div>
 
         {error && <p role="alert" className="border-l-4 border-sun bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{error}</p>}

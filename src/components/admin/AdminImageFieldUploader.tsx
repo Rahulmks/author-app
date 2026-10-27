@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 
-type UploadFolder = 'posts' | 'books' | 'podcasts' | 'videos' | 'author' | 'general';
+type UploadFolder = 'posts' | 'books' | 'podcasts' | 'videos' | 'events' | 'author' | 'general';
 
 interface UploadResponse {
   objectKey: string;

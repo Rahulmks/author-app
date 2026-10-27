@@ -4,13 +4,14 @@ import { createUploadUrl } from '@/lib/aws/presigned-url';
 import { getS3Client, isS3Configured } from '@/lib/aws/s3-client';
 import { requireAdminSession } from '@/lib/auth/auth';
 
-type UploadFolder = 'posts' | 'books' | 'podcasts' | 'videos' | 'author' | 'general';
+type UploadFolder = 'posts' | 'books' | 'podcasts' | 'videos' | 'events' | 'author' | 'general';
 
 const folderPrefixMap: Record<UploadFolder, string> = {
   posts: 'media/posts',
   books: 'media/books',
   podcasts: 'media/podcasts',
   videos: 'media/videos',
+  events: 'media/events',
   author: 'media/author',
   general: 'media/general',
 };
