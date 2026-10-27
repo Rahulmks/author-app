@@ -26,6 +26,11 @@ export function revalidatePodcasts() {
   revalidatePath('/podcast');
 }
 
+export function revalidateEvents() {
+  revalidateTag('events');
+  revalidatePath('/events');
+}
+
 export function revalidatePages() {
   revalidateTag('pages');
   revalidatePath('/about');

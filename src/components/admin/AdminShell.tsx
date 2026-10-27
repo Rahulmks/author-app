@@ -10,6 +10,7 @@ const navigationItems = [
   { href: '/admin/books', label: 'Books' },
   { href: '/admin/podcasts', label: 'Podcasts' },
   { href: '/admin/videos', label: 'Videos' },
+  { href: '/admin/events', label: 'Events' },
   { href: '/admin/media', label: 'Media' },
 ];
 

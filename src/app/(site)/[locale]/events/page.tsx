@@ -2,12 +2,17 @@ import Container from '@/components/layout/Container';
 import { getTranslations } from 'next-intl/server';
 import EventCard from '@/components/events/EventCard';
 import EmptyState from '@/components/ui/EmptyState';
-import { mockEvents } from '@/data/events';
+import { eventRepository } from '@/lib/repositories';
 
 export default async function EventsPage() {
   const t = await getTranslations('eventsPage');
-  const upcomingEvents = mockEvents.filter((event) => event.status === 'upcoming');
-  const pastEvents = mockEvents.filter((event) => event.status === 'past');
+  const events = await eventRepository.getEvents();
+  const upcomingEvents = events
+    .filter((event) => event.status === 'upcoming')
+    .sort((left, right) => left.date.localeCompare(right.date));
+  const pastEvents = events
+    .filter((event) => event.status === 'past')
+    .sort((left, right) => right.date.localeCompare(left.date));
 
   return (
     <Container className="py-8 md:py-12">
