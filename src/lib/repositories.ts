@@ -1,4 +1,6 @@
 import { isS3Configured } from '@/lib/aws/s3-client';
+import { MockEventRepository } from '@/lib/events/mock-event-repository';
+import { S3EventRepository } from '@/lib/events/s3-event-repository';
 import { MockBookRepository } from '@/lib/books/mock-book-repository';
 import { S3BookRepository } from '@/lib/books/s3-book-repository';
 import { MockPodcastRepository } from '@/lib/podcasts/mock-podcast-repository';
@@ -23,3 +25,7 @@ export const videoRepository = isS3Configured()
 export const podcastRepository = isS3Configured()
   ? new S3PodcastRepository()
   : new MockPodcastRepository();
+
+export const eventRepository = isS3Configured()
+  ? new S3EventRepository()
+  : new MockEventRepository();

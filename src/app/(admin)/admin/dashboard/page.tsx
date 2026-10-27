@@ -24,6 +24,11 @@ const cards = [
     description: 'Manage all video entries and metadata.',
   },
   {
+    href: '/admin/events',
+    title: 'Events',
+    description: 'Create and manage public event listings.',
+  },
+  {
     href: '/admin/media',
     title: 'Media Uploads',
     description: 'Upload images and copy generated paths.',
