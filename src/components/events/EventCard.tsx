@@ -44,15 +44,21 @@ export default function EventCard({ event }: EventCardProps) {
         {(imageSrc || event.registrationUrl) && (
           <div className="flex flex-shrink-0 flex-col gap-2 md:items-end">
             {imageSrc && (
-              <div className="relative h-36 w-full overflow-hidden rounded-lg bg-cream md:h-24 md:w-36">
+              <a
+                href={imageSrc}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`View full image: ${event.title}`}
+                className="relative block h-48 w-full overflow-hidden rounded-lg bg-cream md:h-36 md:w-48"
+              >
                 <Image
                   src={imageSrc}
                   alt={event.title}
                   fill
-                  sizes="(max-width: 768px) 100vw, 144px"
-                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 192px"
+                  className="object-contain"
                 />
-              </div>
+              </a>
             )}
             {event.registrationUrl && (
               <div className="pt-1 md:pt-0">
