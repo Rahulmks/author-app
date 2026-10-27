@@ -47,6 +47,7 @@ const initialForm: EventFormState = {
 export default function AdminEventsManager() {
   const [events, setEvents] = useState<EventRecord[]>([]);
   const [form, setForm] = useState<EventFormState>(initialForm);
+  const [imageUploaderKey, setImageUploaderKey] = useState(0);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
@@ -95,6 +96,7 @@ export default function AdminEventsManager() {
 
       await fetchEvents();
       setForm(initialForm);
+      setImageUploaderKey((key) => key + 1);
       setMessage(form.id ? 'Event updated.' : 'Event created.');
     } catch (saveError) {
       setError(saveError instanceof Error ? saveError.message : 'Unable to save event.');
@@ -104,6 +106,7 @@ export default function AdminEventsManager() {
   };
 
   const onEdit = (event: EventRecord) => {
+    setImageUploaderKey((key) => key + 1);
     setForm({
       id: event.id,
       title: event.title,
@@ -141,6 +144,7 @@ export default function AdminEventsManager() {
 
     if (form.id === id) {
       setForm(initialForm);
+      setImageUploaderKey((key) => key + 1);
     }
 
     await fetchEvents();
@@ -208,7 +212,7 @@ export default function AdminEventsManager() {
         <div>
           <label htmlFor="event-image-url" className="mb-1 block text-sm text-text-secondary">Event image</label>
           <input id="event-image-url" type="text" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.imageUrl} onChange={(event) => setForm((prev) => ({ ...prev, imageUrl: event.target.value }))} placeholder="Upload an image or enter its URL" />
-          <AdminImageFieldUploader folder="events" onUploaded={(path) => setForm((prev) => ({ ...prev, imageUrl: path }))} />
+          <AdminImageFieldUploader key={imageUploaderKey} folder="events" onUploaded={(path) => setForm((prev) => ({ ...prev, imageUrl: path }))} />
         </div>
 
         {error && <p role="alert" className="border-l-4 border-sun bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{error}</p>}
@@ -218,7 +222,18 @@ export default function AdminEventsManager() {
           <button type="submit" className="btn-primary" disabled={saving}>
             {saving ? 'Saving...' : form.id ? 'Update Event' : 'Create Event'}
           </button>
-          <button type="button" className="btn-secondary text-sm" onClick={() => setForm(initialForm)}>Reset</button>
+          <button
+            type="button"
+            className="btn-secondary text-sm"
+            onClick={() => {
+              setForm(initialForm);
+              setImageUploaderKey((key) => key + 1);
+              setError(null);
+              setMessage(null);
+            }}
+          >
+            Reset
+          </button>
         </div>
       </form>
 
