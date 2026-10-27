@@ -12,7 +12,7 @@ export default async function HeroSection() {
       <Container>
         <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12 lg:gap-16">
           <div className="order-1 mx-auto w-40 sm:w-48 md:order-2 md:mx-0 md:w-full">
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-border-color">
+            <div className="media-frame relative aspect-[4/5] shadow-card">
               <Image
                 src={resolveImagePath('/images/author/profile.png') ?? '/images/author/profile.png'}
                 alt={t('home.heroPortraitAlt')}
@@ -26,23 +26,17 @@ export default async function HeroSection() {
 
           <div className="order-2 text-center md:order-1 md:text-left">
             <p className="eyebrow mb-4">{t('brand.title')}</p>
-            <h1 className="mb-5 text-4xl font-semibold leading-[1.12] sm:text-5xl lg:text-6xl">
+            <h1 className="mb-5 text-4xl font-bold leading-[1.15]">
               {t('brand.name')}
             </h1>
             <p className="mx-auto max-w-2xl text-base leading-8 text-text-secondary md:mx-0 md:text-lg md:leading-9">
               {t('home.heroBody')}
             </p>
             <div className="mt-7 flex flex-wrap justify-center gap-4 md:justify-start">
-              <Link
-                href="/posts"
-                className="ink-link inline-flex items-center text-sm font-medium text-accent"
-              >
+              <Link href="/posts" className="btn-primary">
                 {t('home.readWritings')}
               </Link>
-              <Link
-                href="/about"
-                className="ink-link inline-flex items-center text-sm font-medium text-text-secondary hover:text-accent"
-              >
+              <Link href="/about" className="btn-secondary">
                 {t('home.meetAuthor')}
               </Link>
             </div>

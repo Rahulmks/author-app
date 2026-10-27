@@ -40,7 +40,7 @@ All pages consume shared components to prevent visual drift:
 
 ## 3. Design System Tokens & Typography
 
-- **Palette**: Vintage cinema-ticket / manuscript palette defined in CSS variables (`--background`, `--text-primary`, `--accent`, `--paper`).
+- **Palette**: Vintage cinema-ticket / manuscript palette defined in CSS variables. The raspberry-pink highlight is reserved for small wayfinding and editorial details, including active and hovered navigation; use the semantic `--highlight-text` token so contrast stays appropriate in both themes. Keep primary calls to action in the warm CTA color.
 - **Font Stack**: Google Fonts `Noto_Sans_Tamil` (sans) and `Noto_Serif_Tamil` (display serif) loaded with `font-display: swap`.
 - **Typography Hierarchy**:
   - `H1`: Page Titles — `text-3xl font-semibold md:text-4xl`

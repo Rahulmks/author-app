@@ -34,7 +34,7 @@ export default async function HomePage() {
 
       {featuredPost && (
         <>
-          <section className="py-10 md:py-14">
+          <section className="py-8 md:py-14">
             <Container>
               <SectionHeading subtitle={t('featuredSubtitle')}>
                 {t('featured')}
@@ -49,7 +49,7 @@ export default async function HomePage() {
       <QuoteGrid quotes={quotes} />
 
       {latestPosts.length > 0 && (
-        <section className="py-10 md:py-14">
+        <section className="py-8 md:py-14">
           <Container>
             <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
               <div>
@@ -58,7 +58,7 @@ export default async function HomePage() {
                   {t('latestSubtitle')}
                 </p>
               </div>
-              <Link href="/posts" className="ink-link whitespace-nowrap text-sm font-medium text-accent">
+              <Link href="/posts" className="ink-link inline-flex min-h-11 items-center whitespace-nowrap text-sm">
                 {t('viewAll')}
               </Link>
             </div>

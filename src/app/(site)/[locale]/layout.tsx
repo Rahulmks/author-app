@@ -5,14 +5,14 @@ import { getMessages, getTranslations, setRequestLocale } from 'next-intl/server
 import '../../../styles/globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { bodyFont, displayFont } from '@/lib/fonts';
+import { fontVariables } from '@/lib/fonts';
 import { isLocale, locales } from '@/i18n/routing';
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#1A1225',
+  themeColor: '#93CBC4',
 };
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
@@ -41,7 +41,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={params.locale}>
-      <body className={`${bodyFont.variable} ${displayFont.variable} font-sans`}>
+      <body className={`${fontVariables} font-sans`}>
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main>{children}</main>

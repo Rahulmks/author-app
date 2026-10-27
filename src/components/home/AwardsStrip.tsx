@@ -21,7 +21,7 @@ export default async function AwardsStrip({ awards }: AwardsStripProps) {
   const t = await getTranslations('home');
 
   return (
-    <section className="border-y border-border-color bg-background-secondary/40 py-6 md:py-8">
+    <section className="on-surface border-y border-line bg-cream py-6 md:py-8">
       <Container>
         <p className="eyebrow mb-4 text-center md:text-left">{t('awards')}</p>
         <div className="grid gap-4 sm:grid-cols-2">
@@ -30,11 +30,11 @@ export default async function AwardsStrip({ awards }: AwardsStripProps) {
             return (
               <div
                 key={award}
-                className="flex items-start gap-4 rounded-xl border border-border-color/60 p-4 md:p-5"
+                className="card flex items-start gap-4 p-4 md:p-5"
               >
                 <svg
                   aria-hidden="true"
-                  className="mt-1 h-6 w-6 flex-shrink-0 text-accent"
+                  className="mt-1 h-6 w-6 flex-shrink-0 text-highlight"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -44,11 +44,11 @@ export default async function AwardsStrip({ awards }: AwardsStripProps) {
                 </svg>
                 <div>
                   {year && (
-                    <span className="block font-display text-2xl text-accent md:text-3xl">
+                    <span className="block font-display text-2xl font-bold text-highlight md:text-3xl">
                       {year}
                     </span>
                   )}
-                  <p className="mt-1 text-sm leading-relaxed text-text-secondary md:text-base">
+                  <p className="mb-0 mt-1 text-sm leading-relaxed text-text-secondary md:text-base">
                     {text}
                   </p>
                 </div>

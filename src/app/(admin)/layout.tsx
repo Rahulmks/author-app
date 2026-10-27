@@ -1,12 +1,12 @@
 import type { Viewport } from 'next';
 import '../../styles/globals.css';
-import { bodyFont, displayFont } from '@/lib/fonts';
+import { fontVariables } from '@/lib/fonts';
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 5,
-  themeColor: '#1A1225',
+  themeColor: '#93CBC4',
 };
 
 export default function AdminRootLayout({
@@ -16,7 +16,7 @@ export default function AdminRootLayout({
 }) {
   return (
     <html lang="ta">
-      <body className={`${bodyFont.variable} ${displayFont.variable} font-sans`}>
+      <body className={`${fontVariables} font-sans`}>
         {children}
       </body>
     </html>

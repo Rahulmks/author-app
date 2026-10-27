@@ -63,7 +63,7 @@ export default function AdminMediaUploader() {
         <p className="text-sm text-text-secondary">Upload image assets to S3 and copy the returned path into your content forms.</p>
       </div>
 
-      <form className="grid gap-4 rounded-2xl border border-border-color p-4" onSubmit={onSubmit}>
+      <form className="grid gap-4 rounded-xl border border-line p-4" onSubmit={onSubmit}>
         <div>
           <label htmlFor="folder" className="mb-1 block text-sm font-medium text-text-secondary">
             Folder
@@ -72,7 +72,7 @@ export default function AdminMediaUploader() {
             id="folder"
             value={folder}
             onChange={(event) => setFolder(event.target.value as UploadFolder)}
-            className="w-full rounded-xl border border-border-color bg-paper px-3 py-2"
+            className="w-full rounded-lg border border-line bg-cream px-3 py-2"
           >
             <option value="posts">posts</option>
             <option value="books">books</option>
@@ -93,11 +93,11 @@ export default function AdminMediaUploader() {
             type="file"
             required
             onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-            className="w-full rounded-xl border border-border-color bg-paper px-3 py-2"
+            className="w-full rounded-lg border border-line bg-cream px-3 py-2"
           />
         </div>
 
-        {error && <p className="text-sm text-red-700">{error}</p>}
+        {error && <p className="border-l-4 border-sun bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{error}</p>}
 
         <button type="submit" disabled={uploading} className="btn-primary w-fit">
           {uploading ? 'Uploading...' : 'Upload'}
@@ -105,10 +105,10 @@ export default function AdminMediaUploader() {
       </form>
 
       {result && (
-        <div className="rounded-2xl border border-green-600/40 bg-green-100/50 p-4">
-          <p className="mb-2 text-sm font-semibold text-green-900">Upload complete</p>
-          <p className="text-sm text-green-900">Storage key: {result.objectKey}</p>
-          {result.publicUrl && <p className="text-sm text-green-900">Public path: {result.publicUrl}</p>}
+        <div className="border-l-4 border-sky bg-cream p-4">
+          <p className="mb-2 text-sm font-semibold text-text-primary">Upload complete</p>
+          <p className="text-sm text-text-primary">Storage key: {result.objectKey}</p>
+          {result.publicUrl && <p className="text-sm text-text-primary">Public path: {result.publicUrl}</p>}
         </div>
       )}
     </div>

@@ -11,39 +11,39 @@ export default function PodcastCard({ podcast }: PodcastCardProps) {
   const t = useTranslations('common');
   const locale = useLocale();
   return (
-    <article className="group border-t border-border-color py-4 md:py-5 first:border-t-0">
+    <article className="group border-t border-line py-4 md:py-5 first:border-t-0">
       <div className="flex items-start gap-4">
         {podcast.coverImage && (
-          <div className="relative h-16 w-16 md:h-20 md:w-20 flex-shrink-0 overflow-hidden rounded border border-border-color/60 bg-paper">
+          <div className="media-frame relative h-16 w-16 flex-shrink-0 md:h-20 md:w-20">
             <Image
               src={podcast.coverImage}
               alt={podcast.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-200 group-hover:scale-105"
             />
           </div>
         )}
         
         <div className="flex-1 min-w-0">
-          <div className="mb-1 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
+          <div className="label mb-1 flex flex-wrap items-center gap-2">
             {podcast.episodeNumber && (
               <span>{t('episode', { number: podcast.episodeNumber })}</span>
             )}
             {podcast.episodeNumber && podcast.duration && <span>·</span>}
-            {podcast.duration && <span className="text-text-secondary font-normal tracking-normal">{podcast.duration}</span>}
+            {podcast.duration && <span className="font-normal normal-case tracking-normal">{podcast.duration}</span>}
             {podcast.publishedAt && (
-              <span className="text-text-secondary font-normal tracking-normal">
+              <span className="font-normal normal-case tracking-normal">
                 · <time dateTime={podcast.publishedAt}>{formatDate(podcast.publishedAt, locale)}</time>
               </span>
             )}
           </div>
           
-          <h3 className="mb-1 text-base md:text-lg font-medium leading-snug transition-colors group-hover:text-accent">
+          <h3 className="mb-1 text-base font-semibold leading-snug md:text-lg">
             {podcast.title}
           </h3>
           
           {podcast.description && (
-            <p className="mb-2 line-clamp-2 text-xs md:text-sm leading-relaxed text-text-secondary">
+            <p className="mb-2 line-clamp-2 text-sm leading-relaxed text-text-secondary">
               {podcast.description}
             </p>
           )}
@@ -54,7 +54,7 @@ export default function PodcastCard({ podcast }: PodcastCardProps) {
                 href={podcast.platforms.spotify}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ink-link text-xs font-medium text-accent"
+                className="ink-link inline-flex min-h-11 items-center text-sm"
               >
                 Spotify
               </a>
@@ -64,7 +64,7 @@ export default function PodcastCard({ podcast }: PodcastCardProps) {
                 href={podcast.platforms.apple}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ink-link text-xs font-medium text-accent"
+                className="ink-link inline-flex min-h-11 items-center text-sm"
               >
                 Apple
               </a>
@@ -74,7 +74,7 @@ export default function PodcastCard({ podcast }: PodcastCardProps) {
                 href={podcast.platforms.youtube}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ink-link text-xs font-medium text-accent"
+                className="ink-link inline-flex min-h-11 items-center text-sm"
               >
                 YouTube
               </a>

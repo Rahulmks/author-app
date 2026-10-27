@@ -150,58 +150,58 @@ export default function AdminBooksManager() {
         <p className="text-sm text-text-secondary">Add and update books shown on the public books page.</p>
       </div>
 
-      <form className="grid gap-4 rounded-2xl border border-border-color p-4" onSubmit={onSubmit}>
+      <form className="grid gap-4 rounded-xl border border-line p-4" onSubmit={onSubmit}>
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Title</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.title} required onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.title} required onChange={(event) => setForm((prev) => ({ ...prev, title: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Slug</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.slug} onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))} placeholder="auto-generated if empty" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.slug} onChange={(event) => setForm((prev) => ({ ...prev, slug: event.target.value }))} placeholder="auto-generated if empty" />
           </div>
         </div>
 
         <div>
           <label className="mb-1 block text-sm text-text-secondary">Description</label>
-          <textarea className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" rows={4} value={form.description} required onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))} />
+          <textarea className="w-full rounded-lg border border-line bg-cream px-3 py-2" rows={4} value={form.description} required onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))} />
         </div>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Cover Image Path</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/books/book.jpg" />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.coverImage} onChange={(event) => setForm((prev) => ({ ...prev, coverImage: event.target.value }))} placeholder="media/books/book.jpg" />
             <AdminImageFieldUploader folder="books" onUploaded={(path) => setForm((prev) => ({ ...prev, coverImage: path }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Publication Year</label>
-            <input type="number" className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.publicationYear} onChange={(event) => setForm((prev) => ({ ...prev, publicationYear: event.target.value }))} />
+            <input type="number" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.publicationYear} onChange={(event) => setForm((prev) => ({ ...prev, publicationYear: event.target.value }))} />
           </div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Publisher</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.publisher} onChange={(event) => setForm((prev) => ({ ...prev, publisher: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.publisher} onChange={(event) => setForm((prev) => ({ ...prev, publisher: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Language</label>
-            <input className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.language} onChange={(event) => setForm((prev) => ({ ...prev, language: event.target.value }))} />
+            <input className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.language} onChange={(event) => setForm((prev) => ({ ...prev, language: event.target.value }))} />
           </div>
           <div>
             <label className="mb-1 block text-sm text-text-secondary">Purchase URL</label>
-            <input type="url" className="w-full rounded-xl border border-border-color bg-paper px-3 py-2" value={form.purchaseUrl} onChange={(event) => setForm((prev) => ({ ...prev, purchaseUrl: event.target.value }))} />
+            <input type="url" className="w-full rounded-lg border border-line bg-cream px-3 py-2" value={form.purchaseUrl} onChange={(event) => setForm((prev) => ({ ...prev, purchaseUrl: event.target.value }))} />
           </div>
         </div>
 
-        {error && <p className="text-sm text-red-700">{error}</p>}
-        {message && <p className="text-sm text-green-800">{message}</p>}
+        {error && <p className="border-l-4 border-sun bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{error}</p>}
+        {message && <p className="border-l-4 border-sky bg-cream px-3 py-2 text-sm font-semibold text-text-primary">{message}</p>}
 
         <div className="flex gap-3">
           <button type="submit" className="btn-primary" disabled={saving}>
             {saving ? 'Saving...' : form.id ? 'Update Book' : 'Create Book'}
           </button>
-          <button type="button" className="rounded-xl border border-border-color px-4 py-2 text-sm" onClick={() => setForm(initialForm)}>
+          <button type="button" className="btn-secondary text-sm" onClick={() => setForm(initialForm)}>
             Reset
           </button>
         </div>
@@ -213,14 +213,14 @@ export default function AdminBooksManager() {
           <p className="text-sm text-text-secondary">Loading books...</p>
         ) : (
           books.map((book) => (
-            <div key={book.id} className="flex flex-col gap-3 rounded-2xl border border-border-color p-4 md:flex-row md:items-center md:justify-between">
+            <div key={book.id} className="flex flex-col gap-3 rounded-xl border border-line p-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="font-medium">{book.title}</p>
                 <p className="text-sm text-text-secondary">/{book.slug}</p>
               </div>
               <div className="flex gap-2">
-                <button type="button" className="rounded-xl border border-border-color px-3 py-2 text-sm" onClick={() => onEdit(book)}>Edit</button>
-                <button type="button" className="rounded-xl border border-red-400 px-3 py-2 text-sm text-red-700" onClick={() => onDelete(book.id)}>Delete</button>
+                <button type="button" className="btn-secondary text-sm" onClick={() => onEdit(book)}>Edit</button>
+                <button type="button" className="btn-secondary text-sm" onClick={() => onDelete(book.id)}>Delete</button>
               </div>
             </div>
           ))

@@ -29,8 +29,8 @@ export default function VideoCard({ video }: VideoCardProps) {
     : '/images/placeholder.svg';
 
   return (
-    <article className="group flex flex-col h-full rounded-lg border border-border-color/60 bg-paper/30 p-3 transition-colors hover:border-accent/60">
-      <div className="relative aspect-[16/9] w-full overflow-hidden rounded bg-border-color mb-3">
+    <article className="card card-tilt group flex h-full flex-col">
+      <div className="media-frame relative aspect-[16/9] w-full">
         {isPlaying && youtubeId ? (
           <iframe
             src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
@@ -59,8 +59,8 @@ export default function VideoCard({ video }: VideoCardProps) {
               className="object-cover transition-transform duration-300 group-hover/thumb:scale-105"
             />
             {/* Play Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black/30 group-hover/thumb:bg-black/15 transition-colors">
-              <div className="flex h-11 w-11 items-center justify-center rounded-full bg-background/85 text-foreground border border-border-color/60 shadow-lg group-hover/thumb:scale-110 transition-transform">
+            <div className="scrim absolute inset-0 flex items-center justify-center transition-colors group-hover/thumb:bg-transparent">
+              <div className="flex h-11 w-11 items-center justify-center rounded-full border border-line bg-paper text-text-primary shadow-card transition-transform group-hover/thumb:scale-110">
                 <svg className="h-5 w-5 fill-current ml-0.5" viewBox="0 0 24 24">
                   <path d="M8 5v14l11-7z" />
                 </svg>
@@ -69,7 +69,7 @@ export default function VideoCard({ video }: VideoCardProps) {
 
             {/* Duration Badge */}
             {video.duration && (
-              <span className="absolute bottom-2 right-2 rounded bg-background/90 px-1.5 py-0.5 font-mono text-[0.68rem] tracking-wider text-foreground backdrop-blur-sm border border-border-color/30">
+              <span className="absolute bottom-2 right-2 rounded bg-ink px-1.5 py-0.5 text-xs font-semibold tabular-nums tracking-wider text-white">
                 {video.duration}
               </span>
             )}
@@ -77,26 +77,26 @@ export default function VideoCard({ video }: VideoCardProps) {
         )}
       </div>
 
-      <div className="flex flex-1 flex-col justify-between">
-        <div>
+      <div className="card-body justify-between">
+        <div className="flex flex-col">
+          <h3 className="card-title">
+            {video.title}
+          </h3>
+
           {video.category && (
-            <p className="mb-1 text-[0.68rem] font-medium uppercase tracking-[0.18em] text-accent">
+            <p className="label mb-1">
               {video.category}
             </p>
           )}
 
-          <h3 className="mb-1.5 line-clamp-2 text-sm md:text-base font-medium leading-snug text-text-primary group-hover:text-accent transition-colors">
-            {video.title}
-          </h3>
-
           {video.description && (
-            <p className="line-clamp-2 text-xs text-text-secondary leading-relaxed mb-3">
+            <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-text-secondary">
               {video.description}
             </p>
           )}
         </div>
 
-        <div className="flex items-center gap-2 pt-2 border-t border-border-color/40 text-[0.72rem] text-text-secondary">
+        <div className="flex items-center gap-2 border-t border-line pt-2 text-xs text-text-secondary">
           {video.platform && <span className="capitalize">{video.platform}</span>}
           {video.platform && video.duration && <span>·</span>}
           {video.duration && <span>{video.duration}</span>}

@@ -10,7 +10,7 @@ export default function SectionHeading({
   className = '' 
 }: SectionHeadingProps) {
   return (
-    <div className={`mb-12 ${className}`}>
+    <div className={`section-heading mb-12 ${className}`}>
       <h2 className="text-3xl font-semibold md:text-4xl mb-3">
         {children}
       </h2>

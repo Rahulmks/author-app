@@ -51,8 +51,8 @@ export default function Header() {
   }
 
   return (
-    <header>
-      <div className="border-b border-border-color">
+    <header className="site-header">
+      <div>
         <Container>
           <nav ref={navigationRef} className="flex items-center justify-between gap-4 py-4 xl:grid xl:grid-cols-[1fr_auto_1fr] xl:gap-8" aria-label={t('nav.primary')}>
             <Link 
@@ -62,7 +62,7 @@ export default function Header() {
               <span className="block font-display text-xl leading-tight md:text-2xl">
                 {t('brand.name')}
               </span>
-              <span className="mt-1 block text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-accent transition-opacity group-hover:opacity-80">
+              <span className="label mt-1 block transition-opacity group-hover:opacity-80">
                 {t('brand.title')}
               </span>
             </Link>
@@ -98,10 +98,10 @@ export default function Header() {
                         }
                       }}
                       onClick={() => item.children && setOpenMenu(item.href)}
-                      className={`whitespace-nowrap text-[15px] font-medium tracking-[0.04em] transition-colors ${
+                      className={`relative inline-flex min-h-11 items-center whitespace-nowrap text-sm font-semibold transition-colors after:absolute after:inset-x-0 after:bottom-1.5 after:h-0.5 after:transition-colors ${
                         isActive 
-                          ? 'text-accent border-b-2 border-accent pb-1 font-semibold' 
-                          : 'text-text-secondary hover:text-accent pb-1'
+                          ? 'text-highlight after:bg-pink'
+                          : 'text-text-primary after:bg-transparent hover:text-highlight hover:after:bg-line'
                       }`}
                       aria-current={isActive ? 'page' : undefined}
                     >
@@ -109,9 +109,11 @@ export default function Header() {
                     </Link>
                     {item.children && isOpen && (
                       <div className="absolute left-0 top-full z-50 pt-3" onMouseEnter={() => setOpenMenu(item.href)}>
-                        <ul className="min-w-52 border border-border-color bg-paper p-2 shadow-lg">
-                        {item.children.map((child) => (
-                          <li key={child.href}>
+                        <ul className="min-w-52 rounded-lg border border-line bg-paper p-2 shadow-card">
+                        {item.children.map((child) => {
+                          const isChildActive = pathname === child.href || pathname?.startsWith(`${child.href}/`);
+                          return (
+                            <li key={child.href}>
                             <Link
                               ref={(element) => { childRefs.current[child.href] = element; }}
                               href={child.href}
@@ -129,12 +131,16 @@ export default function Header() {
                                   if (previous) childRefs.current[previous.href]?.focus();
                                 }
                               }}
-                              className="block min-h-11 whitespace-nowrap px-3 py-2 text-[15px] text-text-secondary hover:bg-accent-soft hover:text-accent"
+                              className={`block min-h-11 whitespace-nowrap rounded px-3 py-2 text-sm font-semibold hover:bg-line hover:text-highlight ${
+                                isChildActive ? 'text-highlight' : 'text-text-secondary'
+                              }`}
+                              aria-current={isChildActive ? 'page' : undefined}
                             >
                               {t(`nav.${child.key}`)}
                             </Link>
-                          </li>
-                        ))}
+                            </li>
+                          );
+                        })}
                         </ul>
                       </div>
                     )}
@@ -150,7 +156,7 @@ export default function Header() {
             </Suspense>
             <button
               type="button"
-              className="flex min-h-11 min-w-11 items-center justify-center p-2 text-text-primary transition-colors hover:text-accent focus:outline-none focus:ring-1 focus:ring-accent xl:hidden"
+              className="flex min-h-11 min-w-11 items-center justify-center rounded-lg p-2 text-text-primary transition-colors hover:bg-line xl:hidden"
               onClick={handleOpenMobileMenu}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation"

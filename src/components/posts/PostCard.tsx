@@ -15,42 +15,42 @@ export default function PostCard({ post }: PostCardProps) {
   const categoryKey = getCategoryLabelKey(post.category);
   const locale = useLocale();
   return (
-    <article className="group border-t border-border-color py-4 md:py-5 first:border-t-0">
+    <article className="group border-t border-line py-4 md:py-5 first:border-t-0">
       <Link href={`/posts/${post.slug}`} className="flex items-start justify-between gap-4 md:gap-6">
         <div className="flex-1 min-w-0">
-          <div className="mb-1.5 flex flex-wrap items-center gap-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-accent">
+          <div className="label mb-1.5 flex flex-wrap items-center gap-2">
             {post.category && <span>{categoryKey ? tNav(categoryKey) : post.category}</span>}
             {post.category && post.publishedAt && <span>·</span>}
             {post.publishedAt && (
-              <time dateTime={post.publishedAt} className="text-text-secondary font-normal tracking-normal">
+              <time dateTime={post.publishedAt} className="font-normal normal-case tracking-normal">
                 {formatDate(post.publishedAt, locale)}
               </time>
             )}
             {post.readingTimeMinutes && (
-              <span className="text-text-secondary font-normal tracking-normal">
+              <span className="font-normal normal-case tracking-normal">
                 · {t('readingTime', { minutes: post.readingTimeMinutes })}
               </span>
             )}
           </div>
           
-          <h3 className="mb-1.5 text-base md:text-lg font-medium leading-snug transition-colors group-hover:text-accent">
+          <h3 className="mb-1.5 text-base font-semibold leading-snug group-hover:underline underline-offset-4 md:text-lg">
             {post.title}
           </h3>
           
           {post.excerpt && (
-            <p className="line-clamp-1 text-xs md:text-sm leading-relaxed text-text-secondary">
+            <p className="mb-0 line-clamp-1 text-sm leading-relaxed text-text-secondary">
               {post.excerpt}
             </p>
           )}
         </div>
 
         {post.coverImage && (
-          <div className="relative h-20 w-20 md:h-24 md:w-24 flex-shrink-0 overflow-hidden rounded border border-border-color/60 bg-paper">
+          <div className="media-frame relative h-20 w-20 flex-shrink-0 md:h-24 md:w-24">
             <Image
               src={post.coverImage}
               alt={post.title}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              className="object-cover transition-transform duration-200 group-hover:scale-105"
             />
           </div>
         )}

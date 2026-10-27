@@ -11,10 +11,10 @@ export default async function BooksPage() {
   return (
     <Container className="py-8 md:py-12">
       <div className="max-w-3xl mb-8">
-        <p className="eyebrow mb-2 text-xs tracking-widest text-accent">
+        <p className="eyebrow mb-2">
           {t('eyebrow')}
         </p>
-        <h1 className="mb-3 text-3xl font-semibold md:text-4xl">
+        <h1 className="mb-3 text-3xl font-bold md:text-4xl">
           {t('heading')}
         </h1>
         <p className="text-base leading-relaxed text-text-secondary">
